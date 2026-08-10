@@ -1,0 +1,62 @@
+import type { Metadata } from "next";
+import { Breadcrumbs, breadcrumbsJsonLd } from "@/components/breadcrumbs";
+import { PageHeader } from "@/components/page-header";
+import { TravelCard } from "@/components/travel-card";
+import { TRIPS, STATUS_LABEL } from "@/lib/data/trips";
+import type { TripStatus } from "@/lib/types";
+
+const SITE_URL = "https://www.pamguerrero.com";
+
+export const metadata: Metadata = {
+  title: "Viajes",
+  description:
+    "Viajes grupales liderados por Pam Guerrero: próximas fechas, lista de espera y viajes ya realizados.",
+  alternates: { canonical: "/viajes" },
+};
+
+const GROUP_ORDER: TripStatus[] = ["proximo", "lista-espera", "agotado", "pasado"];
+
+export default function ViajesPage() {
+  const crumbs = [{ label: "Inicio", href: "/" }, { label: "Viajes" }];
+
+  return (
+    <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbsJsonLd(crumbs, SITE_URL)) }}
+      />
+      <Breadcrumbs items={crumbs} />
+
+      <PageHeader
+        eyebrow="Viaja conmigo"
+        title="Viajes grupales"
+        description="Experiencias pensadas de principio a fin, con acompañamiento durante todo el recorrido. Estas son las fechas abiertas ahora mismo."
+      />
+
+      <div className="mx-auto max-w-6xl px-6 py-16 sm:py-20">
+        {GROUP_ORDER.map((status) => {
+          const trips = TRIPS.filter((t) => t.status === status);
+          if (trips.length === 0) return null;
+
+          return (
+            <section key={status} className="mb-16 last:mb-0">
+              <h2 className="font-display text-2xl font-medium text-ink">{STATUS_LABEL[status]}</h2>
+              <div className="mt-8 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+                {trips.map((trip) => (
+                  <TravelCard key={trip.slug} trip={trip} />
+                ))}
+              </div>
+            </section>
+          );
+        })}
+
+        {TRIPS.length === 0 && (
+          <p className="font-body text-sm text-ink-muted">
+            No hay viajes publicados por el momento. Suscríbete al newsletter para enterarte
+            primero de las próximas fechas.
+          </p>
+        )}
+      </div>
+    </main>
+  );
+}
