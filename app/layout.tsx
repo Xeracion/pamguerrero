@@ -29,11 +29,20 @@ export const metadata: Metadata = {
   },
   description:
     "Doctora en Turismo, exploradora de más de 30 países y fundadora de Caminando.lat. Historias, viajes grupales y experiencias internacionales para quienes creen que hay más de una forma de vivir.",
+  alternates: { canonical: "/" },
+  authors: [{ name: "Pam Guerrero", url: SITE_URL }],
+  creator: "Pam Guerrero",
   openGraph: {
     type: "website",
     locale: "es_ES",
     siteName: "Pam Guerrero",
     url: SITE_URL,
+    title: "Pam Guerrero — Amplía tu mundo",
+    description:
+      "Doctora en Turismo, exploradora de más de 30 países y fundadora de Caminando.lat.",
+  },
+  twitter: {
+    card: "summary_large_image",
     title: "Pam Guerrero — Amplía tu mundo",
     description:
       "Doctora en Turismo, exploradora de más de 30 países y fundadora de Caminando.lat.",
@@ -76,6 +85,7 @@ const WEBSITE_JSON_LD = {
   "@type": "WebSite",
   name: "Pam Guerrero",
   url: SITE_URL,
+  inLanguage: "es",
   publisher: { "@id": `${SITE_URL}/#pam-guerrero` },
 };
 

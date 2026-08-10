@@ -63,6 +63,8 @@ export default async function ArticlePage({
     datePublished: article.datePublished,
     dateModified: article.dateModified ?? article.datePublished,
     author: { "@id": `${SITE_URL}/#pam-guerrero`, name: "Pam Guerrero" },
+    publisher: { "@id": `${SITE_URL}/#pam-guerrero`, name: "Pam Guerrero" },
+    image: { "@type": "ImageObject", url: `${SITE_URL}/opengraph-image` },
     mainEntityOfPage: `${SITE_URL}/explora/${article.category}/${article.slug}`,
   };
 
