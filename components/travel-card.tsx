@@ -4,7 +4,7 @@ import { STATUS_LABEL } from "@/lib/data/trips";
 import type { Trip } from "@/lib/types";
 
 const STATUS_STYLE: Record<Trip["status"], string> = {
-  proximo: "bg-gold/15 text-gold-deep",
+  proximo: "bg-gold/15 text-navy",
   "lista-espera": "bg-slate/15 text-slate",
   agotado: "bg-accent/10 text-accent",
   pasado: "bg-line text-ink-muted",

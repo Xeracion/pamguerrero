@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Montserrat } from "next/font/google";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
@@ -47,6 +47,11 @@ export const metadata: Metadata = {
     description:
       "Doctora en Turismo, exploradora de más de 30 países y fundadora de Caminando.lat.",
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#0f1b3d",
+  colorScheme: "light",
 };
 
 const PERSON_JSON_LD = {
@@ -103,8 +108,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="font-body antialiased">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-full focus:bg-accent focus:px-5 focus:py-3 focus:font-body focus:text-sm focus:font-semibold focus:text-cream"
+        >
+          Saltar al contenido
+        </a>
         <SiteHeader />
-        {children}
+        <div id="main-content">{children}</div>
         <SiteFooter />
       </body>
     </html>
