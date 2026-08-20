@@ -1,36 +1,46 @@
 @import "tailwindcss";
 
 :root {
-  /* Identidad Pam Guerrero */
+  /* Identidad Pam Guerrero — sistema vibrante */
   --color-burgundy: #5d101d;
-  --color-navy: #0f1b3d;
-  --color-navy-deep: #0a1329;
-  --color-slate: #48566e;
-  --color-cream: #f2efea;
-  --color-gold: #bfa274;
+  --color-coral: #ff5a5f;
+  --color-coral-deep: #c62328;
+  --color-cobalt: #304ffe;
+  --color-turquoise: #00b8a9;
+  --color-turquoise-deep: #007a70;
+  --color-hot-pink: #e83e8c;
+  --color-hot-pink-deep: #a8215f;
+  --color-sun: #ffd23f;
+  --color-cream: #fff7ed;
+  --color-ink: #172033;
+  --color-ink-deep: #0d1220;
+  --color-ink-muted: #5a6478;
 
   /* Tokens semánticos */
   --color-paper: var(--color-cream);
   --color-surface: #ffffff;
-  --color-ink: var(--color-navy);
-  --color-ink-muted: var(--color-slate);
   --color-accent: var(--color-burgundy);
-  --color-line: #ded7c9;
-  --color-line-strong: #c9bfab;
+  --color-line: #ecdcc8;
+  --color-line-strong: #d9c1a2;
 }
 
 @theme inline {
   --color-burgundy: var(--color-burgundy);
-  --color-navy: var(--color-navy);
-  --color-navy-deep: var(--color-navy-deep);
-  --color-slate: var(--color-slate);
+  --color-coral: var(--color-coral);
+  --color-coral-deep: var(--color-coral-deep);
+  --color-cobalt: var(--color-cobalt);
+  --color-turquoise: var(--color-turquoise);
+  --color-turquoise-deep: var(--color-turquoise-deep);
+  --color-hot-pink: var(--color-hot-pink);
+  --color-hot-pink-deep: var(--color-hot-pink-deep);
+  --color-sun: var(--color-sun);
   --color-cream: var(--color-cream);
-  --color-gold: var(--color-gold);
+  --color-ink: var(--color-ink);
+  --color-ink-deep: var(--color-ink-deep);
+  --color-ink-muted: var(--color-ink-muted);
 
   --color-paper: var(--color-paper);
   --color-surface: var(--color-surface);
-  --color-ink: var(--color-ink);
-  --color-ink-muted: var(--color-ink-muted);
   --color-accent: var(--color-accent);
   --color-line: var(--color-line);
   --color-line-strong: var(--color-line-strong);
@@ -69,8 +79,8 @@ h4 {
 }
 
 ::selection {
-  background: var(--color-gold);
-  color: var(--color-navy);
+  background: var(--color-coral);
+  color: var(--color-cream);
 }
 
 :focus-visible {

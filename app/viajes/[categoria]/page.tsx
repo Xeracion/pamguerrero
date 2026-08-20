@@ -24,7 +24,7 @@ export async function generateMetadata({
   return {
     title: category.label,
     description: category.description,
-    alternates: { canonical: `/explora/${category.slug}` },
+    alternates: { canonical: `/viajes/${category.slug}` },
   };
 }
 
@@ -40,7 +40,7 @@ export default async function CategoryPage({
   const articles = getArticlesByCategory(category.slug);
   const crumbs = [
     { label: "Inicio", href: "/" },
-    { label: "Explora", href: "/explora" },
+    { label: "Viajes", href: "/viajes" },
     { label: category.label },
   ];
 
@@ -51,7 +51,7 @@ export default async function CategoryPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbsJsonLd(crumbs, SITE_URL)) }}
       />
       <Breadcrumbs items={crumbs} />
-      <PageHeader eyebrow="Explora" title={category.label} description={category.description} />
+      <PageHeader eyebrow="Viajes" title={category.label} description={category.description} />
 
       <section className="py-16 sm:py-20">
         <div className="mx-auto max-w-6xl px-6">

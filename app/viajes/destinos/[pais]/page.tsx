@@ -7,6 +7,7 @@ import { TravelCard } from "@/components/travel-card";
 import { Cta } from "@/components/cta";
 import { DESTINATIONS, getDestination } from "@/lib/data/destinations";
 import { getTrip } from "@/lib/data/trips";
+import { getJourneyByDestination } from "@/lib/data/journeys";
 
 const SITE_URL = "https://www.pamguerrero.com";
 
@@ -26,7 +27,7 @@ export async function generateMetadata({
   return {
     title: destination.name,
     description: destination.summary,
-    alternates: { canonical: `/explora/destinos/${destination.slug}` },
+    alternates: { canonical: `/viajes/destinos/${destination.slug}` },
   };
 }
 
@@ -42,19 +43,33 @@ export default async function DestinationPage({
   const relatedTrips = destination.relatedTripSlugs
     .map((slug) => getTrip(slug))
     .filter((t): t is NonNullable<typeof t> => Boolean(t));
+  const journey = getJourneyByDestination(destination.slug);
+  const openTrip = relatedTrips.find((t) => t.status !== "cerrado");
 
   const crumbs = [
     { label: "Inicio", href: "/" },
-    { label: "Explora", href: "/explora" },
-    { label: "Destinos", href: "/explora/destinos" },
+    { label: "Viajes", href: "/viajes" },
+    { label: "Destinos", href: "/viajes/destinos" },
     { label: destination.name },
   ];
+
+  const destinationJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "TouristDestination",
+    name: destination.name,
+    description: destination.summary,
+    containedInPlace: destination.region,
+  };
 
   return (
     <main>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbsJsonLd(crumbs, SITE_URL)) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(destinationJsonLd) }}
       />
       <Breadcrumbs items={crumbs} />
 
@@ -90,17 +105,56 @@ export default async function DestinationPage({
         </div>
       </div>
 
+      {journey && (
+        <section className="border-t border-line bg-surface py-16">
+          <div className="mx-auto grid max-w-6xl gap-10 px-6 lg:grid-cols-[1fr_1.4fr] lg:items-center">
+            <PhotoPlaceholder
+              label={`[FOTO DE PAM EN ${destination.name.toUpperCase()}]`}
+              aspect="portrait"
+            />
+            <div>
+              <p className="font-body text-xs font-semibold uppercase tracking-[0.1em] text-coral-deep">
+                Mi experiencia
+              </p>
+              <h2 className="mt-2 font-display text-2xl italic font-medium text-ink">
+                {journey.title}
+              </h2>
+              <p className="mt-3 max-w-md font-body text-sm leading-relaxed text-ink-muted">
+                {journey.excerpt}
+              </p>
+              <a
+                href={`/viaja-conmigo/${journey.slug}`}
+                className="mt-4 inline-block font-body text-sm font-semibold text-accent hover:underline"
+              >
+                Acompáñame en el viaje →
+              </a>
+            </div>
+          </div>
+        </section>
+      )}
+
       {relatedTrips.length > 0 && (
-        <section className="border-t border-line bg-surface py-16 sm:py-20">
+        <section className="border-t border-line py-16 sm:py-20">
           <div className="mx-auto max-w-6xl px-6">
-            <h2 className="font-display text-2xl font-medium text-ink">
-              Viajes grupales a {destination.name}
+            <p className="font-body text-xs font-semibold uppercase tracking-[0.1em] text-coral-deep">
+              Si quieres vivirlo conmigo
+            </p>
+            <h2 className="mt-2 font-display text-2xl font-medium text-ink">
+              Próximo viaje a {destination.name}
             </h2>
             <div className="mt-8 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
               {relatedTrips.map((trip) => (
                 <TravelCard key={trip.slug} trip={trip} />
               ))}
             </div>
+            {openTrip && (
+              <a
+                href={`/viajes-grupales/${openTrip.slug}`}
+                className="mt-8 inline-block rounded-full bg-coral px-7 py-3.5 font-body text-sm font-semibold text-ink transition-transform hover:-translate-y-px"
+              >
+                Ver viaje →
+              </a>
+            )}
           </div>
         </section>
       )}
@@ -108,9 +162,9 @@ export default async function DestinationPage({
       <Cta
         eyebrow="Sigue explorando"
         title="Descubre más destinos y todos los próximos viajes."
-        primaryHref="/viajes"
-        primaryLabel="Ver todos los viajes"
-        secondaryHref="/explora/destinos"
+        primaryHref="/viajes-grupales"
+        primaryLabel="Ver viajes grupales"
+        secondaryHref="/viajes/destinos"
         secondaryLabel="Ver más destinos"
       />
     </main>

@@ -26,7 +26,7 @@ export async function generateMetadata({
   return {
     title: article.title,
     description: article.excerpt,
-    alternates: { canonical: `/explora/${article.category}/${article.slug}` },
+    alternates: { canonical: `/viajes/${article.category}/${article.slug}` },
     openGraph: {
       type: "article",
       title: article.title,
@@ -50,8 +50,8 @@ export default async function ArticlePage({
   const related = getRelatedArticles(article);
   const crumbs = [
     { label: "Inicio", href: "/" },
-    { label: "Explora", href: "/explora" },
-    { label: category.label, href: `/explora/${category.slug}` },
+    { label: "Viajes", href: "/viajes" },
+    { label: category.label, href: `/viajes/${category.slug}` },
     { label: article.title },
   ];
 
@@ -65,7 +65,7 @@ export default async function ArticlePage({
     author: { "@id": `${SITE_URL}/#pam-guerrero`, name: "Pam Guerrero" },
     publisher: { "@id": `${SITE_URL}/#pam-guerrero`, name: "Pam Guerrero" },
     image: { "@type": "ImageObject", url: `${SITE_URL}/opengraph-image` },
-    mainEntityOfPage: `${SITE_URL}/explora/${article.category}/${article.slug}`,
+    mainEntityOfPage: `${SITE_URL}/viajes/${article.category}/${article.slug}`,
   };
 
   return (
@@ -123,10 +123,10 @@ export default async function ArticlePage({
       <RelatedContent articles={related} />
 
       <Cta
-        eyebrow="¿Y ahora qué?"
-        title="Sigue ampliando tu mundo."
-        primaryHref="/viajes"
-        primaryLabel="Ver próximos viajes"
+        eyebrow="¿Quieres viajar conmigo?"
+        title="Descubre los próximos viajes grupales."
+        primaryHref="/viajes-grupales"
+        primaryLabel="Ver viajes grupales"
         secondaryHref="/newsletter"
         secondaryLabel="Suscríbete al newsletter"
       />

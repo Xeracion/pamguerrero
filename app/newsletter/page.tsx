@@ -40,7 +40,7 @@ export default function NewsletterPage() {
             <ul className="mt-6 flex flex-col gap-4">
               {WHAT_YOU_GET.map((item) => (
                 <li key={item} className="flex items-start gap-3 border-t border-line pt-4">
-                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-gold" />
+                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-coral" />
                   <span className="font-body text-sm leading-relaxed text-ink-muted">{item}</span>
                 </li>
               ))}

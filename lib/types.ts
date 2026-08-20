@@ -1,19 +1,29 @@
-export type ExploreCategory =
-  | "viajar-mejor"
-  | "experiencias-internacionales"
-  | "cultura"
-  | "ampliar-tu-mundo"
-  | "historias";
+export type ViajesCategory = "viaja-mejor" | "planifica" | "descubre";
 
 export interface CategoryInfo {
-  slug: ExploreCategory;
+  slug: ViajesCategory;
   label: string;
   description: string;
 }
 
 export interface Article {
   slug: string;
-  category: ExploreCategory;
+  category: ViajesCategory;
+  title: string;
+  excerpt: string;
+  datePublished: string;
+  dateModified?: string;
+  readingMinutes: number;
+  isExample?: boolean;
+  body: string[];
+  relatedSlugs?: string[];
+}
+
+export type ExperienceTag = "Cultura" | "Experiencias internacionales" | "Ampliar tu mundo" | "Historias";
+
+export interface Experience {
+  slug: string;
+  tag: ExperienceTag;
   title: string;
   excerpt: string;
   datePublished: string;
@@ -39,7 +49,18 @@ export interface Destination {
   relatedTripSlugs: string[];
 }
 
-export type TripStatus = "proximo" | "agotado" | "lista-espera" | "pasado";
+export interface Journey {
+  slug: string;
+  destinationSlug: string;
+  destinationName: string;
+  title: string;
+  excerpt: string;
+  dateISO: string;
+  isExample?: boolean;
+  body: string[];
+}
+
+export type TripStatus = "proximamente" | "plazas-disponibles" | "ultimas-plazas" | "cerrado";
 
 export interface ItineraryDay {
   day: number;
@@ -60,7 +81,11 @@ export interface Trip {
   durationDays: number;
   price: string;
   status: TripStatus;
+  /** ISO date: si faltan menos de 20 días, la etiqueta de estado se muestra en rojo. */
+  closingDate?: string;
   isExample?: boolean;
+  /** Frase corta en primera persona — perspectiva personal, no copy de agencia. */
+  personalNote: string;
   description: string;
   itinerary: ItineraryDay[];
   includes: string[];

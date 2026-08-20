@@ -7,33 +7,49 @@ import { Cta } from "@/components/cta";
 const SITE_URL = "https://www.pamguerrero.com";
 
 export const metadata: Metadata = {
-  title: "Colabora",
+  title: "Trabaja Conmigo",
   description:
     "Pam Guerrero trabaja con marcas, destinos e instituciones que buscan contar historias reales de viaje y experiencias internacionales.",
-  alternates: { canonical: "/colabora" },
+  alternates: { canonical: "/trabaja-conmigo" },
 };
 
-const CAPABILITIES = [
+const SECTIONS = [
   {
-    title: "Storytelling y contenido",
-    body: "Historias en primera persona, con la voz y la audiencia que ya confían en ella.",
+    title: "Colaboraciones",
+    body: "Marcas, destinos, hoteles y aerolíneas que buscan una voz con audiencia real y confianza construida.",
   },
   {
-    title: "Viajes grupales con marca",
-    body: "Experiencias de viaje diseñadas junto a destinos, hoteles o aerolíneas.",
+    title: "Creación de contenido",
+    body: "Historias en primera persona — fotografía, vídeo y texto — con la voz que ya sigue esta comunidad.",
   },
   {
-    title: "Investigación y turismo",
-    body: "Una mirada de Doctora en Turismo aplicada a proyectos y campañas reales.",
+    title: "Turismo y destinos",
+    body: "Proyectos con oficinas de turismo e instituciones que quieren contar su territorio de forma editorial, no institucional.",
   },
   {
-    title: "Conexión con audiencia latinoamericana",
-    body: "Acceso directo a una comunidad interesada en viajes, cultura y oportunidades internacionales.",
+    title: "Proyectos",
+    body: (
+      <>
+        Iniciativas propias más allá del contenido — como{" "}
+        <a href="/proyectos/caminando" className="text-accent underline hover:no-underline">
+          Caminando.lat
+        </a>
+        , fundada por Pam.
+      </>
+    ),
+  },
+  {
+    title: "Conferencias / Formación",
+    body: "Viajes, turismo, experiencias internacionales y creación de contenido, para universidades, empresas e instituciones bajo solicitud.",
+  },
+  {
+    title: "Investigación",
+    body: "Una mirada de Doctora en Turismo aplicada a proyectos, campañas y estudios reales.",
   },
 ];
 
-export default function ColaboraPage() {
-  const crumbs = [{ label: "Inicio", href: "/" }, { label: "Colabora" }];
+export default function TrabajaConmigoPage() {
+  const crumbs = [{ label: "Inicio", href: "/" }, { label: "Trabaja Conmigo" }];
 
   return (
     <main>
@@ -51,8 +67,8 @@ export default function ColaboraPage() {
 
       <section className="py-16 sm:py-20">
         <div className="mx-auto max-w-6xl px-6">
-          <div className="grid gap-10 sm:grid-cols-2">
-            {CAPABILITIES.map((item) => (
+          <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+            {SECTIONS.map((item) => (
               <div key={item.title} className="border-t border-line pt-5">
                 <h2 className="font-display text-xl font-medium text-ink">{item.title}</h2>
                 <p className="mt-2 font-body text-sm leading-relaxed text-ink-muted">
@@ -79,26 +95,12 @@ export default function ColaboraPage() {
         </div>
       </section>
 
-      <section className="py-16 sm:py-20">
-        <div className="mx-auto max-w-6xl px-6">
-          <h2 className="font-display text-2xl font-medium text-ink">Charlas y conferencias</h2>
-          <p className="mt-3 max-w-xl font-body text-sm leading-relaxed text-ink-muted">
-            Viajes, turismo, experiencias internacionales y creación de contenido, disponible
-            para universidades, empresas e instituciones bajo solicitud.
-          </p>
-          <p className="mt-4 font-body text-xs text-ink-muted">
-            [INSERTAR TEMARIO Y FORMATOS REALES CUANDO EXISTA CONTENIDO SUFICIENTE PARA UNA
-            PÁGINA INDEPENDIENTE]
-          </p>
-        </div>
-      </section>
-
       <Cta
         eyebrow="Hablemos"
         title="¿Tienes un proyecto en mente?"
         description="Cuéntame de qué se trata y qué buscas conseguir."
         primaryHref="/contacto"
-        primaryLabel="Escríbeme"
+        primaryLabel="Trabajemos juntos"
       />
     </main>
   );

@@ -12,8 +12,11 @@ export const TRIPS: Trip[] = [
     dates: "[INSERTAR FECHAS REALES]",
     durationDays: 10,
     price: "[INSERTAR PRECIO REAL]",
-    status: "proximo",
+    status: "ultimas-plazas",
+    closingDate: "2026-09-05",
     isExample: true,
+    personalNote:
+      "Este es el viaje que más me piden que repita desde que lo hice la primera vez.",
     description:
       "Un recorrido grupal pensado para conocer el país más allá de la ruta turística estándar, con acompañamiento de Pam durante todo el viaje.",
     itinerary: [
@@ -61,8 +64,18 @@ export function getTripsByDestination(destinationSlug: string): Trip[] {
 }
 
 export const STATUS_LABEL: Record<Trip["status"], string> = {
-  proximo: "Próximo viaje",
-  agotado: "Agotado",
-  "lista-espera": "Lista de espera",
-  pasado: "Viaje pasado",
+  proximamente: "Próximamente",
+  "plazas-disponibles": "Plazas disponibles",
+  "ultimas-plazas": "Últimas plazas",
+  cerrado: "Cerrado",
 };
+
+const URGENCY_DAYS = 20;
+
+export function isClosingSoon(trip: Trip): boolean {
+  if (!trip.closingDate || trip.status === "cerrado") return false;
+  const daysLeft = Math.ceil(
+    (new Date(trip.closingDate).getTime() - Date.now()) / (1000 * 60 * 60 * 24)
+  );
+  return daysLeft >= 0 && daysLeft < URGENCY_DAYS;
+}

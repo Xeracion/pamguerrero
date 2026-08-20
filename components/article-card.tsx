@@ -8,7 +8,7 @@ export function ArticleCard({ article }: { article: Article }) {
 
   return (
     <Link
-      href={`/explora/${article.category}/${article.slug}`}
+      href={`/viajes/${article.category}/${article.slug}`}
       className="group flex flex-col gap-4"
     >
       <PhotoPlaceholder

@@ -4,7 +4,7 @@ import type { Destination } from "@/lib/types";
 
 export function DestinationCard({ destination }: { destination: Destination }) {
   return (
-    <Link href={`/explora/destinos/${destination.slug}`} className="group flex flex-col gap-4">
+    <Link href={`/viajes/destinos/${destination.slug}`} className="group flex flex-col gap-4">
       <PhotoPlaceholder
         label={`[FOTO DE ${destination.name.toUpperCase()}]`}
         aspect="landscape"

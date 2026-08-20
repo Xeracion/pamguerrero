@@ -111,8 +111,8 @@ export default function ContactoPage() {
               <h2 className="font-display text-xl font-medium text-ink">Colaboraciones</h2>
               <p className="mt-2 max-w-sm font-body text-sm leading-relaxed text-ink-muted">
                 Marcas, destinos e instituciones — revisa también{" "}
-                <a href="/colabora" className="underline hover:text-accent">
-                  la página de colaboraciones
+                <a href="/trabaja-conmigo" className="underline hover:text-accent">
+                  Trabaja conmigo
                 </a>
                 .
               </p>

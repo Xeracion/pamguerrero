@@ -2,13 +2,14 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { InstagramLink } from "@/components/instagram-link";
 
 const NAV = [
-  { href: "/sobre-pam", label: "Sobre Pam" },
+  { href: "/viaja-conmigo", label: "Viaja Conmigo" },
   { href: "/viajes", label: "Viajes" },
-  { href: "/explora", label: "Explora" },
-  { href: "/proyectos/caminando", label: "Caminando.lat" },
-  { href: "/colabora", label: "Colabora" },
+  { href: "/experiencias", label: "Experiencias" },
+  { href: "/sobre-pam", label: "Sobre Pam" },
+  { href: "/trabaja-conmigo", label: "Trabaja Conmigo" },
 ];
 
 export function SiteHeader() {
@@ -18,10 +19,10 @@ export function SiteHeader() {
     <header className="sticky top-0 z-40 border-b border-line bg-paper/95 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-6 py-4">
         <Link href="/" className="font-display text-xl font-semibold tracking-tight text-ink">
-          Pam<span className="text-accent">.</span>Guerrero
+          pam<span className="text-accent">guerrero</span>
         </Link>
 
-        <nav className="hidden items-center gap-7 lg:flex" aria-label="Navegación principal">
+        <nav className="hidden items-center gap-6 lg:flex" aria-label="Navegación principal">
           {NAV.map((item) => (
             <Link
               key={item.href}
@@ -34,11 +35,12 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-3">
+          <InstagramLink className="hidden text-ink-muted transition-colors hover:text-accent sm:block" />
           <Link
-            href="/newsletter"
-            className="hidden rounded-full bg-accent px-5 py-2.5 font-body text-sm font-semibold text-cream transition-transform hover:-translate-y-px sm:inline-block"
+            href="/viajes-grupales"
+            className="hidden rounded-full bg-coral px-5 py-2.5 font-body text-sm font-semibold text-ink transition-transform hover:-translate-y-px sm:inline-block"
           >
-            Newsletter
+            Viajes Grupales
           </Link>
           <button
             type="button"
@@ -89,14 +91,15 @@ export function SiteHeader() {
                 </Link>
               </li>
             ))}
-            <li>
+            <li className="mt-2 flex items-center gap-4">
               <Link
-                href="/newsletter"
+                href="/viajes-grupales"
                 onClick={() => setOpen(false)}
-                className="mt-2 inline-block rounded-full bg-accent px-5 py-2.5 font-body text-sm font-semibold text-cream"
+                className="inline-block rounded-full bg-coral px-5 py-2.5 font-body text-sm font-semibold text-ink"
               >
-                Newsletter
+                Viajes Grupales
               </Link>
+              <InstagramLink className="text-ink-muted" />
             </li>
           </ul>
         </nav>

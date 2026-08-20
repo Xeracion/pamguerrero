@@ -20,10 +20,10 @@ export function Cta({
   secondaryLabel,
 }: CtaProps) {
   return (
-    <section className="bg-navy py-20 text-cream">
+    <section className="bg-ink py-20 text-cream">
       <div className="mx-auto flex max-w-3xl flex-col items-center gap-5 px-6 text-center">
         {eyebrow && (
-          <p className="font-body text-xs font-semibold uppercase tracking-[0.18em] text-gold">
+          <p className="font-body text-xs font-semibold uppercase tracking-[0.18em] text-coral">
             {eyebrow}
           </p>
         )}
@@ -36,7 +36,7 @@ export function Cta({
         <div className="mt-2 flex flex-wrap items-center justify-center gap-4">
           <Link
             href={primaryHref}
-            className="rounded-full bg-gold px-7 py-3.5 font-body text-sm font-semibold text-navy transition-transform hover:-translate-y-px"
+            className="rounded-full bg-coral px-7 py-3.5 font-body text-sm font-semibold text-ink transition-transform hover:-translate-y-px"
           >
             {primaryLabel}
           </Link>

@@ -1,45 +1,55 @@
 import Link from "next/link";
 import { PhotoPlaceholder } from "@/components/photo-placeholder";
+import { RouteLine } from "@/components/route-line";
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden bg-navy text-cream">
-      <div className="absolute inset-0">
-        <PhotoPlaceholder
-          label="[REEMPLAZAR CON FOTO REAL DE PAM — plano editorial, viaje o retrato en movimiento]"
-          aspect="wide"
-          className="h-full w-full border-none bg-navy-deep text-cream/60"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/70 to-navy/20" />
-      </div>
+    <section className="relative overflow-hidden bg-ink">
+      <div className="grid min-h-[88vh] lg:grid-cols-[3fr_2fr]">
+        <div className="relative flex flex-col justify-end gap-8 bg-burgundy px-6 py-20 sm:px-10 lg:py-24">
+          <RouteLine
+            variant="wave"
+            className="absolute left-6 top-10 h-10 w-40 text-coral/70 sm:left-10"
+          />
 
-      <div className="relative mx-auto flex min-h-[86vh] max-w-6xl flex-col justify-end px-6 pb-20 pt-40">
-        <p className="font-body text-xs font-semibold uppercase tracking-[0.2em] text-gold">
-          Doctora en Turismo · +30 países · Fundadora de Caminando.lat
-        </p>
+          <p className="font-body text-xs font-semibold uppercase tracking-[0.24em] text-coral">
+            Doctora en Turismo · +30 países
+          </p>
 
-        <h1 className="mt-6 max-w-3xl font-display text-5xl font-medium italic leading-[1.05] sm:text-6xl md:text-7xl">
-          Hay más mundo del que imaginas.
-        </h1>
+          <h1 className="font-display text-6xl font-medium leading-[0.95] text-cream sm:text-7xl lg:text-8xl">
+            Ampliar
+            <br />
+            <span className="italic text-coral">tu</span>
+            <br />
+            mundo.
+          </h1>
 
-        <p className="mt-6 max-w-xl font-body text-lg leading-relaxed text-cream/85">
-          Ecuador, España y más de treinta países después, esto es lo que he aprendido: existen
-          muchas más formas de vivir de las que nos enseñaron a ver. Vamos a descubrirlas.
-        </p>
+          <p className="max-w-sm font-body text-lg leading-relaxed text-cream/80">
+            Viajes, experiencias e historias para mirar más allá de lo conocido.
+          </p>
 
-        <div className="mt-10 flex flex-wrap items-center gap-4">
-          <Link
-            href="/explora"
-            className="rounded-full bg-gold px-7 py-3.5 font-body text-sm font-semibold text-navy transition-transform hover:-translate-y-px"
-          >
-            Explora conmigo
-          </Link>
-          <Link
-            href="#historia"
-            className="rounded-full border border-cream/40 px-7 py-3.5 font-body text-sm font-semibold text-cream transition-colors hover:border-cream"
-          >
-            Conoce mi historia
-          </Link>
+          <div className="flex flex-wrap items-center gap-4">
+            <Link
+              href="/viaja-conmigo"
+              className="rounded-full bg-coral px-7 py-3.5 font-body text-sm font-semibold text-ink transition-transform hover:-translate-y-px"
+            >
+              Viaja conmigo
+            </Link>
+            <Link
+              href="/viajes"
+              className="rounded-full border border-cream/40 px-7 py-3.5 font-body text-sm font-semibold text-cream transition-colors hover:border-cream"
+            >
+              Explora viajes
+            </Link>
+          </div>
+        </div>
+
+        <div className="relative min-h-[40vh]">
+          <PhotoPlaceholder
+            label="[REEMPLAZAR CON FOTO REAL DE PAM — plano editorial, viaje o retrato en movimiento]"
+            aspect="square"
+            className="h-full w-full border-none bg-ink-deep text-cream/50"
+          />
         </div>
       </div>
     </section>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Breadcrumbs, breadcrumbsJsonLd } from "@/components/breadcrumbs";
 import { PageHeader } from "@/components/page-header";
 import { PhotoPlaceholder } from "@/components/photo-placeholder";
+import { RouteLine } from "@/components/route-line";
 import { Cta } from "@/components/cta";
 
 const SITE_URL = "https://www.pamguerrero.com";
@@ -9,11 +10,11 @@ const SITE_URL = "https://www.pamguerrero.com";
 export const metadata: Metadata = {
   title: "Sobre Pam",
   description:
-    "Doctora en Turismo, exdocente universitaria y exploradora de más de 30 países. La historia completa detrás de Pam Guerrero y de la pregunta que la llevó a construir una vida internacional.",
+    "Doctora en Turismo, exdocente universitaria y exploradora de más de 30 países. La persona, la experiencia y la expertise detrás de Pam Guerrero.",
   alternates: { canonical: "/sobre-pam" },
 };
 
-const CREDENTIALS = [
+const EXPERTISE = [
   "Doctora en Turismo",
   "Exdocente universitaria e investigadora",
   "Más de 30 países recorridos",
@@ -34,30 +35,44 @@ export default function SobrePamPage() {
 
       <PageHeader
         eyebrow="Sobre Pam"
-        title="Una ecuatoriana que se atrevió a preguntarse si existía otra forma de vivir."
-        description="Doctora en Turismo, exdocente universitaria, investigadora y exploradora de más de 30 países. Esta es la historia completa, sin editar para sonar más dramática de lo que fue."
+        title="Antes de los títulos, esto es lo que necesitas saber de mí."
       />
 
-      <section className="py-20 sm:py-24">
-        <div className="mx-auto grid max-w-6xl gap-14 px-6 lg:grid-cols-[1fr_1.2fr] lg:items-start">
+      {/* PERSONA */}
+      <section className="py-16 sm:py-20">
+        <div className="mx-auto grid max-w-6xl gap-14 px-6 lg:grid-cols-[1fr_1.2fr] lg:items-center">
           <PhotoPlaceholder
-            label="[REEMPLAZAR CON FOTO REAL DE PAM — retrato editorial]"
+            label="[REEMPLAZAR CON FOTO REAL DE PAM — momento espontáneo, no posado]"
             aspect="portrait"
-            className="lg:sticky lg:top-28"
           />
+          <div className="flex flex-col gap-6">
+            <p className="font-display text-3xl italic font-medium leading-snug text-ink sm:text-4xl">
+              Curiosa antes que nada. Ecuatoriana, y desde hace años también un poco de cada
+              lugar que he pisado.
+            </p>
+            <p className="font-body text-lg leading-relaxed text-ink-muted">
+              Hago demasiadas preguntas. Como en la calle antes que en restaurantes con estrella.
+              Guardo mapas de sitios a los que todavía no he ido. [INSERTAR MÁS RASGOS Y ANÉCDOTAS
+              REALES QUE DEFINAN A PAM COMO PERSONA]
+            </p>
+          </div>
+        </div>
+      </section>
 
-          <div className="flex flex-col gap-6 font-body text-base leading-relaxed text-ink-muted">
+      <RouteLine className="mx-auto h-10 w-full max-w-4xl text-coral" />
+
+      {/* EXPERIENCIA */}
+      <section className="bg-surface py-16 sm:py-20">
+        <div className="mx-auto max-w-3xl px-6">
+          <p className="font-body text-xs font-semibold uppercase tracking-[0.18em] text-coral-deep">
+            Lo que he vivido
+          </p>
+          <div className="mt-6 flex flex-col gap-6 font-body text-lg leading-relaxed text-ink-muted">
             <p>
-              Nací en Ecuador y durante años construí mi vida dentro de una estructura muy clara:
-              aula, investigación, jornadas larguísimas como docente universitaria. Era una vida
+              Durante años construí mi vida dentro de una estructura muy clara: aula,
+              investigación, jornadas larguísimas como docente universitaria. Era una vida
               profesional válida — y también una que, en algún punto, empezó a sentirse como la
               única opción posible.
-            </p>
-            <p>
-              Hice un doctorado en Turismo investigando de cerca una industria que existe,
-              precisamente, para que las personas puedan salir a ver otras formas de vivir. La
-              ironía no se me escapó: estudiaba el turismo mientras yo misma apenas había viajado
-              por decisión propia.
             </p>
             <p>
               La pregunta que lo cambió todo fue simple: ¿y si existe otra forma de vivir la mía?
@@ -69,23 +84,28 @@ export default function SobrePamPage() {
               internacionales, cómo empezó a crear contenido y a liderar viajes grupales.]
             </p>
             <p>
-              Hoy vivo en España, he recorrido más de 30 países y fundé Caminando.lat para ayudar
-              a otros latinoamericanos a encontrar las oportunidades internacionales — becas,
-              trabajo, rutas de migración — que a mí me cambiaron la vida. Esta web es la
-              continuación natural de esa misma pregunta: un lugar para seguir ampliando el
-              mundo, en compañía.
+              Hoy vivo en España, he recorrido más de 30 países y fundé{" "}
+              <a href="/proyectos/caminando" className="text-accent underline hover:no-underline">
+                Caminando.lat
+              </a>{" "}
+              para ayudar a otros latinoamericanos a encontrar las oportunidades internacionales
+              que a mí me cambiaron la vida.
             </p>
           </div>
         </div>
       </section>
 
-      <section className="border-t border-line bg-surface py-16">
+      {/* EXPERTISE */}
+      <section className="py-16">
         <div className="mx-auto max-w-6xl px-6">
-          <h2 className="font-display text-2xl font-medium text-ink">Trayectoria</h2>
+          <p className="font-body text-xs font-semibold uppercase tracking-[0.18em] text-coral-deep">
+            Lo que sé hacer
+          </p>
+          <h2 className="mt-2 font-display text-2xl font-medium text-ink">Trayectoria</h2>
           <ul className="mt-8 grid gap-x-8 gap-y-5 sm:grid-cols-2 lg:grid-cols-3">
-            {CREDENTIALS.map((item) => (
+            {EXPERTISE.map((item) => (
               <li key={item} className="flex items-start gap-3 border-t border-line pt-4">
-                <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-gold" />
+                <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-coral" />
                 <span className="font-body text-sm text-ink">{item}</span>
               </li>
             ))}
@@ -100,10 +120,10 @@ export default function SobrePamPage() {
       <Cta
         eyebrow="Sigue el camino"
         title="Conoce por dónde puedes empezar a ampliar tu mundo."
-        primaryHref="/viajes"
-        primaryLabel="Ver próximos viajes"
-        secondaryHref="/explora"
-        secondaryLabel="Explorar contenido"
+        primaryHref="/viajes-grupales"
+        primaryLabel="Ver viajes grupales"
+        secondaryHref="/experiencias"
+        secondaryLabel="Explorar experiencias"
       />
     </main>
   );

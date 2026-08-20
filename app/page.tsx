@@ -1,9 +1,12 @@
 import { Hero } from "@/components/hero";
 import { Trajectory } from "@/components/trajectory";
-import { StorySection } from "@/components/story-section";
-import { ExpandYourWorld } from "@/components/expand-your-world";
 import { PathsSection } from "@/components/paths-section";
-import { CaminandoTeaser } from "@/components/caminando-teaser";
+import { StorySection } from "@/components/story-section";
+import { WhereToSection } from "@/components/where-to-section";
+import { GroupTripsTeaser } from "@/components/group-trips-teaser";
+import { StoriesTeaser } from "@/components/stories-teaser";
+import { KnowledgeSection } from "@/components/knowledge-section";
+import { CollaborationsSection } from "@/components/collaborations-section";
 import { NewsletterCta } from "@/components/newsletter-cta";
 
 export default function Home() {
@@ -11,10 +14,13 @@ export default function Home() {
     <main>
       <Hero />
       <Trajectory />
-      <StorySection />
-      <ExpandYourWorld />
       <PathsSection />
-      <CaminandoTeaser />
+      <StorySection />
+      <WhereToSection />
+      <GroupTripsTeaser />
+      <StoriesTeaser />
+      <KnowledgeSection />
+      <CollaborationsSection />
       <NewsletterCta />
     </main>
   );

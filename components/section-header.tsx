@@ -14,7 +14,7 @@ export function SectionHeader({
   tone = "light",
 }: SectionHeaderProps) {
   const alignment = align === "center" ? "text-center items-center mx-auto" : "text-left items-start";
-  const eyebrowColor = tone === "dark" ? "text-gold" : "text-accent";
+  const eyebrowColor = tone === "dark" ? "text-coral" : "text-accent";
   const titleColor = tone === "dark" ? "text-cream" : "text-ink";
   const descriptionColor = tone === "dark" ? "text-cream/80" : "text-ink-muted";
 
