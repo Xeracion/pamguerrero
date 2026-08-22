@@ -28,7 +28,7 @@ const PERSON_JSON_LD = {
     url: "https://caminando.lat",
   },
   sameAs: [
-    // [INSERTAR URL VERIFICADA: Instagram]
+    "https://www.instagram.com/pamguerrerop/",
     // [INSERTAR URL VERIFICADA: YouTube]
     // [INSERTAR URL VERIFICADA: TikTok]
     // [INSERTAR URL VERIFICADA: LinkedIn]

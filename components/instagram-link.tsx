@@ -2,16 +2,14 @@ interface InstagramLinkProps {
   className?: string;
 }
 
-/**
- * [PENDIENTE: enlazar a la cuenta real de Instagram de Pam Guerrero — no
- * se inventa una URL. El enlace apunta a un ancla inerte hasta entonces.]
- */
 export function InstagramLink({ className = "" }: InstagramLinkProps) {
   return (
     <a
-      href="#instagram-pendiente"
-      title="Instagram — pendiente de conectar la cuenta real"
-      aria-label="Instagram de Pam Guerrero (enlace pendiente)"
+      href="https://www.instagram.com/pamguerrerop/"
+      target="_blank"
+      rel="noopener noreferrer"
+      title="Instagram de Pam Guerrero"
+      aria-label="Instagram de Pam Guerrero"
       className={className}
     >
       <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
