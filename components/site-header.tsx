@@ -27,7 +27,7 @@ export function SiteHeader() {
             <Link
               key={item.href}
               href={item.href}
-              className="whitespace-nowrap font-body text-sm font-medium text-ink-muted transition-colors hover:text-ink"
+              className="whitespace-nowrap font-body text-sm font-medium text-ink-muted transition-colors hover:text-tangerine-deep"
             >
               {item.label}
             </Link>
@@ -38,7 +38,7 @@ export function SiteHeader() {
           <InstagramLink className="hidden text-ink-muted transition-colors hover:text-accent sm:block" />
           <Link
             href="/viajes-grupales"
-            className="hidden rounded-full bg-coral px-5 py-2.5 font-body text-sm font-semibold text-ink transition-transform hover:-translate-y-px sm:inline-block"
+            className="hidden rounded-full bg-hot-pink px-5 py-2.5 font-body text-sm font-semibold text-ink transition-transform hover:-translate-y-px sm:inline-block"
           >
             Viajes Grupales
           </Link>
@@ -95,7 +95,7 @@ export function SiteHeader() {
               <Link
                 href="/viajes-grupales"
                 onClick={() => setOpen(false)}
-                className="inline-block rounded-full bg-coral px-5 py-2.5 font-body text-sm font-semibold text-ink"
+                className="inline-block rounded-full bg-hot-pink px-5 py-2.5 font-body text-sm font-semibold text-ink"
               >
                 Viajes Grupales
               </Link>

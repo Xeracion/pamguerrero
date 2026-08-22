@@ -14,9 +14,9 @@ export function SectionHeader({
   tone = "light",
 }: SectionHeaderProps) {
   const alignment = align === "center" ? "text-center items-center mx-auto" : "text-left items-start";
-  const eyebrowColor = tone === "dark" ? "text-coral" : "text-accent";
-  const titleColor = tone === "dark" ? "text-cream" : "text-ink";
-  const descriptionColor = tone === "dark" ? "text-cream/80" : "text-ink-muted";
+  const eyebrowColor = tone === "dark" ? "text-white" : "text-accent";
+  const titleColor = tone === "dark" ? "text-white" : "text-ink";
+  const descriptionColor = tone === "dark" ? "text-white/80" : "text-ink-muted";
 
   return (
     <div className={`flex max-w-2xl flex-col gap-4 ${alignment}`}>

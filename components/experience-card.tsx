@@ -3,7 +3,7 @@ import { SanityImage } from "@/components/sanity-image";
 import type { ExperienceSummary, ExperienceTag } from "@/lib/sanity/queries";
 
 export const TAG_COLOR: Record<ExperienceTag, string> = {
-  Cultura: "text-turquoise-deep",
+  Cultura: "text-aqua-deep",
   "Experiencias internacionales": "text-cobalt",
   "Ampliar tu mundo": "text-hot-pink-deep",
   Historias: "text-coral-deep",

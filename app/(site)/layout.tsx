@@ -56,7 +56,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
       />
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-full focus:bg-accent focus:px-5 focus:py-3 focus:font-body focus:text-sm focus:font-semibold focus:text-cream"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-full focus:bg-accent focus:px-5 focus:py-3 focus:font-body focus:text-sm focus:font-semibold focus:text-white"
       >
         Saltar al contenido
       </a>

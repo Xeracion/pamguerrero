@@ -5,7 +5,7 @@ import type { TripSummary, TripStatus } from "@/lib/sanity/queries";
 
 const STATUS_STYLE: Record<TripStatus, string> = {
   proximamente: "bg-cobalt/15 text-cobalt",
-  "plazas-disponibles": "bg-turquoise/15 text-turquoise-deep",
+  "plazas-disponibles": "bg-aqua/15 text-aqua-deep",
   "ultimas-plazas": "bg-sun/25 text-ink",
   cerrado: "bg-line text-ink-muted",
 };
@@ -24,7 +24,7 @@ export function TravelCard({ trip }: { trip: TripSummary }) {
         />
         <span
           className={`absolute left-3 top-3 rounded-full px-3 py-1 font-body text-xs font-semibold uppercase tracking-[0.06em] ${
-            urgent ? "bg-coral text-cream" : STATUS_STYLE[trip.status]
+            urgent ? "bg-coral text-ink" : STATUS_STYLE[trip.status]
           }`}
         >
           {urgent ? "Últimos días" : STATUS_LABEL[trip.status]}

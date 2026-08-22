@@ -19,27 +19,27 @@ const LEGAL_LINKS = [
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-line bg-ink text-cream">
+    <footer className="border-t border-line bg-ink text-white">
       <div className="mx-auto max-w-6xl px-6 py-16">
         <div className="grid gap-12 md:grid-cols-[1.3fr_1fr_1fr]">
           <div>
             <p className="font-display text-2xl font-semibold">
               pam<span className="text-coral">guerrero</span>
             </p>
-            <p className="mt-4 max-w-xs font-body text-sm leading-relaxed text-cream/70">
+            <p className="mt-4 max-w-xs font-body text-sm leading-relaxed text-white/70">
               Viajar para ampliar tu mundo.
             </p>
-            <InstagramLink className="mt-5 inline-block text-cream/70 transition-colors hover:text-coral" />
+            <InstagramLink className="mt-5 inline-block text-white/70 transition-colors hover:text-coral" />
           </div>
 
           <div>
-            <p className="font-body text-xs font-semibold uppercase tracking-[0.14em] text-cream/50">
+            <p className="font-body text-xs font-semibold uppercase tracking-[0.14em] text-white/50">
               Navega
             </p>
             <ul className="mt-4 flex flex-col gap-2.5">
               {MAIN_LINKS.map((item) => (
                 <li key={item.href}>
-                  <Link href={item.href} className="font-body text-sm text-cream/90 hover:text-coral">
+                  <Link href={item.href} className="font-body text-sm text-white/90 hover:text-coral">
                     {item.label}
                   </Link>
                 </li>
@@ -48,13 +48,13 @@ export function SiteFooter() {
           </div>
 
           <div>
-            <p className="font-body text-xs font-semibold uppercase tracking-[0.14em] text-cream/50">
+            <p className="font-body text-xs font-semibold uppercase tracking-[0.14em] text-white/50">
               Legal
             </p>
             <ul className="mt-4 flex flex-col gap-2.5">
               {LEGAL_LINKS.map((item) => (
                 <li key={item.href}>
-                  <Link href={item.href} className="font-body text-sm text-cream/90 hover:text-coral">
+                  <Link href={item.href} className="font-body text-sm text-white/90 hover:text-coral">
                     {item.label}
                   </Link>
                 </li>
@@ -63,8 +63,8 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="mt-14 border-t border-cream/15 pt-8">
-          <p className="font-body text-xs text-cream/50">
+        <div className="mt-14 border-t border-white/15 pt-8">
+          <p className="font-body text-xs text-white/50">
             © {new Date().getFullYear()} Pam Guerrero. Todos los derechos reservados.
           </p>
         </div>

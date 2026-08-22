@@ -32,7 +32,7 @@ export default function ProyectosPage() {
         <div className="mx-auto max-w-6xl px-6">
           <Link
             href="/proyectos/caminando"
-            className="group grid gap-8 rounded-2xl border border-line bg-surface p-8 transition-colors hover:bg-cream lg:grid-cols-[1fr_1.3fr] lg:items-center"
+            className="group grid gap-8 rounded-2xl border border-line bg-surface p-8 transition-colors hover:bg-line lg:grid-cols-[1fr_1.3fr] lg:items-center"
           >
             <PhotoPlaceholder
               label="[REEMPLAZAR CON IMAGEN REAL DE CAMINANDO.LAT]"

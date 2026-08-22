@@ -18,7 +18,7 @@ export function CollaborationsSection() {
             </p>
             <a
               href="/trabaja-conmigo"
-              className="mt-8 inline-block w-fit rounded-full bg-ink px-7 py-3.5 font-body text-sm font-semibold text-cream transition-transform hover:-translate-y-px"
+              className="mt-8 inline-block w-fit rounded-full bg-ink px-7 py-3.5 font-body text-sm font-semibold text-white transition-transform hover:-translate-y-px"
             >
               Trabaja conmigo
             </a>
@@ -30,7 +30,7 @@ export function CollaborationsSection() {
               aspect="landscape"
             />
             <div>
-              <p className="font-body text-xs font-semibold uppercase tracking-[0.1em] text-turquoise-deep">
+              <p className="font-body text-xs font-semibold uppercase tracking-[0.1em] text-aqua-deep">
                 Un proyecto fundado por Pam
               </p>
               <h3 className="mt-2 font-display text-2xl font-medium text-ink">Caminando.lat</h3>

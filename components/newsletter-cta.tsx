@@ -1,11 +1,11 @@
 export function NewsletterCta() {
   return (
-    <section className="bg-accent py-24 text-cream sm:py-28">
+    <section className="bg-accent py-24 text-white sm:py-28">
       <div className="mx-auto flex max-w-2xl flex-col items-center gap-6 px-6 text-center">
         <h2 className="font-display text-3xl font-medium leading-tight sm:text-4xl">
           Una carta, de vez en cuando, sobre ampliar el mundo.
         </h2>
-        <p className="font-body text-base leading-relaxed text-cream/85">
+        <p className="font-body text-base leading-relaxed text-white/85">
           Destinos, oportunidades y lo que voy aprendiendo por el camino — sin ruido, sin
           relleno.
         </p>
@@ -19,7 +19,7 @@ export function NewsletterCta() {
             type="email"
             required
             placeholder="tu@email.com"
-            className="w-full rounded-full border border-cream/30 bg-cream/10 px-5 py-3 font-body text-sm text-cream placeholder:text-cream/60 focus-visible:outline-cream"
+            className="w-full rounded-full border border-white/30 bg-white/10 px-5 py-3 font-body text-sm text-white placeholder:text-white/60 focus-visible:outline-white"
           />
           <button
             type="submit"
@@ -28,7 +28,7 @@ export function NewsletterCta() {
             Suscribirme
           </button>
         </form>
-        <p className="font-body text-xs text-cream/60">
+        <p className="font-body text-xs text-white/60">
           [PENDIENTE: conectar formulario a proveedor de email real]
         </p>
       </div>

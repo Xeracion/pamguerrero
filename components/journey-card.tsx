@@ -12,7 +12,7 @@ export function JourneyCard({ journey }: { journey: JourneyDoc }) {
         className="transition-opacity group-hover:opacity-80"
       />
       <div>
-        <span className="font-body text-xs font-semibold uppercase tracking-[0.1em] text-coral-deep">
+        <span className="font-body text-xs font-semibold uppercase tracking-[0.1em] text-hot-pink-deep">
           {journey.destination.name}
         </span>
         <h3 className="mt-2 font-display text-2xl italic font-medium leading-snug text-ink group-hover:underline">

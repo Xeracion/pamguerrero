@@ -1,40 +1,49 @@
 @import "tailwindcss";
 
 :root {
-  /* Identidad Pam Guerrero — sistema vibrante */
-  --color-burgundy: #5d101d;
-  --color-coral: #ff5a5f;
-  --color-coral-deep: #c62328;
-  --color-cobalt: #304ffe;
-  --color-turquoise: #00b8a9;
-  --color-turquoise-deep: #007a70;
-  --color-hot-pink: #e83e8c;
-  --color-hot-pink-deep: #a8215f;
-  --color-sun: #ffd23f;
-  --color-cream: #fff7ed;
-  --color-ink: #172033;
-  --color-ink-deep: #0d1220;
-  --color-ink-muted: #5a6478;
+  /* Identidad Pam Guerrero — sistema VIBRANT, saturado, dopamine-driven.
+     Blanco puro reemplaza el crema: el color explota sobre pausas blancas,
+     no sobre un fondo cálido. Ver reglas de contraste abajo. */
+  --color-burgundy: #5d101d; /* firma de marca — logo, nav, CTAs, bloques de identidad */
+  --color-cobalt: #304ffe; /* exploración / viaje — el gran protagonista tras el burgundy */
+  --color-hot-pink: #f72585; /* personalidad — atrevido, contemporáneo */
+  --color-hot-pink-deep: #a3105e; /* variante accesible de hot-pink para texto sobre blanco */
+  --color-coral: #ff4f5e; /* energía / CTA */
+  --color-coral-deep: #c62328; /* variante accesible de coral para texto sobre blanco */
+  --color-aqua: #00cfc1; /* movimiento / experiencias / viaje */
+  --color-aqua-deep: #00786f; /* variante accesible de aqua para texto sobre blanco */
+  --color-sun: #ffd60a; /* descubrimiento — dosis de dopamina en pequeñas superficies */
+  --color-tangerine: #ff6b00; /* sorpresa — combinaciones inesperadas, uso puntual */
+  --color-tangerine-deep: #b34c00; /* variante accesible de tangerine para texto sobre blanco */
+  --color-ink: #111827;
+  --color-ink-deep: #0a0e17;
+  --color-ink-muted: #5b6472;
 
-  /* Tokens semánticos */
-  --color-paper: var(--color-cream);
+  /* Tokens semánticos.
+     Regla de contraste: sobre burgundy/cobalt el texto va en blanco.
+     Sobre hot-pink/coral/aqua/sun/tangerine el texto va en ink (nunca blanco:
+     no alcanzan 4.5:1). Como texto de cuerpo sobre blanco, hot-pink/coral/aqua/
+     tangerine usan siempre su variante "-deep"; sun y tangerine puros son solo
+     fondo, nunca texto. */
+  --color-paper: #ffffff;
   --color-surface: #ffffff;
   --color-accent: var(--color-burgundy);
-  --color-line: #ecdcc8;
-  --color-line-strong: #d9c1a2;
+  --color-line: #e5e7eb;
+  --color-line-strong: #d1d5db;
 }
 
 @theme inline {
   --color-burgundy: var(--color-burgundy);
-  --color-coral: var(--color-coral);
-  --color-coral-deep: var(--color-coral-deep);
   --color-cobalt: var(--color-cobalt);
-  --color-turquoise: var(--color-turquoise);
-  --color-turquoise-deep: var(--color-turquoise-deep);
   --color-hot-pink: var(--color-hot-pink);
   --color-hot-pink-deep: var(--color-hot-pink-deep);
+  --color-coral: var(--color-coral);
+  --color-coral-deep: var(--color-coral-deep);
+  --color-aqua: var(--color-aqua);
+  --color-aqua-deep: var(--color-aqua-deep);
   --color-sun: var(--color-sun);
-  --color-cream: var(--color-cream);
+  --color-tangerine: var(--color-tangerine);
+  --color-tangerine-deep: var(--color-tangerine-deep);
   --color-ink: var(--color-ink);
   --color-ink-deep: var(--color-ink-deep);
   --color-ink-muted: var(--color-ink-muted);
@@ -80,7 +89,7 @@ h4 {
 
 ::selection {
   background: var(--color-coral);
-  color: var(--color-cream);
+  color: var(--color-ink);
 }
 
 :focus-visible {

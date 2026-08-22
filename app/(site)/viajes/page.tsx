@@ -68,7 +68,7 @@ export default async function ViajesPage() {
               <Link
                 key={category.slug}
                 href={`/viajes/${category.slug}`}
-                className="group flex flex-col gap-2 bg-paper p-8 transition-colors hover:bg-cream"
+                className="group flex flex-col gap-2 bg-paper p-8 transition-colors hover:bg-line"
               >
                 <h3 className="font-display text-xl font-medium text-ink group-hover:text-accent">
                   {category.label}

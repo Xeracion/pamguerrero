@@ -90,7 +90,7 @@ export default function CaminandoProjectPage() {
           </p>
           <a
             href="https://caminando.lat"
-            className="whitespace-nowrap rounded-full bg-ink px-7 py-3.5 text-center font-body text-sm font-semibold text-cream transition-transform hover:-translate-y-px"
+            className="whitespace-nowrap rounded-full bg-ink px-7 py-3.5 text-center font-body text-sm font-semibold text-white transition-transform hover:-translate-y-px"
           >
             Descubre Caminando.lat
           </a>

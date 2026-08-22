@@ -74,7 +74,7 @@ export default function NewsletterPage() {
               </div>
               <button
                 type="submit"
-                className="mt-2 rounded-full bg-accent px-7 py-3.5 font-body text-sm font-semibold text-cream transition-transform hover:-translate-y-px"
+                className="mt-2 rounded-full bg-accent px-7 py-3.5 font-body text-sm font-semibold text-white transition-transform hover:-translate-y-px"
               >
                 Suscribirme
               </button>

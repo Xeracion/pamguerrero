@@ -7,7 +7,7 @@ export function FaqAccordion({ faqs }: { faqs: Faq[] }) {
         <details key={faq.question} className="group py-5">
           <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-body text-base font-medium text-ink marker:content-none">
             {faq.question}
-            <span className="shrink-0 font-display text-xl text-accent transition-transform group-open:rotate-45">
+            <span className="shrink-0 font-display text-xl text-tangerine-deep transition-transform group-open:rotate-45">
               +
             </span>
           </summary>

@@ -7,7 +7,7 @@ const PATHS = [
     body: "Acompáñame en mis viajes y experiencias.",
     href: "/viaja-conmigo",
     cta: "Ver mis viajes",
-    accent: "group-hover:text-coral-deep",
+    accent: "group-hover:text-hot-pink-deep",
   },
   {
     title: "Viajes",
@@ -21,7 +21,7 @@ const PATHS = [
     body: "Descubre historias, cultura y experiencias para ampliar tu mundo.",
     href: "/experiencias",
     cta: "Ver experiencias",
-    accent: "group-hover:text-turquoise-deep",
+    accent: "group-hover:text-aqua-deep",
   },
 ];
 
@@ -36,7 +36,7 @@ export function PathsSection() {
             <Link
               key={path.href}
               href={path.href}
-              className="group flex flex-col gap-4 bg-surface p-10 transition-colors hover:bg-cream"
+              className="group flex flex-col gap-4 bg-surface p-10 transition-colors hover:bg-line"
             >
               <h3 className="font-display text-2xl italic font-medium text-ink">{path.title}</h3>
               <p className="font-body text-sm leading-relaxed text-ink-muted">{path.body}</p>
