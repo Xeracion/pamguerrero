@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { InstagramLink } from "@/components/instagram-link";
 import { RouteLine } from "@/components/route-line";
+import { Logo } from "@/components/logo";
 
 const MAIN_LINKS = [
   { href: "/viaja-conmigo", label: "Viaja conmigo" },
@@ -28,9 +29,7 @@ export function SiteFooter() {
       <div className="relative mx-auto max-w-6xl px-6 py-16">
         <div className="grid gap-12 md:grid-cols-[1.3fr_1fr_1fr]">
           <div>
-            <p className="font-display text-2xl font-semibold">
-              pam<span className="text-coral">guerrero</span>
-            </p>
+            <Logo tone="negative" className="h-7 w-auto" />
             <p className="mt-4 max-w-xs font-body text-sm leading-relaxed text-white/70">
               Viajar para ampliar tu mundo.
             </p>

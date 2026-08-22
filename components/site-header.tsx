@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { InstagramLink } from "@/components/instagram-link";
+import { Logo } from "@/components/logo";
 
 const NAV = [
   { href: "/viaja-conmigo", label: "Viaja Conmigo" },
@@ -18,8 +19,8 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-line bg-paper/95 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-6 py-4">
-        <Link href="/" className="font-display text-xl font-semibold tracking-tight text-ink">
-          pam<span className="text-accent">guerrero</span>
+        <Link href="/" aria-label="Pam Guerrero — inicio">
+          <Logo tone="positive" className="h-6 w-auto sm:h-7" />
         </Link>
 
         <nav className="hidden items-center gap-6 lg:flex" aria-label="Navegación principal">
