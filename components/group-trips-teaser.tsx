@@ -20,16 +20,19 @@ export async function GroupTripsTeaser() {
   }
 
   return (
-    <section className="bg-surface py-24 sm:py-32">
+    <section className="bg-sun py-24 sm:py-32">
       <div className="mx-auto max-w-6xl px-6">
         <SectionHeader
           eyebrow="Vívelo conmigo"
           title="Viajes grupales abiertos ahora mismo"
           description="No son paquetes: son experiencias que diseño y acompaño de principio a fin."
+          tone="onWarm"
         />
-        <div className="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {openTrips.map((trip) => (
-            <TravelCard key={trip.slug} trip={trip} />
+            <div key={trip.slug} className="rounded-2xl bg-white p-5 shadow-[0_16px_36px_-20px_rgba(23,32,51,0.35)]">
+              <TravelCard trip={trip} />
+            </div>
           ))}
         </div>
       </div>

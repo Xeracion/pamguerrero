@@ -61,6 +61,7 @@ export default function TrabajaConmigoPage() {
       <Breadcrumbs items={crumbs} />
 
       <PageHeader
+        tone="cobalt"
         eyebrow="Para marcas, destinos e instituciones"
         title="Trabajemos juntos."
         description="No solo publico contenido: cuento historias, viajo, investigo, lidero experiencias y conecto audiencias. Esto es lo que puedo aportar a un proyecto."

@@ -15,7 +15,7 @@ export function DestinationCard({ destination }: { destination: DestinationSumma
         <span className="font-body text-xs font-semibold uppercase tracking-[0.1em] text-accent">
           {destination.region}
         </span>
-        <h3 className="mt-2 font-display text-xl font-medium leading-snug text-ink group-hover:underline">
+        <h3 className="mt-2 font-display text-2xl font-medium leading-snug text-ink group-hover:underline">
           {destination.name}
         </h3>
         <p className="mt-2 font-body text-sm leading-relaxed text-ink-muted">{destination.summary}</p>

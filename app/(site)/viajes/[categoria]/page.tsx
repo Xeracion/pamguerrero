@@ -54,7 +54,12 @@ export default async function CategoryPage({
         dangerouslySetInnerHTML={{ __html: jsonLdString(breadcrumbsJsonLd(crumbs, SITE_URL)) }}
       />
       <Breadcrumbs items={crumbs} />
-      <PageHeader eyebrow="Viajes" title={category.label} description={category.description} />
+      <PageHeader
+        tone="turquoise"
+        eyebrow="Viajes"
+        title={category.label}
+        description={category.description}
+      />
 
       <section className="py-16 sm:py-20">
         <div className="mx-auto max-w-6xl px-6">

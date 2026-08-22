@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { InstagramLink } from "@/components/instagram-link";
+import { RouteLine } from "@/components/route-line";
 
 const MAIN_LINKS = [
   { href: "/viaja-conmigo", label: "Viaja conmigo" },
@@ -19,8 +20,12 @@ const LEGAL_LINKS = [
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-line bg-ink text-white">
-      <div className="mx-auto max-w-6xl px-6 py-16">
+    <footer className="relative overflow-hidden bg-burgundy text-white">
+      <RouteLine
+        variant="arc"
+        className="pointer-events-none absolute -top-4 right-[8%] h-14 w-[40%] text-white/10"
+      />
+      <div className="relative mx-auto max-w-6xl px-6 py-16">
         <div className="grid gap-12 md:grid-cols-[1.3fr_1fr_1fr]">
           <div>
             <p className="font-display text-2xl font-semibold">
@@ -29,7 +34,7 @@ export function SiteFooter() {
             <p className="mt-4 max-w-xs font-body text-sm leading-relaxed text-white/70">
               Viajar para ampliar tu mundo.
             </p>
-            <InstagramLink className="mt-5 inline-block text-white/70 transition-colors hover:text-coral" />
+            <InstagramLink className="mt-5 inline-block text-white/70 transition-colors hover:text-sun" />
           </div>
 
           <div>
@@ -39,7 +44,7 @@ export function SiteFooter() {
             <ul className="mt-4 flex flex-col gap-2.5">
               {MAIN_LINKS.map((item) => (
                 <li key={item.href}>
-                  <Link href={item.href} className="font-body text-sm text-white/90 hover:text-coral">
+                  <Link href={item.href} className="font-body text-sm text-white/90 hover:text-sun">
                     {item.label}
                   </Link>
                 </li>
@@ -54,7 +59,7 @@ export function SiteFooter() {
             <ul className="mt-4 flex flex-col gap-2.5">
               {LEGAL_LINKS.map((item) => (
                 <li key={item.href}>
-                  <Link href={item.href} className="font-body text-sm text-white/90 hover:text-coral">
+                  <Link href={item.href} className="font-body text-sm text-white/90 hover:text-sun">
                     {item.label}
                   </Link>
                 </li>

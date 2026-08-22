@@ -23,6 +23,7 @@ export default function ContactoPage() {
       <Breadcrumbs items={crumbs} />
 
       <PageHeader
+        tone="coral"
         eyebrow="Hablemos"
         title="Contacto"
         description="¿Pregunta sobre un viaje, propuesta de colaboración o consulta de prensa? Escríbeme por aquí."

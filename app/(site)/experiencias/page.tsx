@@ -29,6 +29,7 @@ export default async function ExperienciasPage() {
       <Breadcrumbs items={crumbs} />
 
       <PageHeader
+        tone="tangerine"
         eyebrow="Lo que quiero transmitir"
         title="Experiencias"
         description="Esto no es turismo — es cultura, aprendizaje y transformación. Historias sobre lo que significa ampliar tu mundo, más allá de la lista de sitios que hay que visitar."

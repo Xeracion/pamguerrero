@@ -24,6 +24,7 @@ export default function ProyectosPage() {
       />
       <Breadcrumbs items={crumbs} />
       <PageHeader
+        tone="turquoise"
         eyebrow="Más allá del contenido"
         title="Proyectos"
         description="Cosas que he construido para que las oportunidades sean más fáciles de encontrar, no solo más fáciles de soñar."

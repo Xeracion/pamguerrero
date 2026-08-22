@@ -34,6 +34,7 @@ export default function MisImprescindiblesPage() {
       <Breadcrumbs items={crumbs} />
 
       <PageHeader
+        tone="sun"
         eyebrow="Recomendaciones"
         title="Mis imprescindibles"
         description="Cosas que realmente utilizo o recomiendo para viajar. Todavía no hay nada publicado aquí — no vamos a inventar recomendaciones para llenar la página."

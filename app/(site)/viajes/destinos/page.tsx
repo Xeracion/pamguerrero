@@ -31,6 +31,7 @@ export default async function DestinosPage() {
       />
       <Breadcrumbs items={crumbs} />
       <PageHeader
+        tone="cobalt"
         eyebrow="Viajes"
         title="Destinos"
         description="Cada guía nace de un viaje real: cultura, gastronomía, transporte, presupuesto y errores que no volvería a cometer."

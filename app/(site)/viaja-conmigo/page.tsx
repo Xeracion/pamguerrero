@@ -29,6 +29,7 @@ export default async function ViajaConmigoPage() {
       <Breadcrumbs items={crumbs} />
 
       <PageHeader
+        tone="coral"
         eyebrow="Lo que he vivido"
         title="Viaja conmigo"
         description="Aquí no encontrarás guías ni consejos organizados por intención de búsqueda — eso vive en Viajes. Esto es lo que yo he vivido, contado en primera persona."

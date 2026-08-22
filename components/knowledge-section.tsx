@@ -8,21 +8,24 @@ export async function KnowledgeSection() {
   if (articles.length === 0) return null;
 
   return (
-    <section className="bg-surface py-24 sm:py-32">
+    <section className="bg-tangerine py-24 sm:py-32">
       <div className="mx-auto max-w-6xl px-6">
         <SectionHeader
           eyebrow="🔎 Lo más buscado"
           title="Lo que más me preguntáis"
           description="Las dudas prácticas que más se repiten antes de un viaje internacional."
+          tone="onWarm"
         />
-        <div className="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {articles.slice(0, 3).map((article) => (
-            <ArticleCard key={article.slug} article={article} />
+            <div key={article.slug} className="rounded-2xl bg-white p-5 shadow-[0_16px_36px_-20px_rgba(23,32,51,0.35)]">
+              <ArticleCard article={article} />
+            </div>
           ))}
         </div>
         <Link
           href="/viajes"
-          className="mt-10 inline-block font-body text-sm font-semibold text-accent hover:underline"
+          className="mt-10 inline-block font-body text-sm font-semibold text-ink underline decoration-2 underline-offset-4 hover:no-underline"
         >
           Ver todo en Viajes →
         </Link>

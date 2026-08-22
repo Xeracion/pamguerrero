@@ -18,7 +18,7 @@ export function ArticleCard({ article }: { article: ArticleSummary }) {
         <span className="font-body text-xs font-semibold uppercase tracking-[0.1em] text-accent">
           {article.category.label}
         </span>
-        <h3 className="mt-2 font-display text-xl font-medium leading-snug text-ink group-hover:underline">
+        <h3 className="mt-2 font-display text-2xl font-medium leading-snug text-ink group-hover:underline">
           {article.title}
         </h3>
         <p className="mt-2 font-body text-sm leading-relaxed text-ink-muted">{article.excerpt}</p>

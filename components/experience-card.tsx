@@ -3,9 +3,9 @@ import { SanityImage } from "@/components/sanity-image";
 import type { ExperienceSummary, ExperienceTag } from "@/lib/sanity/queries";
 
 export const TAG_COLOR: Record<ExperienceTag, string> = {
-  Cultura: "text-aqua-deep",
+  Cultura: "text-turquoise-deep",
   "Experiencias internacionales": "text-cobalt",
-  "Ampliar tu mundo": "text-hot-pink-deep",
+  "Ampliar tu mundo": "text-tangerine-deep",
   Historias: "text-coral-deep",
 };
 
@@ -24,7 +24,7 @@ export function ExperienceCard({ experience }: { experience: ExperienceSummary }
         >
           {experience.tag}
         </span>
-        <h3 className="mt-2 font-display text-xl font-medium leading-snug text-ink group-hover:underline">
+        <h3 className="mt-2 font-display text-2xl font-medium leading-snug text-ink group-hover:underline">
           {experience.title}
         </h3>
         <p className="mt-2 font-body text-sm leading-relaxed text-ink-muted">{experience.excerpt}</p>

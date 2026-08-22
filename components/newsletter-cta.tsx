@@ -1,8 +1,14 @@
+import { RouteLine } from "@/components/route-line";
+
 export function NewsletterCta() {
   return (
-    <section className="bg-accent py-24 text-white sm:py-28">
-      <div className="mx-auto flex max-w-2xl flex-col items-center gap-6 px-6 text-center">
-        <h2 className="font-display text-3xl font-medium leading-tight sm:text-4xl">
+    <section className="relative overflow-hidden bg-accent py-24 text-white sm:py-28">
+      <RouteLine
+        variant="arc"
+        className="pointer-events-none absolute -top-6 left-1/2 h-16 w-[70%] -translate-x-1/2 text-white/10"
+      />
+      <div className="relative mx-auto flex max-w-2xl flex-col items-center gap-6 px-6 text-center">
+        <h2 className="font-display text-4xl font-medium leading-[1.05] sm:text-5xl">
           Una carta, de vez en cuando, sobre ampliar el mundo.
         </h2>
         <p className="font-body text-base leading-relaxed text-white/85">

@@ -29,6 +29,7 @@ export default function NewsletterPage() {
       <Breadcrumbs items={crumbs} />
 
       <PageHeader
+        tone="burgundy"
         eyebrow="Sin ruido, sin relleno"
         title="Una carta, de vez en cuando, sobre ampliar el mundo."
         description="Nada de correos diarios ni promociones constantes. Solo lo que de verdad vale la pena leer."

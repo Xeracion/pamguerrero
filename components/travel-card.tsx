@@ -5,7 +5,7 @@ import type { TripSummary, TripStatus } from "@/lib/sanity/queries";
 
 const STATUS_STYLE: Record<TripStatus, string> = {
   proximamente: "bg-cobalt/15 text-cobalt",
-  "plazas-disponibles": "bg-aqua/15 text-aqua-deep",
+  "plazas-disponibles": "bg-turquoise/15 text-turquoise-deep",
   "ultimas-plazas": "bg-sun/25 text-ink",
   cerrado: "bg-line text-ink-muted",
 };
@@ -31,7 +31,7 @@ export function TravelCard({ trip }: { trip: TripSummary }) {
         </span>
       </div>
       <div>
-        <h3 className="font-display text-2xl italic font-medium leading-snug text-ink group-hover:underline">
+        <h3 className="font-display text-3xl italic font-medium leading-snug text-ink group-hover:underline">
           {trip.title}
         </h3>
         <p className="mt-2 font-body text-sm leading-relaxed text-ink-muted">

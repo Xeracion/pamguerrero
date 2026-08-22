@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { Breadcrumbs, breadcrumbsJsonLd } from "@/components/breadcrumbs";
 import { SanityImage } from "@/components/sanity-image";
 import { ExampleContentNote } from "@/components/example-content-note";
+import { RouteLine } from "@/components/route-line";
 import { TravelCard } from "@/components/travel-card";
 import { Cta } from "@/components/cta";
 import { getDestinations, getDestination, getJourneyByDestination } from "@/lib/sanity/queries";
@@ -11,6 +12,23 @@ import { getDestinations, getDestination, getJourneyByDestination } from "@/lib/
 const SITE_URL = "https://www.pamguerrero.com";
 
 export const revalidate = 300;
+
+/**
+ * Cada destino recibe su propio tratamiento cromático — determinado por el
+ * slug, no elegido a mano, para que la plantilla siga funcionando igual de
+ * bien con el próximo destino que se publique en Sanity.
+ */
+const CHAPTER_TONES = [
+  { bg: "bg-burgundy", border: "border-burgundy", text: "text-white", route: "text-white/15", tag: "bg-sun text-ink" },
+  { bg: "bg-cobalt", border: "border-cobalt", text: "text-white", route: "text-white/15", tag: "bg-coral text-ink" },
+  { bg: "bg-turquoise", border: "border-turquoise", text: "text-ink", route: "text-ink/15", tag: "bg-burgundy text-white" },
+  { bg: "bg-tangerine", border: "border-tangerine", text: "text-ink", route: "text-ink/15", tag: "bg-white text-ink" },
+] as const;
+
+function chapterTone(slug: string) {
+  const hash = slug.split("").reduce((acc, ch) => acc + ch.charCodeAt(0), 0);
+  return CHAPTER_TONES[hash % CHAPTER_TONES.length];
+}
 
 export async function generateStaticParams() {
   const destinations = await getDestinations();
@@ -45,6 +63,7 @@ export default async function DestinationPage({
   const relatedTrips = destination.relatedTrips ?? [];
   const journey = await getJourneyByDestination(destination.slug);
   const openTrip = relatedTrips.find((t) => t.status !== "cerrado");
+  const tone = chapterTone(destination.slug);
 
   const crumbs = [
     { label: "Inicio", href: "/" },
@@ -73,30 +92,48 @@ export default async function DestinationPage({
       />
       <Breadcrumbs items={crumbs} />
 
-      <div className="relative">
+      {/* PORTADA — fotografía gigante con el título superpuesto */}
+      <div className="relative min-h-[70vh]">
         <SanityImage
           image={destination.mainImage}
-          fallbackLabel={`[FOTO PRINCIPAL DE ${destination.name.toUpperCase()}]`}
-          aspect="wide"
-          className="border-none"
+          fallbackLabel={`[FOTO PRINCIPAL DE ${destination.name.toUpperCase()} — a pantalla completa]`}
+          aspect="square"
+          className="absolute inset-0 h-full w-full border-none"
         />
+        <div
+          className="absolute inset-0"
+          style={{
+            background: "linear-gradient(to top, rgba(13,18,32,0.85) 0%, rgba(13,18,32,0.05) 55%)",
+          }}
+        />
+        <div className="relative flex min-h-[70vh] flex-col justify-end px-6 py-14 sm:px-10">
+          {destination.isExample && <ExampleContentNote className="mb-6 w-fit" />}
+          <h1 className="max-w-3xl font-display text-6xl font-medium leading-[0.95] text-white sm:text-7xl lg:text-8xl">
+            {destination.name}
+          </h1>
+        </div>
       </div>
 
-      <div className="mx-auto max-w-6xl px-6 py-16 sm:py-20">
-        {destination.isExample && <ExampleContentNote className="mb-6" />}
-        <span className="font-body text-xs font-semibold uppercase tracking-[0.1em] text-accent">
-          {destination.region}
-        </span>
-        <h1 className="mt-3 max-w-2xl font-display text-4xl font-medium leading-[1.1] text-ink sm:text-5xl">
-          {destination.name}
-        </h1>
-        <p className="mt-5 max-w-xl font-body text-lg leading-relaxed text-ink-muted">
-          {destination.summary}
-        </p>
+      {/* CAPÍTULO — franja de color propia del destino */}
+      <section className={`relative overflow-hidden ${tone.bg} py-14`}>
+        <RouteLine variant="arc" className={`pointer-events-none absolute -right-8 top-2 h-16 w-[35%] ${tone.route}`} />
+        <div className="relative mx-auto flex max-w-6xl flex-col gap-4 px-6 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <span className={`inline-block rounded-full px-3 py-1 font-body text-xs font-semibold uppercase tracking-[0.1em] ${tone.tag}`}>
+              {destination.region}
+            </span>
+            <p className={`mt-3 max-w-xl font-body text-lg leading-relaxed ${tone.text}`}>
+              {destination.summary}
+            </p>
+          </div>
+        </div>
+      </section>
 
-        <div className="mt-14 grid gap-12 lg:grid-cols-2">
+      {/* GUÍA — pequeños datos editoriales */}
+      <div className="mx-auto max-w-6xl px-6 py-16 sm:py-20">
+        <div className="grid gap-12 lg:grid-cols-2">
           {(destination.guide ?? []).map((section) => (
-            <div key={section.heading} className="border-t border-line pt-6">
+            <div key={section.heading} className={`border-t-2 pt-6 ${tone.border}`}>
               <h2 className="font-display text-2xl font-medium text-ink">{section.heading}</h2>
               <p className="mt-3 font-body text-base leading-relaxed text-ink-muted">
                 {section.body}

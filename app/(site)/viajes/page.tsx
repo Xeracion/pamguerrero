@@ -36,6 +36,7 @@ export default async function ViajesPage() {
       <Breadcrumbs items={crumbs} />
 
       <PageHeader
+        tone="turquoise"
         eyebrow="Lo que sé"
         title="Viajes"
         description="Todo lo que necesitas para descubrir el mundo: destinos, guías, consejos y experiencias para ayudarte a viajar mejor."

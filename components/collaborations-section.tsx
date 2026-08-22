@@ -2,46 +2,44 @@ import { PhotoPlaceholder } from "@/components/photo-placeholder";
 
 export function CollaborationsSection() {
   return (
-    <section className="bg-surface py-24 sm:py-32">
+    <section className="bg-cobalt py-24 sm:py-32">
       <div className="mx-auto max-w-6xl px-6">
-        <div className="grid gap-12 lg:grid-cols-2">
+        <div className="grid gap-14 lg:grid-cols-2 lg:items-center">
           <div className="flex flex-col justify-center">
-            <p className="font-body text-xs font-semibold uppercase tracking-[0.18em] text-accent">
+            <p className="font-body text-xs font-semibold uppercase tracking-[0.18em] text-sun">
               Para marcas, destinos e instituciones
             </p>
-            <h2 className="mt-4 font-display text-3xl font-medium leading-tight text-ink sm:text-4xl">
+            <h2 className="mt-4 font-display text-4xl font-medium leading-[1.05] text-white sm:text-5xl">
               Trabajemos juntos.
             </h2>
-            <p className="mt-4 max-w-md font-body text-base leading-relaxed text-ink-muted">
+            <p className="mt-5 max-w-md font-body text-lg leading-relaxed text-white/80">
               Storytelling, viajes grupales con marca, investigación en turismo y acceso directo
               a una comunidad latinoamericana interesada en viajar.
             </p>
             <a
               href="/trabaja-conmigo"
-              className="mt-8 inline-block w-fit rounded-full bg-ink px-7 py-3.5 font-body text-sm font-semibold text-white transition-transform hover:-translate-y-px"
+              className="mt-8 inline-block w-fit rounded-full bg-white px-7 py-3.5 font-body text-sm font-semibold text-cobalt transition-transform hover:-translate-y-px"
             >
               Trabaja conmigo
             </a>
           </div>
 
-          <div className="flex flex-col gap-5 border-t border-line pt-10 lg:border-l lg:border-t-0 lg:pl-12 lg:pt-0">
+          <div className="relative mx-auto w-full max-w-sm">
             <PhotoPlaceholder
               label="[REEMPLAZAR CON IMAGEN REAL DE CAMINANDO.LAT]"
-              aspect="landscape"
+              aspect="portrait"
+              className="border-none text-white/40"
             />
-            <div>
-              <p className="font-body text-xs font-semibold uppercase tracking-[0.1em] text-aqua-deep">
+            <div className="absolute -bottom-6 -left-6 max-w-[13rem] rounded-xl bg-coral p-5 shadow-[0_20px_40px_-15px_rgba(13,18,32,0.5)]">
+              <p className="font-body text-[11px] font-semibold uppercase tracking-[0.1em] text-ink">
                 Un proyecto fundado por Pam
               </p>
-              <h3 className="mt-2 font-display text-2xl font-medium text-ink">Caminando.lat</h3>
-              <p className="mt-2 max-w-md font-body text-sm leading-relaxed text-ink-muted">
-                Becas, trabajo y rutas de migración para latinoamericanos.
-              </p>
+              <h3 className="mt-1 font-display text-xl font-medium text-ink">Caminando.lat</h3>
               <a
                 href="https://caminando.lat"
-                className="mt-4 inline-block font-body text-sm font-semibold text-accent hover:underline"
+                className="mt-2 inline-block font-body text-xs font-semibold text-ink underline underline-offset-2"
               >
-                Descubre Caminando.lat →
+                Descúbrelo →
               </a>
             </div>
           </div>
