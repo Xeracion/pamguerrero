@@ -1,3 +1,4 @@
+import { jsonLdString } from "@/lib/json-ld";
 import type { Metadata } from "next";
 import { Breadcrumbs, breadcrumbsJsonLd } from "@/components/breadcrumbs";
 import { PhotoPlaceholder } from "@/components/photo-placeholder";
@@ -47,11 +48,11 @@ export default function CaminandoProjectPage() {
     <main>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbsJsonLd(crumbs, SITE_URL)) }}
+        dangerouslySetInnerHTML={{ __html: jsonLdString(breadcrumbsJsonLd(crumbs, SITE_URL)) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(projectJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: jsonLdString(projectJsonLd) }}
       />
       <Breadcrumbs items={crumbs} />
 

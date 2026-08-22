@@ -1,3 +1,4 @@
+import { jsonLdString } from "@/lib/json-ld";
 import type { Metadata } from "next";
 import { Breadcrumbs, breadcrumbsJsonLd } from "@/components/breadcrumbs";
 import { PageHeader } from "@/components/page-header";
@@ -26,7 +27,7 @@ export default async function DestinosPage() {
     <main>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbsJsonLd(crumbs, SITE_URL)) }}
+        dangerouslySetInnerHTML={{ __html: jsonLdString(breadcrumbsJsonLd(crumbs, SITE_URL)) }}
       />
       <Breadcrumbs items={crumbs} />
       <PageHeader

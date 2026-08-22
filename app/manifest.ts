@@ -8,8 +8,8 @@ export default function manifest(): MetadataRoute.Manifest {
       "Doctora en Turismo, exploradora de más de 30 países y fundadora de Caminando.lat.",
     start_url: "/",
     display: "standalone",
-    background_color: "#f2efea",
-    theme_color: "#0f1b3d",
+    background_color: "#ffffff",
+    theme_color: "#5d101d",
     lang: "es",
   };
 }

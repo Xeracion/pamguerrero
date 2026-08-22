@@ -1,3 +1,4 @@
+import { jsonLdString } from "@/lib/json-ld";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Breadcrumbs, breadcrumbsJsonLd } from "@/components/breadcrumbs";
@@ -51,11 +52,11 @@ export default async function TripPage({ params }: { params: Promise<{ slug: str
     <main>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbsJsonLd(crumbs, SITE_URL)) }}
+        dangerouslySetInnerHTML={{ __html: jsonLdString(breadcrumbsJsonLd(crumbs, SITE_URL)) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd(trip.faqs)) }}
+        dangerouslySetInnerHTML={{ __html: jsonLdString(faqJsonLd(trip.faqs)) }}
       />
       <Breadcrumbs items={crumbs} />
 

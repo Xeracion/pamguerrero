@@ -15,16 +15,16 @@ export default function OpengraphImage() {
           flexDirection: "column",
           justifyContent: "space-between",
           padding: "80px",
-          backgroundColor: "#0f1b3d",
-          backgroundImage: "linear-gradient(135deg, #0f1b3d 0%, #0a1329 100%)",
+          backgroundColor: "#5d101d",
+          backgroundImage: "linear-gradient(135deg, #5d101d 0%, #370a12 100%)",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-          <div style={{ width: 34, height: 2, backgroundColor: "#bfa274" }} />
+          <div style={{ width: 34, height: 2, backgroundColor: "#f72585" }} />
           <span
             style={{
               fontSize: 22,
-              color: "#bfa274",
+              color: "#f72585",
               letterSpacing: 4,
               textTransform: "uppercase",
               fontWeight: 600,
@@ -35,15 +35,15 @@ export default function OpengraphImage() {
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-          <span style={{ fontSize: 92, color: "#f2efea", fontWeight: 600, lineHeight: 1.05 }}>
+          <span style={{ fontSize: 92, color: "#ffffff", fontWeight: 600, lineHeight: 1.05 }}>
             Pam Guerrero
           </span>
-          <span style={{ fontSize: 38, color: "#bfa274", fontStyle: "italic" }}>
+          <span style={{ fontSize: 38, color: "#f72585", fontStyle: "italic" }}>
             Amplía tu mundo.
           </span>
         </div>
 
-        <span style={{ fontSize: 24, color: "#a9b2c6" }}>
+        <span style={{ fontSize: 24, color: "rgba(255, 255, 255, 0.7)" }}>
           Doctora en Turismo · +30 países · Fundadora de Caminando.lat
         </span>
       </div>

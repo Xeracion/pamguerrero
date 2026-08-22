@@ -1,3 +1,4 @@
+import { jsonLdString } from "@/lib/json-ld";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumbs, breadcrumbsJsonLd } from "@/components/breadcrumbs";
@@ -19,7 +20,7 @@ export default function ProyectosPage() {
     <main>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbsJsonLd(crumbs, SITE_URL)) }}
+        dangerouslySetInnerHTML={{ __html: jsonLdString(breadcrumbsJsonLd(crumbs, SITE_URL)) }}
       />
       <Breadcrumbs items={crumbs} />
       <PageHeader

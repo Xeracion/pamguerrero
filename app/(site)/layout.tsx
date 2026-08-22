@@ -1,3 +1,4 @@
+import { jsonLdString } from "@/lib/json-ld";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 
@@ -48,11 +49,11 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(PERSON_JSON_LD) }}
+        dangerouslySetInnerHTML={{ __html: jsonLdString(PERSON_JSON_LD) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(WEBSITE_JSON_LD) }}
+        dangerouslySetInnerHTML={{ __html: jsonLdString(WEBSITE_JSON_LD) }}
       />
       <a
         href="#main-content"
