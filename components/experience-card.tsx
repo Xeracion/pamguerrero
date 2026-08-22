@@ -1,19 +1,20 @@
 import Link from "next/link";
-import { PhotoPlaceholder } from "@/components/photo-placeholder";
-import type { Experience } from "@/lib/types";
+import { SanityImage } from "@/components/sanity-image";
+import type { ExperienceSummary, ExperienceTag } from "@/lib/sanity/queries";
 
-export const TAG_COLOR: Record<Experience["tag"], string> = {
+export const TAG_COLOR: Record<ExperienceTag, string> = {
   Cultura: "text-turquoise-deep",
   "Experiencias internacionales": "text-cobalt",
   "Ampliar tu mundo": "text-hot-pink-deep",
   Historias: "text-coral-deep",
 };
 
-export function ExperienceCard({ experience }: { experience: Experience }) {
+export function ExperienceCard({ experience }: { experience: ExperienceSummary }) {
   return (
     <Link href={`/experiencias/${experience.slug}`} className="group flex flex-col gap-4">
-      <PhotoPlaceholder
-        label={`[FOTO PARA: ${experience.title}]`}
+      <SanityImage
+        image={experience.mainImage}
+        fallbackLabel={`[FOTO PARA: ${experience.title}]`}
         aspect="landscape"
         className="transition-opacity group-hover:opacity-80"
       />

@@ -1,18 +1,19 @@
 import Link from "next/link";
-import { PhotoPlaceholder } from "@/components/photo-placeholder";
-import type { Journey } from "@/lib/types";
+import { SanityImage } from "@/components/sanity-image";
+import type { JourneyDoc } from "@/lib/sanity/queries";
 
-export function JourneyCard({ journey }: { journey: Journey }) {
+export function JourneyCard({ journey }: { journey: JourneyDoc }) {
   return (
     <Link href={`/viaja-conmigo/${journey.slug}`} className="group flex flex-col gap-4">
-      <PhotoPlaceholder
-        label={`[FOTO DE PAM EN ${journey.destinationName.toUpperCase()}]`}
+      <SanityImage
+        image={journey.mainImage}
+        fallbackLabel={`[FOTO DE PAM EN ${journey.destination.name.toUpperCase()}]`}
         aspect="portrait"
         className="transition-opacity group-hover:opacity-80"
       />
       <div>
         <span className="font-body text-xs font-semibold uppercase tracking-[0.1em] text-coral-deep">
-          {journey.destinationName}
+          {journey.destination.name}
         </span>
         <h3 className="mt-2 font-display text-2xl italic font-medium leading-snug text-ink group-hover:underline">
           {journey.title}

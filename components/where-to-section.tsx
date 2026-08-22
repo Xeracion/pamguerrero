@@ -1,9 +1,10 @@
 import Link from "next/link";
-import { PhotoPlaceholder } from "@/components/photo-placeholder";
-import { DESTINATIONS } from "@/lib/data/destinations";
+import { SanityImage } from "@/components/sanity-image";
+import { getDestinations } from "@/lib/sanity/queries";
 
-export function WhereToSection() {
-  const [featured, ...rest] = DESTINATIONS;
+export async function WhereToSection() {
+  const destinations = await getDestinations();
+  const [featured, ...rest] = destinations;
 
   return (
     <section className="bg-ink py-24 text-cream sm:py-32">
@@ -18,8 +19,9 @@ export function WhereToSection() {
         {featured ? (
           <div className="mt-14 grid gap-10 lg:grid-cols-[1.6fr_1fr]">
             <Link href={`/viajes/destinos/${featured.slug}`} className="group flex flex-col gap-5">
-              <PhotoPlaceholder
-                label={`[FOTO EDITORIAL DE ${featured.name.toUpperCase()}]`}
+              <SanityImage
+                image={featured.mainImage}
+                fallbackLabel={`[FOTO EDITORIAL DE ${featured.name.toUpperCase()}]`}
                 aspect="wide"
                 className="border-cream/20 bg-ink-deep text-cream/50 transition-opacity group-hover:opacity-85"
               />

@@ -1,9 +1,10 @@
 import { SectionHeader } from "@/components/section-header";
 import { JourneyCard } from "@/components/journey-card";
-import { JOURNEYS } from "@/lib/data/journeys";
+import { getJourneys } from "@/lib/sanity/queries";
 
-export function StoriesTeaser() {
-  if (JOURNEYS.length === 0) return null;
+export async function StoriesTeaser() {
+  const journeys = await getJourneys();
+  if (journeys.length === 0) return null;
 
   return (
     <section className="bg-paper py-24 sm:py-32">
@@ -14,7 +15,7 @@ export function StoriesTeaser() {
           description="No consejos organizados por intención de búsqueda — esto es lo que yo he vivido."
         />
         <div className="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-          {JOURNEYS.slice(0, 3).map((journey) => (
+          {journeys.slice(0, 3).map((journey) => (
             <JourneyCard key={journey.slug} journey={journey} />
           ))}
         </div>

@@ -1,27 +1,23 @@
 import Link from "next/link";
-import { PhotoPlaceholder } from "@/components/photo-placeholder";
-import { getCategory } from "@/lib/data/categories";
-import type { Article } from "@/lib/types";
+import { SanityImage } from "@/components/sanity-image";
+import type { ArticleSummary } from "@/lib/sanity/queries";
 
-export function ArticleCard({ article }: { article: Article }) {
-  const category = getCategory(article.category);
-
+export function ArticleCard({ article }: { article: ArticleSummary }) {
   return (
     <Link
-      href={`/viajes/${article.category}/${article.slug}`}
+      href={`/viajes/${article.category.slug}/${article.slug}`}
       className="group flex flex-col gap-4"
     >
-      <PhotoPlaceholder
-        label={`[FOTO PARA: ${article.title}]`}
+      <SanityImage
+        image={article.mainImage}
+        fallbackLabel={`[FOTO PARA: ${article.title}]`}
         aspect="landscape"
         className="transition-opacity group-hover:opacity-80"
       />
       <div>
-        {category && (
-          <span className="font-body text-xs font-semibold uppercase tracking-[0.1em] text-accent">
-            {category.label}
-          </span>
-        )}
+        <span className="font-body text-xs font-semibold uppercase tracking-[0.1em] text-accent">
+          {article.category.label}
+        </span>
         <h3 className="mt-2 font-display text-xl font-medium leading-snug text-ink group-hover:underline">
           {article.title}
         </h3>

@@ -1,10 +1,11 @@
 import { SectionHeader } from "@/components/section-header";
 import { TravelCard } from "@/components/travel-card";
 import { Cta } from "@/components/cta";
-import { TRIPS } from "@/lib/data/trips";
+import { getTrips } from "@/lib/sanity/queries";
 
-export function GroupTripsTeaser() {
-  const openTrips = TRIPS.filter((t) => t.status !== "cerrado").slice(0, 3);
+export async function GroupTripsTeaser() {
+  const trips = await getTrips();
+  const openTrips = trips.filter((t) => t.status !== "cerrado").slice(0, 3);
 
   if (openTrips.length === 0) {
     return (

@@ -1,7 +1,7 @@
 import { ArticleCard } from "@/components/article-card";
-import type { Article } from "@/lib/types";
+import type { ArticleSummary } from "@/lib/sanity/queries";
 
-export function RelatedContent({ articles }: { articles: Article[] }) {
+export function RelatedContent({ articles }: { articles: ArticleSummary[] }) {
   if (articles.length === 0) return null;
 
   return (

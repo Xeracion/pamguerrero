@@ -1,4 +1,4 @@
-import type { Faq } from "@/lib/types";
+import type { Faq } from "@/lib/sanity/queries";
 
 export function FaqAccordion({ faqs }: { faqs: Faq[] }) {
   return (

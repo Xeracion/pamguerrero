@@ -1,12 +1,13 @@
 import Link from "next/link";
-import { PhotoPlaceholder } from "@/components/photo-placeholder";
-import type { Destination } from "@/lib/types";
+import { SanityImage } from "@/components/sanity-image";
+import type { DestinationSummary } from "@/lib/sanity/queries";
 
-export function DestinationCard({ destination }: { destination: Destination }) {
+export function DestinationCard({ destination }: { destination: DestinationSummary }) {
   return (
     <Link href={`/viajes/destinos/${destination.slug}`} className="group flex flex-col gap-4">
-      <PhotoPlaceholder
-        label={`[FOTO DE ${destination.name.toUpperCase()}]`}
+      <SanityImage
+        image={destination.mainImage}
+        fallbackLabel={`[FOTO DE ${destination.name.toUpperCase()}]`}
         aspect="landscape"
         className="transition-opacity group-hover:opacity-80"
       />

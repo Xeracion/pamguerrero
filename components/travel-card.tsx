@@ -1,23 +1,24 @@
 import Link from "next/link";
-import { PhotoPlaceholder } from "@/components/photo-placeholder";
-import { STATUS_LABEL, isClosingSoon } from "@/lib/data/trips";
-import type { Trip } from "@/lib/types";
+import { SanityImage } from "@/components/sanity-image";
+import { STATUS_LABEL, isClosingSoon } from "@/lib/sanity/queries";
+import type { TripSummary, TripStatus } from "@/lib/sanity/queries";
 
-const STATUS_STYLE: Record<Trip["status"], string> = {
+const STATUS_STYLE: Record<TripStatus, string> = {
   proximamente: "bg-cobalt/15 text-cobalt",
   "plazas-disponibles": "bg-turquoise/15 text-turquoise-deep",
   "ultimas-plazas": "bg-sun/25 text-ink",
   cerrado: "bg-line text-ink-muted",
 };
 
-export function TravelCard({ trip }: { trip: Trip }) {
+export function TravelCard({ trip }: { trip: TripSummary }) {
   const urgent = isClosingSoon(trip);
 
   return (
     <Link href={`/viajes-grupales/${trip.slug}`} className="group flex flex-col gap-4">
       <div className="relative">
-        <PhotoPlaceholder
-          label={`[FOTO DEL VIAJE: ${trip.title}]`}
+        <SanityImage
+          image={trip.mainImage}
+          fallbackLabel={`[FOTO DEL VIAJE: ${trip.title}]`}
           aspect="portrait"
           className="transition-opacity group-hover:opacity-80"
         />

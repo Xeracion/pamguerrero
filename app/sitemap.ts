@@ -1,14 +1,11 @@
 import type { MetadataRoute } from "next";
-import { CATEGORIES } from "@/lib/data/categories";
-import { ARTICLES } from "@/lib/data/articles";
-import { EXPERIENCES } from "@/lib/data/experiences";
-import { DESTINATIONS } from "@/lib/data/destinations";
-import { TRIPS } from "@/lib/data/trips";
-import { JOURNEYS } from "@/lib/data/journeys";
+import { sanityClient } from "@/lib/sanity/client";
 
 const SITE_URL = "https://www.pamguerrero.com";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export const revalidate = 300;
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRouteInputs: Array<Omit<MetadataRoute.Sitemap[number], "lastModified">> = [
     { url: SITE_URL, changeFrequency: "weekly", priority: 1 },
     { url: `${SITE_URL}/viaja-conmigo`, changeFrequency: "weekly", priority: 0.8 },
@@ -29,42 +26,57 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: new Date(),
   }));
 
-  const categoryRoutes: MetadataRoute.Sitemap = CATEGORIES.map((c) => ({
+  const [categories, articles, experiences, destinations, journeys, trips] = await Promise.all([
+    sanityClient.fetch<{ slug: string }[]>(`*[_type == "category"]{ "slug": slug.current }`),
+    sanityClient.fetch<{ slug: string; category: string; date: string }[]>(
+      `*[_type == "article"]{ "slug": slug.current, "category": category->slug.current, "date": coalesce(dateModified, datePublished) }`
+    ),
+    sanityClient.fetch<{ slug: string; date: string }[]>(
+      `*[_type == "experience"]{ "slug": slug.current, "date": coalesce(dateModified, datePublished) }`
+    ),
+    sanityClient.fetch<{ slug: string }[]>(`*[_type == "destination"]{ "slug": slug.current }`),
+    sanityClient.fetch<{ slug: string; date: string }[]>(
+      `*[_type == "journey"]{ "slug": slug.current, date }`
+    ),
+    sanityClient.fetch<{ slug: string }[]>(`*[_type == "trip"]{ "slug": slug.current }`),
+  ]);
+
+  const categoryRoutes: MetadataRoute.Sitemap = categories.map((c) => ({
     url: `${SITE_URL}/viajes/${c.slug}`,
     lastModified: new Date(),
     changeFrequency: "weekly",
     priority: 0.7,
   }));
 
-  const articleRoutes: MetadataRoute.Sitemap = ARTICLES.map((a) => ({
+  const articleRoutes: MetadataRoute.Sitemap = articles.map((a) => ({
     url: `${SITE_URL}/viajes/${a.category}/${a.slug}`,
-    lastModified: new Date(a.dateModified ?? a.datePublished),
+    lastModified: new Date(a.date),
     changeFrequency: "monthly",
     priority: 0.6,
   }));
 
-  const experienceRoutes: MetadataRoute.Sitemap = EXPERIENCES.map((e) => ({
+  const experienceRoutes: MetadataRoute.Sitemap = experiences.map((e) => ({
     url: `${SITE_URL}/experiencias/${e.slug}`,
-    lastModified: new Date(e.dateModified ?? e.datePublished),
+    lastModified: new Date(e.date),
     changeFrequency: "monthly",
     priority: 0.6,
   }));
 
-  const destinationRoutes: MetadataRoute.Sitemap = DESTINATIONS.map((d) => ({
+  const destinationRoutes: MetadataRoute.Sitemap = destinations.map((d) => ({
     url: `${SITE_URL}/viajes/destinos/${d.slug}`,
     lastModified: new Date(),
     changeFrequency: "monthly",
     priority: 0.7,
   }));
 
-  const journeyRoutes: MetadataRoute.Sitemap = JOURNEYS.map((j) => ({
+  const journeyRoutes: MetadataRoute.Sitemap = journeys.map((j) => ({
     url: `${SITE_URL}/viaja-conmigo/${j.slug}`,
-    lastModified: new Date(j.dateISO),
+    lastModified: new Date(j.date),
     changeFrequency: "monthly",
     priority: 0.6,
   }));
 
-  const tripRoutes: MetadataRoute.Sitemap = TRIPS.map((t) => ({
+  const tripRoutes: MetadataRoute.Sitemap = trips.map((t) => ({
     url: `${SITE_URL}/viajes-grupales/${t.slug}`,
     lastModified: new Date(),
     changeFrequency: "weekly",

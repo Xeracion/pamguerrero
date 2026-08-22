@@ -1,7 +1,7 @@
 import { ExperienceCard } from "@/components/experience-card";
-import type { Experience } from "@/lib/types";
+import type { ExperienceSummary } from "@/lib/sanity/queries";
 
-export function RelatedExperiences({ experiences }: { experiences: Experience[] }) {
+export function RelatedExperiences({ experiences }: { experiences: ExperienceSummary[] }) {
   if (experiences.length === 0) return null;
 
   return (
