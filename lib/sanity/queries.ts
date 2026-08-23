@@ -1,5 +1,5 @@
 import type { PortableTextBlock } from "next-sanity";
-import { sanityClient } from "./client";
+import { sanityFetch } from "./live";
 
 export interface SanityImageRef {
   asset?: { _ref: string; _type: "reference" };
@@ -130,40 +130,46 @@ const TRIP_SUMMARY_PROJECTION = `{
 const DESTINATION_REF_PROJECTION = `destination->{ "slug": slug.current, name }`;
 
 export async function getCategories(): Promise<CategoryDoc[]> {
-  return sanityClient.fetch(`*[_type == "category"] | order(title asc) ${CATEGORY_PROJECTION}`);
+  const { data } = await sanityFetch({
+    query: `*[_type == "category"] | order(title asc) ${CATEGORY_PROJECTION}`,
+  });
+  return data as CategoryDoc[];
 }
 
 export async function getCategory(slug: string): Promise<CategoryDoc | null> {
-  return sanityClient.fetch(
-    `*[_type == "category" && slug.current == $slug][0] ${CATEGORY_PROJECTION}`,
-    { slug }
-  );
+  const { data } = await sanityFetch({
+    query: `*[_type == "category" && slug.current == $slug][0] ${CATEGORY_PROJECTION}`,
+    params: { slug },
+  });
+  return data as CategoryDoc | null;
 }
 
 export async function getArticles(): Promise<ArticleSummary[]> {
-  return sanityClient.fetch(
-    `*[_type == "article"] | order(datePublished desc) {
-      "slug": slug.current, title, excerpt, readingMinutes, isExample,
-      mainImage ${IMAGE_PROJECTION},
-      category-> ${CATEGORY_PROJECTION}
-    }`
-  );
-}
-
-export async function getArticlesByCategory(categorySlug: string): Promise<ArticleSummary[]> {
-  return sanityClient.fetch(
-    `*[_type == "article" && category->slug.current == $categorySlug] | order(datePublished desc) {
+  const { data } = await sanityFetch({
+    query: `*[_type == "article"] | order(datePublished desc) {
       "slug": slug.current, title, excerpt, readingMinutes, isExample,
       mainImage ${IMAGE_PROJECTION},
       category-> ${CATEGORY_PROJECTION}
     }`,
-    { categorySlug }
-  );
+  });
+  return data as ArticleSummary[];
+}
+
+export async function getArticlesByCategory(categorySlug: string): Promise<ArticleSummary[]> {
+  const { data } = await sanityFetch({
+    query: `*[_type == "article" && category->slug.current == $categorySlug] | order(datePublished desc) {
+      "slug": slug.current, title, excerpt, readingMinutes, isExample,
+      mainImage ${IMAGE_PROJECTION},
+      category-> ${CATEGORY_PROJECTION}
+    }`,
+    params: { categorySlug },
+  });
+  return data as ArticleSummary[];
 }
 
 export async function getArticle(slug: string): Promise<ArticleDoc | null> {
-  return sanityClient.fetch(
-    `*[_type == "article" && slug.current == $slug][0] {
+  const { data } = await sanityFetch({
+    query: `*[_type == "article" && slug.current == $slug][0] {
       "slug": slug.current, title, excerpt, readingMinutes, isExample, body,
       datePublished, dateModified,
       mainImage ${IMAGE_PROJECTION},
@@ -174,22 +180,24 @@ export async function getArticle(slug: string): Promise<ArticleDoc | null> {
         category-> ${CATEGORY_PROJECTION}
       }
     }`,
-    { slug }
-  );
+    params: { slug },
+  });
+  return data as ArticleDoc | null;
 }
 
 export async function getExperiences(): Promise<ExperienceSummary[]> {
-  return sanityClient.fetch(
-    `*[_type == "experience"] | order(datePublished desc) {
+  const { data } = await sanityFetch({
+    query: `*[_type == "experience"] | order(datePublished desc) {
       "slug": slug.current, title, excerpt, tag, readingMinutes, isExample,
       mainImage ${IMAGE_PROJECTION}
-    }`
-  );
+    }`,
+  });
+  return data as ExperienceSummary[];
 }
 
 export async function getExperience(slug: string): Promise<ExperienceDoc | null> {
-  return sanityClient.fetch(
-    `*[_type == "experience" && slug.current == $slug][0] {
+  const { data } = await sanityFetch({
+    query: `*[_type == "experience" && slug.current == $slug][0] {
       "slug": slug.current, title, excerpt, tag, readingMinutes, isExample, body,
       datePublished, dateModified,
       mainImage ${IMAGE_PROJECTION},
@@ -198,83 +206,94 @@ export async function getExperience(slug: string): Promise<ExperienceDoc | null>
         mainImage ${IMAGE_PROJECTION}
       }
     }`,
-    { slug }
-  );
+    params: { slug },
+  });
+  return data as ExperienceDoc | null;
 }
 
 export async function getDestinations(): Promise<DestinationSummary[]> {
-  return sanityClient.fetch(
-    `*[_type == "destination"] | order(name asc) {
+  const { data } = await sanityFetch({
+    query: `*[_type == "destination"] | order(name asc) {
       "slug": slug.current, name, region, summary, isExample,
       mainImage ${IMAGE_PROJECTION}
-    }`
-  );
+    }`,
+  });
+  return data as DestinationSummary[];
 }
 
 export async function getDestination(slug: string): Promise<DestinationDoc | null> {
-  return sanityClient.fetch(
-    `*[_type == "destination" && slug.current == $slug][0] {
+  const { data } = await sanityFetch({
+    query: `*[_type == "destination" && slug.current == $slug][0] {
       "slug": slug.current, name, region, summary, isExample, guide,
       mainImage ${IMAGE_PROJECTION},
       "relatedTrips": relatedTrips[]-> ${TRIP_SUMMARY_PROJECTION}
     }`,
-    { slug }
-  );
+    params: { slug },
+  });
+  return data as DestinationDoc | null;
 }
 
 export async function getJourneys(): Promise<JourneyDoc[]> {
-  return sanityClient.fetch(
-    `*[_type == "journey"] | order(date desc) {
+  const { data } = await sanityFetch({
+    query: `*[_type == "journey"] | order(date desc) {
       "slug": slug.current, title, excerpt, date, isExample, body,
       mainImage ${IMAGE_PROJECTION},
       ${DESTINATION_REF_PROJECTION}
-    }`
-  );
+    }`,
+  });
+  return data as JourneyDoc[];
 }
 
 export async function getJourney(slug: string): Promise<JourneyDoc | null> {
-  return sanityClient.fetch(
-    `*[_type == "journey" && slug.current == $slug][0] {
+  const { data } = await sanityFetch({
+    query: `*[_type == "journey" && slug.current == $slug][0] {
       "slug": slug.current, title, excerpt, date, isExample, body,
       mainImage ${IMAGE_PROJECTION},
       ${DESTINATION_REF_PROJECTION}
     }`,
-    { slug }
-  );
+    params: { slug },
+  });
+  return data as JourneyDoc | null;
 }
 
 export async function getJourneyByDestination(destinationSlug: string): Promise<JourneyDoc | null> {
-  return sanityClient.fetch(
-    `*[_type == "journey" && destination->slug.current == $destinationSlug][0] {
+  const { data } = await sanityFetch({
+    query: `*[_type == "journey" && destination->slug.current == $destinationSlug][0] {
       "slug": slug.current, title, excerpt, date, isExample, body,
       mainImage ${IMAGE_PROJECTION},
       ${DESTINATION_REF_PROJECTION}
     }`,
-    { destinationSlug }
-  );
+    params: { destinationSlug },
+  });
+  return data as JourneyDoc | null;
 }
 
 export async function getTrips(): Promise<TripSummary[]> {
-  return sanityClient.fetch(`*[_type == "trip"] | order(closingDate asc) ${TRIP_SUMMARY_PROJECTION}`);
+  const { data } = await sanityFetch({
+    query: `*[_type == "trip"] | order(closingDate asc) ${TRIP_SUMMARY_PROJECTION}`,
+  });
+  return data as TripSummary[];
 }
 
 export async function getTrip(slug: string): Promise<TripDoc | null> {
-  return sanityClient.fetch(
-    `*[_type == "trip" && slug.current == $slug][0] {
+  const { data } = await sanityFetch({
+    query: `*[_type == "trip" && slug.current == $slug][0] {
       "slug": slug.current, title, personalNote, dates, durationDays, status, closingDate,
       isExample, description, price, accommodation, itinerary, includes, excludes, faqs,
       mainImage ${IMAGE_PROJECTION},
       ${DESTINATION_REF_PROJECTION}
     }`,
-    { slug }
-  );
+    params: { slug },
+  });
+  return data as TripDoc | null;
 }
 
 export async function getTripsByDestination(destinationSlug: string): Promise<TripSummary[]> {
-  return sanityClient.fetch(
-    `*[_type == "trip" && destination->slug.current == $destinationSlug] | order(closingDate asc) ${TRIP_SUMMARY_PROJECTION}`,
-    { destinationSlug }
-  );
+  const { data } = await sanityFetch({
+    query: `*[_type == "trip" && destination->slug.current == $destinationSlug] | order(closingDate asc) ${TRIP_SUMMARY_PROJECTION}`,
+    params: { destinationSlug },
+  });
+  return data as TripSummary[];
 }
 
 const URGENCY_DAYS = 20;

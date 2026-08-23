@@ -1,6 +1,9 @@
+import { draftMode } from "next/headers";
+import { VisualEditing } from "next-sanity/visual-editing";
 import { jsonLdString } from "@/lib/json-ld";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { SanityLive } from "@/lib/sanity/live";
 
 const SITE_URL = "https://www.pamguerrero.com";
 
@@ -44,7 +47,9 @@ const WEBSITE_JSON_LD = {
   publisher: { "@id": `${SITE_URL}/#pam-guerrero` },
 };
 
-export default function SiteLayout({ children }: { children: React.ReactNode }) {
+export default async function SiteLayout({ children }: { children: React.ReactNode }) {
+  const { isEnabled: isDraftMode } = await draftMode();
+
   return (
     <>
       <script
@@ -64,6 +69,8 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
       <SiteHeader />
       <div id="main-content">{children}</div>
       <SiteFooter />
+      <SanityLive includeDrafts={isDraftMode} />
+      {isDraftMode && <VisualEditing />}
     </>
   );
 }
