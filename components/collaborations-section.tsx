@@ -28,7 +28,8 @@ export function CollaborationsSection() {
             <PhotoPlaceholder
               label="[REEMPLAZAR CON IMAGEN REAL DE CAMINANDO.LAT]"
               aspect="portrait"
-              className="border-none text-white/40"
+              tone="dark"
+              className="border-none"
             />
             <div className="absolute -bottom-6 -left-6 max-w-[13rem] rounded-xl bg-coral p-5 shadow-[0_20px_40px_-15px_rgba(13,18,32,0.5)]">
               <p className="font-body text-[11px] font-semibold uppercase tracking-[0.1em] text-ink">

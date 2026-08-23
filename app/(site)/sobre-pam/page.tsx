@@ -86,7 +86,8 @@ export default function SobrePamPage() {
           <PhotoPlaceholder
             label="[FOTO: PAM DOCENTE O EN INVESTIGACIÓN, ANTES DE VIAJAR]"
             aspect="portrait"
-            className="border-none text-white/40"
+            tone="dark"
+            className="border-none"
           />
           <div>
             <p className="font-body text-xs font-semibold uppercase tracking-[0.18em] text-sun">

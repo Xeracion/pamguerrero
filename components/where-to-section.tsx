@@ -29,13 +29,15 @@ export async function WhereToSection() {
           image={featured.mainImage}
           fallbackLabel={`[FOTO EDITORIAL DE ${featured.name.toUpperCase()} — a pantalla completa]`}
           aspect="square"
+          tone="dark"
           className="absolute inset-0 h-full w-full border-none"
         />
       ) : (
         <PhotoPlaceholder
           label={`[FOTO EDITORIAL DE ${featured.name.toUpperCase()} — a pantalla completa]`}
           aspect="square"
-          className="absolute inset-0 h-full w-full border-none text-white/40"
+          tone="dark"
+          className="absolute inset-0 h-full w-full border-none"
         />
       )}
       <div

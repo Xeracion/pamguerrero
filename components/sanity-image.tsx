@@ -7,6 +7,7 @@ interface SanityImageProps {
   image?: SanityImageRef;
   fallbackLabel: string;
   aspect?: "square" | "portrait" | "landscape" | "wide";
+  tone?: "light" | "dark";
   className?: string;
   sizes?: string;
 }
@@ -22,13 +23,16 @@ export function SanityImage({
   image,
   fallbackLabel,
   aspect = "landscape",
+  tone = "light",
   className = "",
   sizes = "(min-width: 1024px) 33vw, 100vw",
 }: SanityImageProps) {
   const url = urlForImage(image)?.width(1600).url();
 
   if (!url) {
-    return <PhotoPlaceholder label={fallbackLabel} aspect={aspect} className={className} />;
+    return (
+      <PhotoPlaceholder label={fallbackLabel} aspect={aspect} tone={tone} className={className} />
+    );
   }
 
   return (

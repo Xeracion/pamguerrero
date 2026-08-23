@@ -98,6 +98,7 @@ export default async function DestinationPage({
           image={destination.mainImage}
           fallbackLabel={`[FOTO PRINCIPAL DE ${destination.name.toUpperCase()} — a pantalla completa]`}
           aspect="square"
+          tone="dark"
           className="absolute inset-0 h-full w-full border-none"
         />
         <div

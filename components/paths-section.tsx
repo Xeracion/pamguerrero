@@ -53,6 +53,7 @@ export function PathsSection() {
               <PhotoPlaceholder
                 label={path.label}
                 aspect="portrait"
+                tone="dark"
                 className="border-none transition-transform duration-300 group-hover:scale-[1.03]"
               />
               <div

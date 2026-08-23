@@ -8,7 +8,8 @@ export function Hero() {
       <PhotoPlaceholder
         label="[REEMPLAZAR CON FOTO REAL DE PAM — plano editorial, viaje o retrato en movimiento, a pantalla completa]"
         aspect="square"
-        className="absolute inset-0 h-full w-full border-none text-white/40"
+        tone="dark"
+        className="absolute inset-0 h-full w-full border-none"
       />
 
       <div

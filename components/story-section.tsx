@@ -14,17 +14,18 @@ export function StorySection() {
           <PhotoPlaceholder
             label="[REEMPLAZAR CON FOTO REAL DE PAM — momento de docencia o primer viaje]"
             aspect="portrait"
-            className="absolute inset-y-0 left-0 w-[72%] border-none text-white/40"
+            tone="dark"
+            className="absolute inset-y-0 left-0 w-[72%] border-none"
           />
           <PhotoPlaceholder
             label="[FOTO SECUNDARIA: PAM CON PERSONAS]"
             aspect="square"
-            className="absolute right-0 top-0 w-[45%] rotate-3 border-4 border-burgundy text-white/40 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)]"
+            className="absolute right-0 top-0 w-[45%] rotate-3 border-4 border-burgundy shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)]"
           />
           <PhotoPlaceholder
             label="[FOTO TERCIARIA: DETALLE DE VIAJE]"
             aspect="square"
-            className="absolute bottom-0 right-6 w-[38%] -rotate-2 border-4 border-burgundy text-white/40 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)]"
+            className="absolute bottom-0 right-6 w-[38%] -rotate-2 border-4 border-burgundy shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)]"
           />
         </div>
 
