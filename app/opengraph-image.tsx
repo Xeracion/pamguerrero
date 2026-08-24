@@ -16,15 +16,15 @@ export default function OpengraphImage() {
           justifyContent: "space-between",
           padding: "80px",
           backgroundColor: "#5d101d",
-          backgroundImage: "linear-gradient(135deg, #5d101d 0%, #370a12 100%)",
+          backgroundImage: "linear-gradient(135deg, #5d101d 0%, #18304a 100%)",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-          <div style={{ width: 34, height: 2, backgroundColor: "#f72585" }} />
+          <div style={{ width: 34, height: 2, backgroundColor: "#e6d8c8" }} />
           <span
             style={{
               fontSize: 22,
-              color: "#f72585",
+              color: "#e6d8c8",
               letterSpacing: 4,
               textTransform: "uppercase",
               fontWeight: 600,
@@ -38,7 +38,7 @@ export default function OpengraphImage() {
           <span style={{ fontSize: 92, color: "#ffffff", fontWeight: 600, lineHeight: 1.05 }}>
             Pam Guerrero
           </span>
-          <span style={{ fontSize: 38, color: "#f72585", fontStyle: "italic" }}>
+          <span style={{ fontSize: 38, color: "#d96f5f", fontStyle: "italic" }}>
             Amplía tu mundo.
           </span>
         </div>

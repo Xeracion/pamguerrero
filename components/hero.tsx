@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { PhotoPlaceholder } from "@/components/photo-placeholder";
 import { RouteLine } from "@/components/route-line";
+import { PlaneIcon } from "@/components/plane-icon";
+import { OrganicAccent } from "@/components/organic-accent";
 
 export function Hero() {
   return (
@@ -20,9 +22,11 @@ export function Hero() {
         }}
       />
 
+      <OrganicAccent className="pointer-events-none absolute -left-16 bottom-0 h-72 w-72 text-white/5" />
+
       <RouteLine
         variant="loop"
-        className="pointer-events-none absolute right-[6%] top-[14%] h-24 w-[46%] text-white/50 sm:h-32"
+        className="pointer-events-none absolute right-[6%] top-[14%] h-24 w-[46%] text-white/30 sm:h-32"
       />
 
       <div className="relative flex min-h-[92vh] flex-col justify-between px-6 py-10 sm:px-10 sm:py-14">
@@ -30,11 +34,14 @@ export function Hero() {
           <p className="font-body text-xs font-semibold uppercase tracking-[0.28em] text-white/80">
             Doctora en Turismo · +30 países
           </p>
-          <div className="hidden rounded-2xl border border-white/25 bg-white/10 px-5 py-3 text-right backdrop-blur-sm sm:block">
-            <p className="font-display text-3xl font-semibold text-white">30+</p>
-            <p className="font-body text-[11px] uppercase tracking-[0.14em] text-white/70">
-              países recorridos
-            </p>
+          <div className="hidden items-center gap-3 rounded-2xl border border-white/25 bg-white/10 px-5 py-3 text-right backdrop-blur-sm sm:flex">
+            <PlaneIcon className="h-4 w-4 -rotate-12 text-white/50" />
+            <div>
+              <p className="font-display text-3xl font-semibold text-white">30+</p>
+              <p className="font-body text-[11px] uppercase tracking-[0.14em] text-white/70">
+                países recorridos
+              </p>
+            </div>
           </div>
         </div>
 

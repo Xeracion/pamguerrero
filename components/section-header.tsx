@@ -8,10 +8,11 @@ interface SectionHeaderProps {
 
 /**
  * tone reflects the section's background:
- * light = white/paper (ink text, burgundy eyebrow)
- * onBrand = burgundy or cobalt (white text — the only two bg colors white reads on)
- * onWarm = coral / turquoise / tangerine / sun (ink text — none of these four
- * ever pair with white text; see contrast rules in globals.css)
+ * light = paper/white (ink text, burgundy eyebrow)
+ * onBrand = burgundy or navy (white text — the two dark anchor colors)
+ * onWarm = coral / teal / ochre (solid ink, no opacity reduction — teal
+ * in particular only clears 4.5:1 against ink at full opacity, so any
+ * lightened variant would fail; see contrast notes in globals.css)
  */
 export function SectionHeader({
   eyebrow,
@@ -21,11 +22,10 @@ export function SectionHeader({
   tone = "light",
 }: SectionHeaderProps) {
   const alignment = align === "center" ? "text-center items-center mx-auto" : "text-left items-start";
-  const eyebrowColor =
-    tone === "onBrand" ? "text-white" : tone === "onWarm" ? "text-ink/70" : "text-accent";
+  const eyebrowColor = tone === "onBrand" ? "text-white" : tone === "onWarm" ? "text-ink" : "text-accent";
   const titleColor = tone === "onBrand" ? "text-white" : "text-ink";
   const descriptionColor =
-    tone === "onBrand" ? "text-white/80" : tone === "onWarm" ? "text-ink/75" : "text-ink-muted";
+    tone === "onBrand" ? "text-white/80" : tone === "onWarm" ? "text-ink" : "text-ink-muted";
 
   return (
     <div className={`flex max-w-2xl flex-col gap-5 ${alignment}`}>

@@ -7,25 +7,31 @@ interface PageHeaderProps {
   tone?: "white" | "burgundy" | "cobalt" | "coral" | "turquoise" | "tangerine" | "sun";
 }
 
+/**
+ * burgundy/cobalt(navy) are the two deep anchor colors — solid, white text.
+ * coral/turquoise(teal)/tangerine(ochre)/sun(sand) render as a soft tinted
+ * wash rather than a solid fill: teal in particular only clears 4.5:1
+ * against ink at full opacity, and a wash reads as the "sutil" accent this
+ * palette calls for rather than a saturated block.
+ */
 const TONE_BG: Record<NonNullable<PageHeaderProps["tone"]>, string> = {
   white: "bg-surface",
   burgundy: "bg-burgundy",
   cobalt: "bg-cobalt",
-  coral: "bg-coral",
-  turquoise: "bg-turquoise",
-  tangerine: "bg-tangerine",
-  sun: "bg-sun",
+  coral: "bg-coral/14",
+  turquoise: "bg-turquoise/12",
+  tangerine: "bg-tangerine/16",
+  sun: "bg-sun/60",
 };
 
-/** white text only pairs safely with burgundy/cobalt; everything else needs ink. */
 const ON_DARK = new Set<PageHeaderProps["tone"]>(["burgundy", "cobalt"]);
 
 export function PageHeader({ eyebrow, title, description, tone = "white" }: PageHeaderProps) {
   const onDark = ON_DARK.has(tone);
   const colored = tone !== "white";
-  const eyebrowColor = tone === "white" ? "text-accent" : onDark ? "text-white/80" : "text-ink/70";
+  const eyebrowColor = tone === "white" ? "text-accent" : onDark ? "text-white/80" : "text-ink";
   const titleColor = tone === "white" ? "text-ink" : onDark ? "text-white" : "text-ink";
-  const descColor = tone === "white" ? "text-ink-muted" : onDark ? "text-white/80" : "text-ink/75";
+  const descColor = tone === "white" ? "text-ink-muted" : onDark ? "text-white/80" : "text-ink";
 
   return (
     <div className={`relative overflow-hidden ${colored ? TONE_BG[tone] : "border-b border-line bg-surface"}`}>

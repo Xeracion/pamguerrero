@@ -7,11 +7,11 @@ interface LogoProps {
  * Wordmark: italic "pam" + upright "guerrero", set in Cormorant Garamond
  * (the site's own display face, already loaded via next/font) so it
  * renders pixel-identical to the rest of the type system.
- * positive = dark mark for light backgrounds, negative = white mark for
- * burgundy/color blocks.
+ * positive = burgundy mark for light backgrounds (the brand's signature
+ * color), negative = white mark for burgundy/navy blocks.
  */
 export function Logo({ tone = "positive", className = "" }: LogoProps) {
-  const fill = tone === "negative" ? "#ffffff" : "#172033";
+  const fill = tone === "negative" ? "#ffffff" : "#5d101d";
 
   return (
     <svg

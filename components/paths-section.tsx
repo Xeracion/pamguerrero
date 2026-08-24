@@ -34,12 +34,11 @@ const PATHS = [
 
 export function PathsSection() {
   return (
-    <section className="bg-turquoise py-24 sm:py-32">
+    <section className="bg-turquoise/12 py-24 sm:py-32">
       <div className="mx-auto max-w-6xl px-6">
         <SectionHeader
           eyebrow="Por dónde empezar"
           title="¿Qué quieres hacer?"
-          tone="onWarm"
           align="center"
         />
 
@@ -59,7 +58,7 @@ export function PathsSection() {
               <div
                 className="pointer-events-none absolute inset-x-0 bottom-0 flex flex-col gap-2 p-6"
                 style={{
-                  background: "linear-gradient(to top, rgba(13,18,32,0.92) 0%, rgba(13,18,32,0) 65%)",
+                  background: "linear-gradient(to top, rgba(23,35,46,0.92) 0%, rgba(23,35,46,0) 65%)",
                 }}
               >
                 <h3 className="font-display text-2xl italic font-medium text-white">

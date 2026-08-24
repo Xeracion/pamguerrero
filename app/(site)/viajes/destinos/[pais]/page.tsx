@@ -21,7 +21,7 @@ export const revalidate = 300;
 const CHAPTER_TONES = [
   { bg: "bg-burgundy", border: "border-burgundy", text: "text-white", route: "text-white/15", tag: "bg-sun text-ink" },
   { bg: "bg-cobalt", border: "border-cobalt", text: "text-white", route: "text-white/15", tag: "bg-coral text-ink" },
-  { bg: "bg-turquoise", border: "border-turquoise", text: "text-ink", route: "text-ink/15", tag: "bg-burgundy text-white" },
+  { bg: "bg-turquoise/14", border: "border-turquoise", text: "text-ink", route: "text-ink/15", tag: "bg-burgundy text-white" },
   { bg: "bg-tangerine", border: "border-tangerine", text: "text-ink", route: "text-ink/15", tag: "bg-white text-ink" },
 ] as const;
 

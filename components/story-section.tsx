@@ -30,7 +30,7 @@ export function StorySection() {
         </div>
 
         <div>
-          <p className="font-body text-xs font-semibold uppercase tracking-[0.2em] text-coral">
+          <p className="font-body text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
             Por qué viajo
           </p>
           <h2 className="mt-4 font-display text-4xl italic font-medium leading-[1.05] text-white sm:text-5xl">
@@ -42,7 +42,7 @@ export function StorySection() {
           </p>
           <Link
             href="/sobre-pam"
-            className="mt-8 inline-block font-body text-sm font-semibold text-white underline decoration-coral decoration-2 underline-offset-4 hover:text-coral"
+            className="mt-8 inline-block font-body text-sm font-semibold text-white underline decoration-coral decoration-2 underline-offset-4 hover:decoration-white"
           >
             Conoce mi historia completa →
           </Link>

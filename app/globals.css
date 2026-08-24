@@ -1,34 +1,41 @@
 @import "tailwindcss";
 
 :root {
-  /* Identidad Pam Guerrero — el color ES la arquitectura de la página, no
-     un acento sobre fondo blanco. Grandes bloques saturados alternan con
-     blanco como pausa. Reglas de contraste abajo. */
-  --color-burgundy: #5d101d; /* firma de marca — hero, footer, bloques de identidad */
-  --color-cobalt: #3155b7; /* exploración / cielo / mar / internacionalidad */
-  --color-coral: #ff6257; /* alegría / humanidad */
-  --color-coral-deep: #c23a2e; /* variante accesible de coral para texto sobre blanco */
-  --color-turquoise: #00b8a9; /* agua / libertad / movimiento */
-  --color-turquoise-deep: #007367; /* variante accesible de turquoise para texto sobre blanco */
-  --color-tangerine: #ff6b00; /* energía / aventura / sorpresa */
-  --color-tangerine-deep: #b34c00; /* variante accesible de tangerine para texto sobre blanco */
-  --color-sun: #ffd447; /* luz / sol / descubrimiento */
-  --color-ink: #172033;
-  --color-ink-deep: #0d1220;
-  --color-ink-muted: #5a6478;
+  /* Identidad Pam Guerrero — marca personal de viajes: sofisticada, vibrante
+     con mesura, editorial. Burgundy es la firma; el resto de la paleta
+     funciona como una sinfonía de acentos sutiles sobre un fondo cálido,
+     no como bloques de color extremadamente saturados.
+     Los nombres de los tokens (cobalt/turquoise/tangerine/sun) se
+     conservan por compatibilidad con los componentes existentes — el
+     comentario junto a cada uno indica su rol real en la paleta actual. */
+  --color-burgundy: #5d101d; /* firma de marca — logo, hero, momentos de identidad */
+  --color-cobalt: #18304a; /* = Deep Navy — estructura, secciones ancla junto al burgundy */
+  --color-coral: #d96f5f; /* = Warm Coral — calidez, CTA */
+  --color-coral-deep: #a83d2c; /* variante accesible de coral para texto sobre el fondo cálido */
+  --color-turquoise: #438c8a; /* = Muted Teal — movimiento, agua */
+  --color-turquoise-deep: #2c5b59; /* variante accesible de teal para texto */
+  --color-tangerine: #c49a45; /* = Ochre — descubrimiento, acento cálido */
+  --color-tangerine-deep: #7c5f26; /* variante accesible de ochre para texto */
+  --color-sun: #e6d8c8; /* = Soft Sand — acentos y superficies muy suaves */
+  --color-dusty-blue: #7595a5; /* acento adicional, uso puntual */
+  --color-dusty-blue-deep: #42606f; /* variante accesible de dusty blue para texto */
+  --color-ink: #17232e; /* lectura — navy casi negro, cálido, no gris frío */
+  --color-ink-deep: #0e1822;
+  --color-ink-muted: #56636e;
 
   /* Tokens semánticos.
-     Regla de contraste: sobre burgundy/cobalt el texto va en blanco.
-     Sobre coral/turquoise/tangerine/sun el texto va SIEMPRE en ink — ninguno
-     de los cuatro alcanza 4.5:1 en blanco, ni siquiera en texto grande.
-     Como texto de cuerpo sobre blanco, coral/turquoise/tangerine usan su
-     variante "-deep"; cobalt y burgundy funcionan directos como texto;
-     sun nunca es texto, solo fondo. */
-  --color-paper: #ffffff;
-  --color-surface: #ffffff;
+     Regla de contraste: sobre burgundy/cobalt(navy) el texto va en blanco.
+     Sobre coral/tangerine(ochre) el texto en ink funciona sólido (>4.5:1).
+     Teal es más claro que las otras — como fondo grande de sección se usa
+     atenuado (bg-turquoise/10-15, ver PathsSection/PageHeader) en vez de
+     sólido, para que el texto de cuerpo siga siendo accesible; como acento
+     puntual (badges, iconos) sí funciona sólido. Sand nunca lleva texto en
+     blanco, siempre ink — es tan clara que casi no hace falta atenuarla. */
+  --color-paper: #f4efe7; /* fondo principal — cálido, no blanco puro */
+  --color-surface: #ffffff; /* superficie elevada: cards y fichas sobre el fondo cálido */
   --color-accent: var(--color-burgundy);
-  --color-line: #e3e6ec;
-  --color-line-strong: #cdd2db;
+  --color-line: #e3d9c9;
+  --color-line-strong: #cfc0aa;
 }
 
 @theme inline {
@@ -41,6 +48,8 @@
   --color-tangerine: var(--color-tangerine);
   --color-tangerine-deep: var(--color-tangerine-deep);
   --color-sun: var(--color-sun);
+  --color-dusty-blue: var(--color-dusty-blue);
+  --color-dusty-blue-deep: var(--color-dusty-blue-deep);
   --color-ink: var(--color-ink);
   --color-ink-deep: var(--color-ink-deep);
   --color-ink-muted: var(--color-ink-muted);

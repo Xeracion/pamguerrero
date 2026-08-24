@@ -4,9 +4,9 @@ import { STATUS_LABEL, isClosingSoon } from "@/lib/sanity/queries";
 import type { TripSummary, TripStatus } from "@/lib/sanity/queries";
 
 const STATUS_STYLE: Record<TripStatus, string> = {
-  proximamente: "bg-cobalt/15 text-cobalt",
+  proximamente: "bg-dusty-blue/20 text-dusty-blue-deep",
   "plazas-disponibles": "bg-turquoise/15 text-turquoise-deep",
-  "ultimas-plazas": "bg-sun/25 text-ink",
+  "ultimas-plazas": "bg-sun/40 text-ink",
   cerrado: "bg-line text-ink-muted",
 };
 
