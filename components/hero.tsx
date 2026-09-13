@@ -10,7 +10,7 @@ export async function Hero() {
   const settings = await getSiteSettings();
 
   return (
-    <section className="relative min-h-[92vh] overflow-hidden bg-burgundy">
+    <section className="relative min-h-[60vh] overflow-hidden bg-burgundy">
       <SanityImage
         image={settings.heroImage}
         fallbackLabel="[REEMPLAZAR CON FOTO REAL DE PAM — plano editorial, viaje o retrato en movimiento, a pantalla completa]"
@@ -47,7 +47,7 @@ export async function Hero() {
         className="pointer-events-none absolute right-[6%] top-[14%] h-24 w-[46%] text-white/30 sm:h-32"
       />
 
-      <div className="relative flex min-h-[92vh] flex-col justify-between px-6 py-10 sm:px-10 sm:py-14">
+      <div className="relative flex min-h-[60vh] flex-col justify-between px-6 py-10 sm:px-10 sm:py-14">
         <div className="flex items-center justify-between">
           <p className="font-body text-xs font-semibold uppercase tracking-[0.28em] text-white/80">
             {settings.heroEyebrow || "Doctora en Turismo · +30 países"}
