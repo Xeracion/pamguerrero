@@ -2,6 +2,7 @@ import Link from "next/link";
 import { InstagramLink } from "@/components/instagram-link";
 import { RouteLine } from "@/components/route-line";
 import { Logo } from "@/components/logo";
+import { getSiteSettings } from "@/lib/sanity/queries";
 
 const MAIN_LINKS = [
   { href: "/viaja-conmigo", label: "Viaja conmigo" },
@@ -19,7 +20,9 @@ const LEGAL_LINKS = [
   { href: "/aviso-legal", label: "Aviso legal" },
 ];
 
-export function SiteFooter() {
+export async function SiteFooter() {
+  const settings = await getSiteSettings();
+
   return (
     <footer className="relative overflow-hidden bg-burgundy text-white">
       <RouteLine
@@ -31,7 +34,7 @@ export function SiteFooter() {
           <div>
             <Logo tone="negative" className="h-7 w-auto" />
             <p className="mt-4 max-w-xs font-body text-sm leading-relaxed text-white/70">
-              Viajar para ampliar tu mundo.
+              {settings.footerTagline || "Viajar para ampliar tu mundo."}
             </p>
             <InstagramLink className="mt-5 inline-block text-white/70 transition-colors hover:text-white" />
           </div>

@@ -2,6 +2,7 @@ import { jsonLdString } from "@/lib/json-ld";
 import type { Metadata } from "next";
 import { Breadcrumbs, breadcrumbsJsonLd } from "@/components/breadcrumbs";
 import { PageHeader } from "@/components/page-header";
+import { getSiteSettings } from "@/lib/sanity/queries";
 
 const SITE_URL = "https://www.pamguerrero.com";
 
@@ -11,7 +12,9 @@ export const metadata: Metadata = {
   alternates: { canonical: "/contacto" },
 };
 
-export default function ContactoPage() {
+export default async function ContactoPage() {
+  const settings = await getSiteSettings();
+  const header = settings.contactoHeader;
   const crumbs = [{ label: "Inicio", href: "/" }, { label: "Contacto" }];
 
   return (
@@ -24,9 +27,11 @@ export default function ContactoPage() {
 
       <PageHeader
         tone="coral"
-        eyebrow="Hablemos"
-        title="Contacto"
-        description="¿Pregunta sobre un viaje, propuesta de colaboración o consulta de prensa? Escríbeme por aquí."
+        eyebrow={header?.eyebrow || "Hablemos"}
+        title={header?.title || "Contacto"}
+        description={
+          header?.description || "¿Pregunta sobre un viaje, propuesta de colaboración o consulta de prensa? Escríbeme por aquí."
+        }
       />
 
       <section className="py-16 sm:py-20">

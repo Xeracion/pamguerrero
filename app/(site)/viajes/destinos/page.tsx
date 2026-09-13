@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { Breadcrumbs, breadcrumbsJsonLd } from "@/components/breadcrumbs";
 import { PageHeader } from "@/components/page-header";
 import { DestinationCard } from "@/components/destination-card";
-import { getDestinations } from "@/lib/sanity/queries";
+import { getDestinations, getSiteSettings } from "@/lib/sanity/queries";
 
 const SITE_URL = "https://www.pamguerrero.com";
 
@@ -16,7 +16,8 @@ export const metadata: Metadata = {
 };
 
 export default async function DestinosPage() {
-  const destinations = await getDestinations();
+  const [destinations, settings] = await Promise.all([getDestinations(), getSiteSettings()]);
+  const header = settings.destinosHeader;
   const crumbs = [
     { label: "Inicio", href: "/" },
     { label: "Viajes", href: "/viajes" },
@@ -32,9 +33,12 @@ export default async function DestinosPage() {
       <Breadcrumbs items={crumbs} />
       <PageHeader
         tone="cobalt"
-        eyebrow="Viajes"
-        title="Destinos"
-        description="Cada guía nace de un viaje real: cultura, gastronomía, transporte, presupuesto y errores que no volvería a cometer."
+        eyebrow={header?.eyebrow || "Viajes"}
+        title={header?.title || "Destinos"}
+        description={
+          header?.description ||
+          "Cada guía nace de un viaje real: cultura, gastronomía, transporte, presupuesto y errores que no volvería a cometer."
+        }
       />
 
       <section className="py-16 sm:py-20">

@@ -4,6 +4,7 @@ import { Breadcrumbs, breadcrumbsJsonLd } from "@/components/breadcrumbs";
 import { PageHeader } from "@/components/page-header";
 import { PhotoPlaceholder } from "@/components/photo-placeholder";
 import { Cta } from "@/components/cta";
+import { getSiteSettings } from "@/lib/sanity/queries";
 
 const SITE_URL = "https://www.pamguerrero.com";
 
@@ -49,7 +50,9 @@ const SECTIONS = [
   },
 ];
 
-export default function TrabajaConmigoPage() {
+export default async function TrabajaConmigoPage() {
+  const settings = await getSiteSettings();
+  const header = settings.trabajaConmigoHeader;
   const crumbs = [{ label: "Inicio", href: "/" }, { label: "Trabaja Conmigo" }];
 
   return (
@@ -62,9 +65,12 @@ export default function TrabajaConmigoPage() {
 
       <PageHeader
         tone="cobalt"
-        eyebrow="Para marcas, destinos e instituciones"
-        title="Trabajemos juntos."
-        description="No solo publico contenido: cuento historias, viajo, investigo, lidero experiencias y conecto audiencias. Esto es lo que puedo aportar a un proyecto."
+        eyebrow={header?.eyebrow || "Para marcas, destinos e instituciones"}
+        title={header?.title || "Trabajemos juntos."}
+        description={
+          header?.description ||
+          "No solo publico contenido: cuento historias, viajo, investigo, lidero experiencias y conecto audiencias. Esto es lo que puedo aportar a un proyecto."
+        }
       />
 
       <section className="py-16 sm:py-20">

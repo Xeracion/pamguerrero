@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { Breadcrumbs, breadcrumbsJsonLd } from "@/components/breadcrumbs";
 import { PageHeader } from "@/components/page-header";
 import { ExperienceCard } from "@/components/experience-card";
-import { getExperiences } from "@/lib/sanity/queries";
+import { getExperiences, getSiteSettings } from "@/lib/sanity/queries";
 
 const SITE_URL = "https://www.pamguerrero.com";
 
@@ -17,7 +17,8 @@ export const metadata: Metadata = {
 };
 
 export default async function ExperienciasPage() {
-  const experiences = await getExperiences();
+  const [experiences, settings] = await Promise.all([getExperiences(), getSiteSettings()]);
+  const header = settings.experienciasHeader;
   const crumbs = [{ label: "Inicio", href: "/" }, { label: "Experiencias" }];
 
   return (
@@ -30,9 +31,12 @@ export default async function ExperienciasPage() {
 
       <PageHeader
         tone="tangerine"
-        eyebrow="Lo que quiero transmitir"
-        title="Experiencias"
-        description="Esto no es turismo — es cultura, aprendizaje y transformación. Historias sobre lo que significa ampliar tu mundo, más allá de la lista de sitios que hay que visitar."
+        eyebrow={header?.eyebrow || "Lo que quiero transmitir"}
+        title={header?.title || "Experiencias"}
+        description={
+          header?.description ||
+          "Esto no es turismo — es cultura, aprendizaje y transformación. Historias sobre lo que significa ampliar tu mundo, más allá de la lista de sitios que hay que visitar."
+        }
       />
 
       <section className="py-16 sm:py-20">

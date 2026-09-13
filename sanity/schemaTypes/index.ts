@@ -6,9 +6,11 @@ import { experience } from "./experience";
 import { destination } from "./destination";
 import { journey } from "./journey";
 import { trip } from "./trip";
+import { siteSettings } from "./siteSettings";
 import { itineraryDay } from "./objects/itineraryDay";
 import { faq } from "./objects/faq";
 import { guideSection } from "./objects/guideSection";
+import { photoCaption } from "./objects/photoCaption";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -19,9 +21,11 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     destination,
     journey,
     trip,
+    siteSettings,
     // Objetos reutilizables
     itineraryDay,
     faq,
     guideSection,
+    photoCaption,
   ],
 };

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Breadcrumbs, breadcrumbsJsonLd } from "@/components/breadcrumbs";
 import { PageHeader } from "@/components/page-header";
 import { PhotoPlaceholder } from "@/components/photo-placeholder";
+import { getSiteSettings } from "@/lib/sanity/queries";
 
 const SITE_URL = "https://www.pamguerrero.com";
 
@@ -13,7 +14,9 @@ export const metadata: Metadata = {
   alternates: { canonical: "/proyectos" },
 };
 
-export default function ProyectosPage() {
+export default async function ProyectosPage() {
+  const settings = await getSiteSettings();
+  const header = settings.proyectosHeader;
   const crumbs = [{ label: "Inicio", href: "/" }, { label: "Proyectos" }];
 
   return (
@@ -25,9 +28,12 @@ export default function ProyectosPage() {
       <Breadcrumbs items={crumbs} />
       <PageHeader
         tone="turquoise"
-        eyebrow="Más allá del contenido"
-        title="Proyectos"
-        description="Cosas que he construido para que las oportunidades sean más fáciles de encontrar, no solo más fáciles de soñar."
+        eyebrow={header?.eyebrow || "Más allá del contenido"}
+        title={header?.title || "Proyectos"}
+        description={
+          header?.description ||
+          "Cosas que he construido para que las oportunidades sean más fáciles de encontrar, no solo más fáciles de soñar."
+        }
       />
 
       <section className="py-16 sm:py-20">

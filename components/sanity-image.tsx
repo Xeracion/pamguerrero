@@ -10,6 +10,7 @@ interface SanityImageProps {
   tone?: "light" | "dark";
   className?: string;
   sizes?: string;
+  dataAttribute?: string;
 }
 
 const ASPECT_RATIO: Record<NonNullable<SanityImageProps["aspect"]>, string> = {
@@ -26,6 +27,7 @@ export function SanityImage({
   tone = "light",
   className = "",
   sizes = "(min-width: 1024px) 33vw, 100vw",
+  dataAttribute,
 }: SanityImageProps) {
   const url = urlForImage(image)?.width(1600).url();
 
@@ -36,7 +38,10 @@ export function SanityImage({
   }
 
   return (
-    <div className={`relative overflow-hidden ${ASPECT_RATIO[aspect]} ${className}`}>
+    <div
+      className={`relative overflow-hidden ${ASPECT_RATIO[aspect]} ${className}`}
+      data-sanity={dataAttribute}
+    >
       <Image
         src={url}
         alt={image?.alt || fallbackLabel}

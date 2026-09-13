@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { Breadcrumbs, breadcrumbsJsonLd } from "@/components/breadcrumbs";
 import { PageHeader } from "@/components/page-header";
 import { TravelCard } from "@/components/travel-card";
-import { getTrips, STATUS_LABEL } from "@/lib/sanity/queries";
+import { getTrips, getSiteSettings, STATUS_LABEL } from "@/lib/sanity/queries";
 import type { TripStatus } from "@/lib/sanity/queries";
 
 const SITE_URL = "https://www.pamguerrero.com";
@@ -25,7 +25,8 @@ const GROUP_ORDER: TripStatus[] = [
 ];
 
 export default async function ViajesGrupalesPage() {
-  const trips = await getTrips();
+  const [trips, settings] = await Promise.all([getTrips(), getSiteSettings()]);
+  const header = settings.viajesGrupalesHeader;
   const crumbs = [{ label: "Inicio", href: "/" }, { label: "Viajes Grupales" }];
 
   return (
@@ -38,9 +39,12 @@ export default async function ViajesGrupalesPage() {
 
       <PageHeader
         tone="coral"
-        eyebrow="Vívelo conmigo"
-        title="Viajes grupales"
-        description="No son paquetes: son experiencias que diseño y acompaño de principio a fin. Estas son las convocatorias abiertas ahora mismo."
+        eyebrow={header?.eyebrow || "Vívelo conmigo"}
+        title={header?.title || "Viajes grupales"}
+        description={
+          header?.description ||
+          "No son paquetes: son experiencias que diseño y acompaño de principio a fin. Estas son las convocatorias abiertas ahora mismo."
+        }
       />
 
       <div className="mx-auto max-w-6xl px-6 py-16 sm:py-20">

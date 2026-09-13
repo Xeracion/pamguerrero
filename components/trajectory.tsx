@@ -1,6 +1,7 @@
 import { RouteLine } from "@/components/route-line";
+import { getSiteSettings } from "@/lib/sanity/queries";
 
-const MILESTONES = [
+const DEFAULT_MILESTONES = [
   "Ecuador",
   "Docencia universitaria",
   "Doctora en Turismo",
@@ -8,7 +9,13 @@ const MILESTONES = [
   "Fundadora de Caminando.lat",
 ];
 
-export function Trajectory() {
+export async function Trajectory() {
+  const settings = await getSiteSettings();
+  const milestones =
+    settings.trajectoryMilestones && settings.trajectoryMilestones.length > 0
+      ? settings.trajectoryMilestones
+      : DEFAULT_MILESTONES;
+
   return (
     <section className="relative overflow-hidden bg-cobalt py-5">
       <RouteLine
@@ -17,10 +24,10 @@ export function Trajectory() {
       />
       <div className="relative mx-auto max-w-6xl overflow-x-auto px-6">
         <ol className="flex min-w-max items-center gap-3 font-body text-sm font-medium text-white/80">
-          {MILESTONES.map((item, i) => (
+          {milestones.map((item, i) => (
             <li key={item} className="flex items-center gap-3">
               {i > 0 && <span className="text-white/30">—</span>}
-              <span className={i === MILESTONES.length - 1 ? "text-white" : ""}>{item}</span>
+              <span className={i === milestones.length - 1 ? "text-white" : ""}>{item}</span>
             </li>
           ))}
         </ol>

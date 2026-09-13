@@ -1,26 +1,29 @@
 import { PhotoPlaceholder } from "@/components/photo-placeholder";
+import { getSiteSettings } from "@/lib/sanity/queries";
 
-export function CollaborationsSection() {
+export async function CollaborationsSection() {
+  const settings = await getSiteSettings();
+
   return (
     <section className="bg-cobalt py-24 sm:py-32">
       <div className="mx-auto max-w-6xl px-6">
         <div className="grid gap-14 lg:grid-cols-2 lg:items-center">
           <div className="flex flex-col justify-center">
             <p className="font-body text-xs font-semibold uppercase tracking-[0.18em] text-white/70">
-              Para marcas, destinos e instituciones
+              {settings.collabEyebrow || "Para marcas, destinos e instituciones"}
             </p>
             <h2 className="mt-4 font-display text-4xl font-medium leading-[1.05] text-white sm:text-5xl">
-              Trabajemos juntos.
+              {settings.collabHeadline || "Trabajemos juntos."}
             </h2>
             <p className="mt-5 max-w-md font-body text-lg leading-relaxed text-white/80">
-              Storytelling, viajes grupales con marca, investigación en turismo y acceso directo
-              a una comunidad latinoamericana interesada en viajar.
+              {settings.collabBody ||
+                "Storytelling, viajes grupales con marca, investigación en turismo y acceso directo a una comunidad latinoamericana interesada en viajar."}
             </p>
             <a
               href="/trabaja-conmigo"
               className="mt-8 inline-block w-fit rounded-full bg-white px-7 py-3.5 font-body text-sm font-semibold text-cobalt transition-transform hover:-translate-y-px"
             >
-              Trabaja conmigo
+              {settings.collabCtaLabel || "Trabaja conmigo"}
             </a>
           </div>
 

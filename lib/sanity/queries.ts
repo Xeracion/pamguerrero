@@ -296,6 +296,113 @@ export async function getTripsByDestination(destinationSlug: string): Promise<Tr
   return data as TripSummary[];
 }
 
+export interface PageHeaderSettings {
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+}
+
+export interface PhotoCaption {
+  image?: SanityImageRef;
+  caption: string;
+}
+
+export interface SiteSettings {
+  heroImage?: SanityImageRef;
+  sobrePamIntroImage?: SanityImageRef;
+  sobrePamIntroImageSecondary?: SanityImageRef;
+  sobrePamExperienceImage?: SanityImageRef;
+
+  heroEyebrow?: string;
+  heroHeadlineLine1?: string;
+  heroHeadlineLine2?: string;
+  heroHeadlineLine3?: string;
+  heroSubheadline?: string;
+  heroCtaPrimaryLabel?: string;
+  heroCtaSecondaryLabel?: string;
+  heroStatNumber?: string;
+  heroStatLabel?: string;
+
+  trajectoryMilestones?: string[];
+
+  storyEyebrow?: string;
+  storyHeadline?: string;
+  storyBody?: string;
+  storyLinkLabel?: string;
+
+  collabEyebrow?: string;
+  collabHeadline?: string;
+  collabBody?: string;
+  collabCtaLabel?: string;
+
+  homeNewsletterHeadline?: string;
+  homeNewsletterBody?: string;
+  homeNewsletterButtonLabel?: string;
+
+  sobrePamIntroQuote?: string;
+  sobrePamIntroBody?: string;
+  sobrePamExperienceEyebrow?: string;
+  sobrePamExperienceBody1?: string;
+  sobrePamExperienceBody2?: string;
+  sobrePamMomentsHeading?: string;
+  sobrePamMoments?: PhotoCaption[];
+  sobrePamExpertiseHeading?: string;
+  sobrePamExpertiseItems?: string[];
+
+  viajesGrupalesHeader?: PageHeaderSettings;
+  misImprescindiblesHeader?: PageHeaderSettings;
+  viajaConmigoHeader?: PageHeaderSettings;
+  proyectosHeader?: PageHeaderSettings;
+  sobrePamHeader?: PageHeaderSettings;
+  trabajaConmigoHeader?: PageHeaderSettings;
+  viajesHeader?: PageHeaderSettings;
+  destinosHeader?: PageHeaderSettings;
+  experienciasHeader?: PageHeaderSettings;
+  newsletterHeader?: PageHeaderSettings;
+  contactoHeader?: PageHeaderSettings;
+
+  footerTagline?: string;
+}
+
+/** El documento "Ajustes del sitio" es un singleton con este id fijo — ver sanity/structure.ts. */
+export const SITE_SETTINGS_ID = "siteSettings";
+
+export async function getSiteSettings(): Promise<SiteSettings> {
+  const { data } = await sanityFetch({
+    query: `*[_type == "siteSettings" && _id == $id][0] {
+      heroImage ${IMAGE_PROJECTION},
+      sobrePamIntroImage ${IMAGE_PROJECTION},
+      sobrePamIntroImageSecondary ${IMAGE_PROJECTION},
+      sobrePamExperienceImage ${IMAGE_PROJECTION},
+
+      heroEyebrow, heroHeadlineLine1, heroHeadlineLine2, heroHeadlineLine3, heroSubheadline,
+      heroCtaPrimaryLabel, heroCtaSecondaryLabel, heroStatNumber, heroStatLabel,
+
+      trajectoryMilestones,
+
+      storyEyebrow, storyHeadline, storyBody, storyLinkLabel,
+
+      collabEyebrow, collabHeadline, collabBody, collabCtaLabel,
+
+      homeNewsletterHeadline, homeNewsletterBody, homeNewsletterButtonLabel,
+
+      sobrePamIntroQuote, sobrePamIntroBody,
+      sobrePamExperienceEyebrow, sobrePamExperienceBody1, sobrePamExperienceBody2,
+      sobrePamMomentsHeading,
+      "sobrePamMoments": sobrePamMoments[] { "image": image ${IMAGE_PROJECTION}, caption },
+      sobrePamExpertiseHeading, sobrePamExpertiseItems,
+
+      viajesGrupalesHeader, misImprescindiblesHeader, viajaConmigoHeader, proyectosHeader,
+      sobrePamHeader, trabajaConmigoHeader, viajesHeader, destinosHeader, experienciasHeader,
+      newsletterHeader, contactoHeader,
+
+      footerTagline
+    }`,
+    params: { id: SITE_SETTINGS_ID },
+  });
+  return (data as SiteSettings | null) ?? {};
+}
+
 const URGENCY_DAYS = 20;
 
 export function isClosingSoon(trip: Pick<TripSummary, "closingDate" | "status">): boolean {

@@ -5,7 +5,7 @@ import { Breadcrumbs, breadcrumbsJsonLd } from "@/components/breadcrumbs";
 import { PageHeader } from "@/components/page-header";
 import { ArticleCard } from "@/components/article-card";
 import { DestinationCard } from "@/components/destination-card";
-import { getCategories, getArticles, getDestinations } from "@/lib/sanity/queries";
+import { getCategories, getArticles, getDestinations, getSiteSettings } from "@/lib/sanity/queries";
 
 const SITE_URL = "https://www.pamguerrero.com";
 
@@ -19,11 +19,13 @@ export const metadata: Metadata = {
 };
 
 export default async function ViajesPage() {
-  const [categories, articles, destinations] = await Promise.all([
+  const [categories, articles, destinations, settings] = await Promise.all([
     getCategories(),
     getArticles(),
     getDestinations(),
+    getSiteSettings(),
   ]);
+  const header = settings.viajesHeader;
   const crumbs = [{ label: "Inicio", href: "/" }, { label: "Viajes" }];
   const latestArticles = articles.slice(0, 3);
 
@@ -37,9 +39,12 @@ export default async function ViajesPage() {
 
       <PageHeader
         tone="turquoise"
-        eyebrow="Lo que sé"
-        title="Viajes"
-        description="Todo lo que necesitas para descubrir el mundo: destinos, guías, consejos y experiencias para ayudarte a viajar mejor."
+        eyebrow={header?.eyebrow || "Lo que sé"}
+        title={header?.title || "Viajes"}
+        description={
+          header?.description ||
+          "Todo lo que necesitas para descubrir el mundo: destinos, guías, consejos y experiencias para ayudarte a viajar mejor."
+        }
       />
 
       <section className="py-16 sm:py-20">

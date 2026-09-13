@@ -3,6 +3,7 @@ import { structureTool } from "sanity/structure";
 import { visionTool } from "@sanity/vision";
 import { presentationTool, defineLocations } from "sanity/presentation";
 import { schema } from "./sanity/schemaTypes";
+import { structure } from "./sanity/structure";
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ?? "a4kawsmz";
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET ?? "production";
@@ -15,7 +16,7 @@ export default defineConfig({
   dataset,
   schema,
   plugins: [
-    structureTool(),
+    structureTool({ structure }),
     presentationTool({
       previewUrl: {
         previewMode: { enable: "/api/draft-mode/enable" },
@@ -70,6 +71,15 @@ export default defineConfig({
               doc && {
                 locations: [{ title: doc.title ?? "Sin título", href: `/viajes-grupales/${doc.slug}` }],
               },
+          }),
+          siteSettings: defineLocations({
+            select: {},
+            resolve: () => ({
+              locations: [
+                { title: "Inicio", href: "/" },
+                { title: "Sobre Pam", href: "/sobre-pam" },
+              ],
+            }),
           }),
         },
       },

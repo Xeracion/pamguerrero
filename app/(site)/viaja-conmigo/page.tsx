@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { Breadcrumbs, breadcrumbsJsonLd } from "@/components/breadcrumbs";
 import { PageHeader } from "@/components/page-header";
 import { JourneyCard } from "@/components/journey-card";
-import { getJourneys } from "@/lib/sanity/queries";
+import { getJourneys, getSiteSettings } from "@/lib/sanity/queries";
 
 const SITE_URL = "https://www.pamguerrero.com";
 
@@ -17,7 +17,8 @@ export const metadata: Metadata = {
 };
 
 export default async function ViajaConmigoPage() {
-  const journeys = await getJourneys();
+  const [journeys, settings] = await Promise.all([getJourneys(), getSiteSettings()]);
+  const header = settings.viajaConmigoHeader;
   const crumbs = [{ label: "Inicio", href: "/" }, { label: "Viaja Conmigo" }];
 
   return (
@@ -30,9 +31,12 @@ export default async function ViajaConmigoPage() {
 
       <PageHeader
         tone="coral"
-        eyebrow="Lo que he vivido"
-        title="Viaja conmigo"
-        description="Aquí no encontrarás guías ni consejos organizados por intención de búsqueda — eso vive en Viajes. Esto es lo que yo he vivido, contado en primera persona."
+        eyebrow={header?.eyebrow || "Lo que he vivido"}
+        title={header?.title || "Viaja conmigo"}
+        description={
+          header?.description ||
+          "Aquí no encontrarás guías ni consejos organizados por intención de búsqueda — eso vive en Viajes. Esto es lo que yo he vivido, contado en primera persona."
+        }
       />
 
       <section className="py-16 sm:py-20">

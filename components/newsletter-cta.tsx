@@ -1,6 +1,9 @@
 import { RouteLine } from "@/components/route-line";
+import { getSiteSettings } from "@/lib/sanity/queries";
 
-export function NewsletterCta() {
+export async function NewsletterCta() {
+  const settings = await getSiteSettings();
+
   return (
     <section className="relative overflow-hidden bg-accent py-24 text-white sm:py-28">
       <RouteLine
@@ -9,11 +12,11 @@ export function NewsletterCta() {
       />
       <div className="relative mx-auto flex max-w-2xl flex-col items-center gap-6 px-6 text-center">
         <h2 className="font-display text-4xl font-medium leading-[1.05] sm:text-5xl">
-          Una carta, de vez en cuando, sobre ampliar el mundo.
+          {settings.homeNewsletterHeadline || "Una carta, de vez en cuando, sobre ampliar el mundo."}
         </h2>
         <p className="font-body text-base leading-relaxed text-white/85">
-          Destinos, oportunidades y lo que voy aprendiendo por el camino — sin ruido, sin
-          relleno.
+          {settings.homeNewsletterBody ||
+            "Destinos, oportunidades y lo que voy aprendiendo por el camino — sin ruido, sin relleno."}
         </p>
 
         <form className="mt-2 flex w-full max-w-md flex-col gap-3 sm:flex-row" aria-label="Suscripción al newsletter">
@@ -31,7 +34,7 @@ export function NewsletterCta() {
             type="submit"
             className="whitespace-nowrap rounded-full bg-coral px-6 py-3 font-body text-sm font-semibold text-ink transition-transform hover:-translate-y-px"
           >
-            Suscribirme
+            {settings.homeNewsletterButtonLabel || "Suscribirme"}
           </button>
         </form>
         <p className="font-body text-xs text-white/60">

@@ -2,6 +2,7 @@ import { jsonLdString } from "@/lib/json-ld";
 import type { Metadata } from "next";
 import { Breadcrumbs, breadcrumbsJsonLd } from "@/components/breadcrumbs";
 import { PageHeader } from "@/components/page-header";
+import { getSiteSettings } from "@/lib/sanity/queries";
 
 const SITE_URL = "https://www.pamguerrero.com";
 
@@ -22,7 +23,9 @@ const CATEGORIES = [
   "Herramientas",
 ];
 
-export default function MisImprescindiblesPage() {
+export default async function MisImprescindiblesPage() {
+  const settings = await getSiteSettings();
+  const header = settings.misImprescindiblesHeader;
   const crumbs = [{ label: "Inicio", href: "/" }, { label: "Mis imprescindibles" }];
 
   return (
@@ -35,9 +38,12 @@ export default function MisImprescindiblesPage() {
 
       <PageHeader
         tone="tangerine"
-        eyebrow="Recomendaciones"
-        title="Mis imprescindibles"
-        description="Cosas que realmente utilizo o recomiendo para viajar. Todavía no hay nada publicado aquí — no vamos a inventar recomendaciones para llenar la página."
+        eyebrow={header?.eyebrow || "Recomendaciones"}
+        title={header?.title || "Mis imprescindibles"}
+        description={
+          header?.description ||
+          "Cosas que realmente utilizo o recomiendo para viajar. Todavía no hay nada publicado aquí — no vamos a inventar recomendaciones para llenar la página."
+        }
       />
 
       <section className="py-16 sm:py-20">

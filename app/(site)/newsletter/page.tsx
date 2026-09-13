@@ -2,6 +2,7 @@ import { jsonLdString } from "@/lib/json-ld";
 import type { Metadata } from "next";
 import { Breadcrumbs, breadcrumbsJsonLd } from "@/components/breadcrumbs";
 import { PageHeader } from "@/components/page-header";
+import { getSiteSettings } from "@/lib/sanity/queries";
 
 const SITE_URL = "https://www.pamguerrero.com";
 
@@ -17,7 +18,9 @@ const WHAT_YOU_GET = [
   "Lo primero en enterarte de próximas fechas de viajes grupales.",
 ];
 
-export default function NewsletterPage() {
+export default async function NewsletterPage() {
+  const settings = await getSiteSettings();
+  const header = settings.newsletterHeader;
   const crumbs = [{ label: "Inicio", href: "/" }, { label: "Newsletter" }];
 
   return (
@@ -30,9 +33,11 @@ export default function NewsletterPage() {
 
       <PageHeader
         tone="burgundy"
-        eyebrow="Sin ruido, sin relleno"
-        title="Una carta, de vez en cuando, sobre ampliar el mundo."
-        description="Nada de correos diarios ni promociones constantes. Solo lo que de verdad vale la pena leer."
+        eyebrow={header?.eyebrow || "Sin ruido, sin relleno"}
+        title={header?.title || "Una carta, de vez en cuando, sobre ampliar el mundo."}
+        description={
+          header?.description || "Nada de correos diarios ni promociones constantes. Solo lo que de verdad vale la pena leer."
+        }
       />
 
       <section className="py-16 sm:py-20">
