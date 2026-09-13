@@ -22,6 +22,17 @@ export function Hero() {
         }}
       />
 
+      {/* Scrim adicional: independiente de la diagonal, garantiza contraste
+          del titular contra cualquier foto, incluida una con tonos claros o
+          muy saturados en la zona inferior donde vive el texto. */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(to top, rgba(14,3,6,0.85) 0%, rgba(14,3,6,0.55) 30%, rgba(14,3,6,0) 62%)",
+        }}
+      />
+
       <OrganicAccent className="pointer-events-none absolute -left-16 bottom-0 h-72 w-72 text-white/5" />
 
       <RouteLine
