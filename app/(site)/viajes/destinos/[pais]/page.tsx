@@ -7,7 +7,8 @@ import { ExampleContentNote } from "@/components/example-content-note";
 import { RouteLine } from "@/components/route-line";
 import { TravelCard } from "@/components/travel-card";
 import { Cta } from "@/components/cta";
-import { getDestinations, getDestination, getJourneyByDestination } from "@/lib/sanity/queries";
+import { sanityClient } from "@/lib/sanity/client";
+import { getDestination, getJourneyByDestination } from "@/lib/sanity/queries";
 
 const SITE_URL = "https://www.pamguerrero.com";
 
@@ -30,9 +31,15 @@ function chapterTone(slug: string) {
   return CHAPTER_TONES[hash % CHAPTER_TONES.length];
 }
 
+// generateStaticParams corre en build time, sin contexto de request — no puede
+// usar sanityFetch (llama a draftMode() internamente), así que consulta el
+// cliente directo en vez del helper getDestinations() que usa el resto de la
+// página.
 export async function generateStaticParams() {
-  const destinations = await getDestinations();
-  return destinations.map((d) => ({ pais: d.slug }));
+  const destinations: { pais: string }[] = await sanityClient.fetch(
+    `*[_type == "destination"]{ "pais": slug.current }`
+  );
+  return destinations;
 }
 
 export async function generateMetadata({

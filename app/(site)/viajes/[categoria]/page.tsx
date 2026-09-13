@@ -4,15 +4,22 @@ import { notFound } from "next/navigation";
 import { Breadcrumbs, breadcrumbsJsonLd } from "@/components/breadcrumbs";
 import { PageHeader } from "@/components/page-header";
 import { ArticleCard } from "@/components/article-card";
-import { getCategories, getCategory, getArticlesByCategory } from "@/lib/sanity/queries";
+import { sanityClient } from "@/lib/sanity/client";
+import { getCategory, getArticlesByCategory } from "@/lib/sanity/queries";
 
 const SITE_URL = "https://www.pamguerrero.com";
 
 export const revalidate = 300;
 
+// generateStaticParams corre en build time, sin contexto de request — no puede
+// usar sanityFetch (llama a draftMode() internamente), así que consulta el
+// cliente directo en vez del helper getCategories() que usan el resto de las
+// páginas.
 export async function generateStaticParams() {
-  const categories = await getCategories();
-  return categories.map((c) => ({ categoria: c.slug }));
+  const categories: { categoria: string }[] = await sanityClient.fetch(
+    `*[_type == "category"]{ "categoria": slug.current }`
+  );
+  return categories;
 }
 
 export async function generateMetadata({
