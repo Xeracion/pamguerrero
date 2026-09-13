@@ -1,22 +1,24 @@
 @import "tailwindcss";
 
 :root {
-  /* Identidad Pam Guerrero — marca personal de viajes: sofisticada, vibrante
-     con mesura, editorial. Burgundy es la firma; el resto de la paleta
-     funciona como una sinfonía de acentos sutiles sobre un fondo cálido,
-     no como bloques de color extremadamente saturados.
-     Los nombres de los tokens (cobalt/turquoise/tangerine/sun) se
-     conservan por compatibilidad con los componentes existentes — el
-     comentario junto a cada uno indica su rol real en la paleta actual. */
-  --color-burgundy: #5d101d; /* firma de marca — logo, hero, momentos de identidad */
-  --color-cobalt: #18304a; /* = Deep Navy — estructura, secciones ancla junto al burgundy */
-  --color-coral: #d96f5f; /* = Warm Coral — calidez, CTA */
-  --color-coral-deep: #a83d2c; /* variante accesible de coral para texto sobre el fondo cálido */
-  --color-turquoise: #438c8a; /* = Muted Teal — movimiento, agua */
+  /* Identidad Pam Guerrero — marca personal de viajes: vibrante, sofisticada,
+     editorial. Burgundy y Deep Blue son los dos anclas de marca (siempre con
+     texto blanco encima); coral/teal/ochre/dusty-blue viven como acentos
+     puntuales — manchas, líneas, badges — nunca como el fondo de una sección
+     entera. El fondo general es blanco/casi blanco: la fotografía y el
+     espacio en blanco son los protagonistas, el color aparece integrado, no
+     en bloques.
+     Los nombres de los tokens (cobalt/turquoise/tangerine) se conservan por
+     compatibilidad con los componentes existentes — el comentario junto a
+     cada uno indica su rol real en la paleta actual. */
+  --color-burgundy: #5d101d; /* firma de marca — logo, hero, momentos de identidad, fondo puntual */
+  --color-cobalt: #18304a; /* = Deep Blue — segundo color protagonista, fondo puntual junto al burgundy, siempre con blanco */
+  --color-coral: #d96f5f; /* = Warm Coral — acento cálido, CTA, detalles */
+  --color-coral-deep: #a83d2c; /* variante accesible de coral para texto */
+  --color-turquoise: #438c8a; /* = Muted Teal — acento de movimiento/agua, uso puntual */
   --color-turquoise-deep: #2c5b59; /* variante accesible de teal para texto */
-  --color-tangerine: #c49a45; /* = Ochre — descubrimiento, acento cálido */
+  --color-tangerine: #c49a45; /* = Ochre — acento de descubrimiento, uso puntual */
   --color-tangerine-deep: #7c5f26; /* variante accesible de ochre para texto */
-  --color-sun: #e6d8c8; /* = Soft Sand — acentos y superficies muy suaves */
   --color-dusty-blue: #7595a5; /* acento adicional, uso puntual */
   --color-dusty-blue-deep: #42606f; /* variante accesible de dusty blue para texto */
   --color-ink: #17232e; /* lectura — navy casi negro, cálido, no gris frío */
@@ -24,18 +26,19 @@
   --color-ink-muted: #56636e;
 
   /* Tokens semánticos.
-     Regla de contraste: sobre burgundy/cobalt(navy) el texto va en blanco.
+     Regla de contraste: sobre burgundy/cobalt(azul) el texto va en blanco.
      Sobre coral/tangerine(ochre) el texto en ink funciona sólido (>4.5:1).
-     Teal es más claro que las otras — como fondo grande de sección se usa
-     atenuado (bg-turquoise/10-15, ver PathsSection/PageHeader) en vez de
-     sólido, para que el texto de cuerpo siga siendo accesible; como acento
-     puntual (badges, iconos) sí funciona sólido. Sand nunca lleva texto en
-     blanco, siempre ink — es tan clara que casi no hace falta atenuarla. */
-  --color-paper: #f4efe7; /* fondo principal — cálido, no blanco puro */
-  --color-surface: #ffffff; /* superficie elevada: cards y fichas sobre el fondo cálido */
+     Teal es más claro que las otras — como fondo se usa siempre atenuado
+     (bg-turquoise/10-15) para que el texto de cuerpo siga siendo accesible;
+     como acento puntual (badges, iconos) sí funciona sólido. Ningún color
+     secundario cubre nunca una sección completa a opacidad plena: el fondo
+     por defecto es --color-paper (blanco), y coral/teal/ochre/dusty-blue
+     aparecen como manchas, líneas o badges sobre ese blanco. */
+  --color-paper: #ffffff; /* fondo principal — blanco limpio, la foto y el espacio en blanco protagonizan */
+  --color-surface: #ffffff; /* superficie elevada: cards y fichas (se distinguen por borde/sombra, no por color) */
   --color-accent: var(--color-burgundy);
-  --color-line: #e3d9c9;
-  --color-line-strong: #cfc0aa;
+  --color-line: #e5e1da;
+  --color-line-strong: #cfc9bd;
 }
 
 @theme inline {
@@ -47,7 +50,6 @@
   --color-turquoise-deep: var(--color-turquoise-deep);
   --color-tangerine: var(--color-tangerine);
   --color-tangerine-deep: var(--color-tangerine-deep);
-  --color-sun: var(--color-sun);
   --color-dusty-blue: var(--color-dusty-blue);
   --color-dusty-blue-deep: var(--color-dusty-blue-deep);
   --color-ink: var(--color-ink);

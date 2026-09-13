@@ -4,15 +4,15 @@ interface PageHeaderProps {
   eyebrow?: string;
   title: string;
   description?: string;
-  tone?: "white" | "burgundy" | "cobalt" | "coral" | "turquoise" | "tangerine" | "sun";
+  tone?: "white" | "burgundy" | "cobalt" | "coral" | "turquoise" | "tangerine";
 }
 
 /**
- * burgundy/cobalt(navy) are the two deep anchor colors — solid, white text.
- * coral/turquoise(teal)/tangerine(ochre)/sun(sand) render as a soft tinted
- * wash rather than a solid fill: teal in particular only clears 4.5:1
- * against ink at full opacity, and a wash reads as the "sutil" accent this
- * palette calls for rather than a saturated block.
+ * burgundy/cobalt(azul) are the two deep anchor colors — solid, white text.
+ * coral/turquoise(teal)/tangerine(ochre) render as a soft tinted wash rather
+ * than a solid fill: teal in particular only clears 4.5:1 against ink at
+ * full opacity, and a wash reads as the "sutil" accent this palette calls
+ * for rather than a saturated block.
  */
 const TONE_BG: Record<NonNullable<PageHeaderProps["tone"]>, string> = {
   white: "bg-surface",
@@ -21,7 +21,6 @@ const TONE_BG: Record<NonNullable<PageHeaderProps["tone"]>, string> = {
   coral: "bg-coral/14",
   turquoise: "bg-turquoise/12",
   tangerine: "bg-tangerine/16",
-  sun: "bg-sun/60",
 };
 
 const ON_DARK = new Set<PageHeaderProps["tone"]>(["burgundy", "cobalt"]);

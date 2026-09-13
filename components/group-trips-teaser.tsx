@@ -1,6 +1,7 @@
 import { SectionHeader } from "@/components/section-header";
 import { TravelCard } from "@/components/travel-card";
 import { Cta } from "@/components/cta";
+import { RouteLine } from "@/components/route-line";
 import { getTrips } from "@/lib/sanity/queries";
 
 export async function GroupTripsTeaser() {
@@ -20,17 +21,23 @@ export async function GroupTripsTeaser() {
   }
 
   return (
-    <section className="bg-sun py-24 sm:py-32">
-      <div className="mx-auto max-w-6xl px-6">
+    <section className="relative overflow-hidden bg-paper py-24 sm:py-32">
+      <RouteLine
+        variant="zigzag"
+        className="pointer-events-none absolute -left-10 -top-6 h-14 w-[55%] text-coral/20"
+      />
+      <div className="relative mx-auto max-w-6xl px-6">
         <SectionHeader
           eyebrow="Vívelo conmigo"
           title="Viajes grupales abiertos ahora mismo"
           description="No son paquetes: son experiencias que diseño y acompaño de principio a fin."
-          tone="onWarm"
         />
         <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {openTrips.map((trip) => (
-            <div key={trip.slug} className="rounded-2xl bg-white p-5 shadow-[0_16px_36px_-20px_rgba(23,32,51,0.35)]">
+            <div
+              key={trip.slug}
+              className="rounded-2xl border border-line border-t-2 border-t-coral bg-white p-5 shadow-[0_16px_36px_-20px_rgba(23,32,51,0.2)]"
+            >
               <TravelCard trip={trip} />
             </div>
           ))}

@@ -6,7 +6,7 @@ export function CollaborationsSection() {
       <div className="mx-auto max-w-6xl px-6">
         <div className="grid gap-14 lg:grid-cols-2 lg:items-center">
           <div className="flex flex-col justify-center">
-            <p className="font-body text-xs font-semibold uppercase tracking-[0.18em] text-sun">
+            <p className="font-body text-xs font-semibold uppercase tracking-[0.18em] text-white/70">
               Para marcas, destinos e instituciones
             </p>
             <h2 className="mt-4 font-display text-4xl font-medium leading-[1.05] text-white sm:text-5xl">

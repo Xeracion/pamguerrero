@@ -49,7 +49,7 @@ export async function WhereToSection() {
       />
 
       <div className="relative flex min-h-[85vh] flex-col justify-between px-6 py-12 sm:px-10 sm:py-16">
-        <span className="inline-flex w-fit items-center gap-2 rounded-full bg-sun px-4 py-1.5 font-body text-xs font-semibold uppercase tracking-[0.18em] text-ink">
+        <span className="inline-flex w-fit items-center gap-2 rounded-full bg-white px-4 py-1.5 font-body text-xs font-semibold uppercase tracking-[0.18em] text-ink">
           🌍 ¿A dónde vamos?
         </span>
 

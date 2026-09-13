@@ -29,7 +29,7 @@ export function NewsletterCta() {
           />
           <button
             type="submit"
-            className="whitespace-nowrap rounded-full bg-sun px-6 py-3 font-body text-sm font-semibold text-ink transition-transform hover:-translate-y-px"
+            className="whitespace-nowrap rounded-full bg-coral px-6 py-3 font-body text-sm font-semibold text-ink transition-transform hover:-translate-y-px"
           >
             Suscribirme
           </button>

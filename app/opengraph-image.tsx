@@ -20,11 +20,11 @@ export default function OpengraphImage() {
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-          <div style={{ width: 34, height: 2, backgroundColor: "#e6d8c8" }} />
+          <div style={{ width: 34, height: 2, backgroundColor: "rgba(255,255,255,0.75)" }} />
           <span
             style={{
               fontSize: 22,
-              color: "#e6d8c8",
+              color: "rgba(255,255,255,0.75)",
               letterSpacing: 4,
               textTransform: "uppercase",
               fontWeight: 600,

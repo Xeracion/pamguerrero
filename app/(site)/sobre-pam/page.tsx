@@ -90,7 +90,7 @@ export default function SobrePamPage() {
             className="border-none"
           />
           <div>
-            <p className="font-body text-xs font-semibold uppercase tracking-[0.18em] text-sun">
+            <p className="font-body text-xs font-semibold uppercase tracking-[0.18em] text-white/70">
               Lo que he vivido
             </p>
             <div className="mt-6 flex flex-col gap-6 font-body text-lg leading-relaxed text-white/85">
@@ -111,7 +111,7 @@ export default function SobrePamPage() {
               </p>
               <p>
                 Hoy vivo en España, he recorrido más de 30 países y fundé{" "}
-                <a href="/proyectos/caminando" className="text-white underline hover:text-sun">
+                <a href="/proyectos/caminando" className="text-white underline hover:text-white/70">
                   Caminando.lat
                 </a>{" "}
                 para ayudar a otros latinoamericanos a encontrar las oportunidades internacionales

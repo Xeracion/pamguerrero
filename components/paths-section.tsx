@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { PhotoPlaceholder } from "@/components/photo-placeholder";
 import { SectionHeader } from "@/components/section-header";
+import { OrganicAccent } from "@/components/organic-accent";
 
 const PATHS = [
   {
@@ -34,8 +35,9 @@ const PATHS = [
 
 export function PathsSection() {
   return (
-    <section className="bg-turquoise/12 py-24 sm:py-32">
-      <div className="mx-auto max-w-6xl px-6">
+    <section className="relative overflow-hidden bg-paper py-24 sm:py-32">
+      <OrganicAccent className="pointer-events-none absolute -left-24 -bottom-16 h-96 w-96 text-turquoise/8" />
+      <div className="relative mx-auto max-w-6xl px-6">
         <SectionHeader
           eyebrow="Por dónde empezar"
           title="¿Qué quieres hacer?"

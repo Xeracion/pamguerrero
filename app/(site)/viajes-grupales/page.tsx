@@ -37,7 +37,7 @@ export default async function ViajesGrupalesPage() {
       <Breadcrumbs items={crumbs} />
 
       <PageHeader
-        tone="sun"
+        tone="coral"
         eyebrow="Vívelo conmigo"
         title="Viajes grupales"
         description="No son paquetes: son experiencias que diseño y acompaño de principio a fin. Estas son las convocatorias abiertas ahora mismo."

@@ -33,7 +33,7 @@ export function SiteFooter() {
             <p className="mt-4 max-w-xs font-body text-sm leading-relaxed text-white/70">
               Viajar para ampliar tu mundo.
             </p>
-            <InstagramLink className="mt-5 inline-block text-white/70 transition-colors hover:text-sun" />
+            <InstagramLink className="mt-5 inline-block text-white/70 transition-colors hover:text-white" />
           </div>
 
           <div>
@@ -43,7 +43,7 @@ export function SiteFooter() {
             <ul className="mt-4 flex flex-col gap-2.5">
               {MAIN_LINKS.map((item) => (
                 <li key={item.href}>
-                  <Link href={item.href} className="font-body text-sm text-white/90 hover:text-sun">
+                  <Link href={item.href} className="font-body text-sm text-white/90 hover:text-white">
                     {item.label}
                   </Link>
                 </li>
@@ -58,7 +58,7 @@ export function SiteFooter() {
             <ul className="mt-4 flex flex-col gap-2.5">
               {LEGAL_LINKS.map((item) => (
                 <li key={item.href}>
-                  <Link href={item.href} className="font-body text-sm text-white/90 hover:text-sun">
+                  <Link href={item.href} className="font-body text-sm text-white/90 hover:text-white">
                     {item.label}
                   </Link>
                 </li>

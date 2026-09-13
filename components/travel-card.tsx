@@ -6,7 +6,7 @@ import type { TripSummary, TripStatus } from "@/lib/sanity/queries";
 const STATUS_STYLE: Record<TripStatus, string> = {
   proximamente: "bg-dusty-blue/20 text-dusty-blue-deep",
   "plazas-disponibles": "bg-turquoise/15 text-turquoise-deep",
-  "ultimas-plazas": "bg-sun/40 text-ink",
+  "ultimas-plazas": "bg-tangerine/20 text-tangerine-deep",
   cerrado: "bg-line text-ink-muted",
 };
 
