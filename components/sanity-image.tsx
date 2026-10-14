@@ -46,9 +46,18 @@ export function SanityImage({
     );
   }
 
+  // Callers that need a full-bleed background pass their own "absolute"
+  // positioning (e.g. "absolute inset-0 h-full w-full") in className. Forcing
+  // "relative" here too would fight it — both classes set `position` and
+  // which one the browser applies depends on Tailwind's internal stylesheet
+  // order, not on the order of class names in this string — which is exactly
+  // what made the Hero photo render squashed. "absolute" is itself a valid
+  // containing block for the <Image fill> below, so skip "relative" then.
+  const position = className.includes("absolute") ? "" : "relative";
+
   return (
     <div
-      className={`relative overflow-hidden ${ASPECT_RATIO[aspect]} ${className}`}
+      className={`${position} overflow-hidden ${ASPECT_RATIO[aspect]} ${className}`}
       data-sanity={dataAttribute}
     >
       <Image
