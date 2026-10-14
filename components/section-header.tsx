@@ -24,7 +24,7 @@ export function SectionHeader({
   const descriptionColor = tone === "onBrand" ? "text-white/80" : "text-ink-muted";
 
   return (
-    <div className={`flex max-w-2xl flex-col gap-5 ${alignment}`}>
+    <div data-reveal className={`flex max-w-2xl flex-col gap-5 ${alignment}`}>
       {eyebrow && (
         <p className={`font-body text-xs font-semibold uppercase tracking-[0.2em] ${eyebrowColor}`}>
           {eyebrow}

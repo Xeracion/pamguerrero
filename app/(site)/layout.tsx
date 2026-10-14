@@ -3,6 +3,7 @@ import { VisualEditing } from "next-sanity/visual-editing";
 import { jsonLdString } from "@/lib/json-ld";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { ScrollReveal } from "@/components/scroll-reveal";
 import { SanityLive } from "@/lib/sanity/live";
 
 const SITE_URL = "https://www.pamguerrero.com";
@@ -69,6 +70,7 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
       <SiteHeader />
       <div id="main-content">{children}</div>
       <SiteFooter />
+      <ScrollReveal />
       <SanityLive includeDrafts={isDraftMode} />
       {isDraftMode && <VisualEditing />}
     </>

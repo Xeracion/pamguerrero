@@ -14,13 +14,14 @@ export function TravelCard({ trip }: { trip: TripSummary }) {
   const urgent = isClosingSoon(trip);
 
   return (
-    <Link href={`/viajes-grupales/${trip.slug}`} className="group flex flex-col gap-4">
+    <Link href={`/viajes-grupales/${trip.slug}`} data-reveal className="group flex flex-col gap-4">
       <div className="relative">
         <SanityImage
           image={trip.mainImage}
           fallbackLabel={`[FOTO DEL VIAJE: ${trip.title}]`}
           aspect="portrait"
-          className="transition-opacity group-hover:opacity-80"
+          className="rounded-xl"
+          imageClassName="card-image-zoom"
         />
         <span
           className={`absolute left-3 top-3 rounded-full px-3 py-1 font-body text-xs font-semibold uppercase tracking-[0.06em] ${

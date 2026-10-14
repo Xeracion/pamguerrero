@@ -49,6 +49,7 @@ export function PathsSection() {
             <Link
               key={path.href}
               href={path.href}
+              data-reveal
               className={`group relative block overflow-hidden rounded-lg shadow-[0_18px_40px_-18px_rgba(0,0,0,0.35)] ${path.offset}`}
             >
               <PhotoPlaceholder

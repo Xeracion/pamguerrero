@@ -4,12 +4,13 @@ import type { JourneyDoc } from "@/lib/sanity/queries";
 
 export function JourneyCard({ journey }: { journey: JourneyDoc }) {
   return (
-    <Link href={`/viaja-conmigo/${journey.slug}`} className="group flex flex-col gap-4">
+    <Link href={`/viaja-conmigo/${journey.slug}`} data-reveal className="group flex flex-col gap-4">
       <SanityImage
         image={journey.mainImage}
         fallbackLabel={`[FOTO DE PAM EN ${journey.destination.name.toUpperCase()}]`}
         aspect="portrait"
-        className="transition-opacity group-hover:opacity-80"
+        className="rounded-xl"
+        imageClassName="card-image-zoom"
       />
       <div>
         <span className="font-body text-xs font-semibold uppercase tracking-[0.1em] text-coral-deep">

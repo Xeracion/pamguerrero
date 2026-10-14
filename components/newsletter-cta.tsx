@@ -10,7 +10,7 @@ export async function NewsletterCta() {
         variant="arc"
         className="pointer-events-none absolute -top-6 left-1/2 h-16 w-[70%] -translate-x-1/2 text-white/10"
       />
-      <div className="relative mx-auto flex max-w-2xl flex-col items-center gap-6 px-6 text-center">
+      <div className="relative mx-auto flex max-w-2xl flex-col items-center gap-6 px-6 text-center" data-reveal>
         <h2 className="font-display text-4xl font-medium leading-[1.05] sm:text-5xl">
           {settings.homeNewsletterHeadline || "Una carta, de vez en cuando, sobre ampliar el mundo."}
         </h2>

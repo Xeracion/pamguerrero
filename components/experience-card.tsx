@@ -11,12 +11,13 @@ export const TAG_COLOR: Record<ExperienceTag, string> = {
 
 export function ExperienceCard({ experience }: { experience: ExperienceSummary }) {
   return (
-    <Link href={`/experiencias/${experience.slug}`} className="group flex flex-col gap-4">
+    <Link href={`/experiencias/${experience.slug}`} data-reveal className="group flex flex-col gap-4">
       <SanityImage
         image={experience.mainImage}
         fallbackLabel={`[FOTO PARA: ${experience.title}]`}
         aspect="landscape"
-        className="transition-opacity group-hover:opacity-80"
+        className="rounded-xl"
+        imageClassName="card-image-zoom"
       />
       <div>
         <span

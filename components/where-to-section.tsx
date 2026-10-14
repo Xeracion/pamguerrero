@@ -54,7 +54,7 @@ export async function WhereToSection() {
         </span>
 
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
-          <Link href={`/viajes/destinos/${featured.slug}`} className="group max-w-2xl">
+          <Link href={`/viajes/destinos/${featured.slug}`} data-reveal className="group max-w-2xl">
             <span className="inline-block rounded-full bg-coral px-3 py-1 font-body text-xs font-semibold uppercase tracking-[0.1em] text-ink">
               {featured.region}
             </span>

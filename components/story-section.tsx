@@ -32,7 +32,7 @@ export async function StorySection() {
           />
         </div>
 
-        <div>
+        <div data-reveal>
           <p className="font-body text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
             {settings.storyEyebrow || "Por qué viajo"}
           </p>

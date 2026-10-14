@@ -4,12 +4,13 @@ import type { DestinationSummary } from "@/lib/sanity/queries";
 
 export function DestinationCard({ destination }: { destination: DestinationSummary }) {
   return (
-    <Link href={`/viajes/destinos/${destination.slug}`} className="group flex flex-col gap-4">
+    <Link href={`/viajes/destinos/${destination.slug}`} data-reveal className="group flex flex-col gap-4">
       <SanityImage
         image={destination.mainImage}
         fallbackLabel={`[FOTO DE ${destination.name.toUpperCase()}]`}
         aspect="landscape"
-        className="transition-opacity group-hover:opacity-80"
+        className="rounded-xl"
+        imageClassName="card-image-zoom"
       />
       <div>
         <span className="font-body text-xs font-semibold uppercase tracking-[0.1em] text-accent">

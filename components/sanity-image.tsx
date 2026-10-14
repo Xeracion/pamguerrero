@@ -9,6 +9,7 @@ interface SanityImageProps {
   aspect?: "square" | "portrait" | "landscape" | "wide";
   tone?: "light" | "dark";
   className?: string;
+  imageClassName?: string;
   sizes?: string;
   dataAttribute?: string;
 }
@@ -26,6 +27,7 @@ export function SanityImage({
   aspect = "landscape",
   tone = "light",
   className = "",
+  imageClassName = "",
   sizes = "(min-width: 1024px) 33vw, 100vw",
   dataAttribute,
 }: SanityImageProps) {
@@ -47,7 +49,7 @@ export function SanityImage({
         alt={image?.alt || fallbackLabel}
         fill
         sizes={sizes}
-        className="object-cover"
+        className={`object-cover ${imageClassName}`}
       />
     </div>
   );

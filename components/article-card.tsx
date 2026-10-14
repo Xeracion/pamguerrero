@@ -6,13 +6,15 @@ export function ArticleCard({ article }: { article: ArticleSummary }) {
   return (
     <Link
       href={`/viajes/${article.category.slug}/${article.slug}`}
+      data-reveal
       className="group flex flex-col gap-4"
     >
       <SanityImage
         image={article.mainImage}
         fallbackLabel={`[FOTO PARA: ${article.title}]`}
         aspect="landscape"
-        className="transition-opacity group-hover:opacity-80"
+        className="rounded-xl"
+        imageClassName="card-image-zoom"
       />
       <div>
         <span className="font-body text-xs font-semibold uppercase tracking-[0.1em] text-accent">

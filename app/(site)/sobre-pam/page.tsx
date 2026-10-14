@@ -90,7 +90,7 @@ export default async function SobrePamPage() {
               dataAttribute={imageDataAttribute(SITE_SETTINGS_ID, "siteSettings", "sobrePamIntroImageSecondary")}
             />
           </div>
-          <div className="flex flex-col gap-6">
+          <div data-reveal className="flex flex-col gap-6">
             <p className="font-display text-3xl italic font-medium leading-snug text-ink sm:text-4xl">
               {settings.sobrePamIntroQuote ||
                 "Curiosa antes que nada. Ecuatoriana, y desde hace años también un poco de cada lugar que he pisado."}
@@ -118,7 +118,7 @@ export default async function SobrePamPage() {
             className="border-none"
             dataAttribute={imageDataAttribute(SITE_SETTINGS_ID, "siteSettings", "sobrePamExperienceImage")}
           />
-          <div>
+          <div data-reveal>
             <p className="font-body text-xs font-semibold uppercase tracking-[0.18em] text-white/70">
               {settings.sobrePamExperienceEyebrow || "Lo que he vivido"}
             </p>
@@ -160,11 +160,12 @@ export default async function SobrePamPage() {
           </h2>
           <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {moments.map((moment, i) => (
-              <div key={moment.key} className={i % 2 === 1 ? "sm:mt-10" : ""}>
+              <div key={moment.key} data-reveal className={i % 2 === 1 ? "sm:mt-10" : ""}>
                 <SanityImage
                   image={moment.image}
                   fallbackLabel={moment.fallbackLabel}
                   aspect="portrait"
+                  className="rounded-xl"
                   dataAttribute={
                     moment.image
                       ? imageDataAttribute(SITE_SETTINGS_ID, "siteSettings", `sobrePamMoments[${i}].image`)
@@ -191,7 +192,7 @@ export default async function SobrePamPage() {
           </h2>
           <ul className="mt-8 grid gap-x-8 gap-y-5 sm:grid-cols-2 lg:grid-cols-3">
             {expertise.map((item) => (
-              <li key={item} className="flex items-start gap-3 border-t border-line pt-4">
+              <li key={item} data-reveal className="flex items-start gap-3 border-t border-line pt-4">
                 <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-coral" />
                 <span className="font-body text-sm text-ink">{item}</span>
               </li>

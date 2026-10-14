@@ -8,7 +8,7 @@ export async function CollaborationsSection() {
     <section className="bg-cobalt py-24 sm:py-32">
       <div className="mx-auto max-w-6xl px-6">
         <div className="grid gap-14 lg:grid-cols-2 lg:items-center">
-          <div className="flex flex-col justify-center">
+          <div data-reveal className="flex flex-col justify-center">
             <p className="font-body text-xs font-semibold uppercase tracking-[0.18em] text-white/70">
               {settings.collabEyebrow || "Para marcas, destinos e instituciones"}
             </p>
