@@ -13,7 +13,8 @@ export async function Hero() {
     <section className="relative min-h-[60vh] overflow-hidden bg-burgundy">
       <SanityImage
         image={settings.heroImage}
-        fallbackLabel="[REEMPLAZAR CON FOTO REAL DE PAM — plano editorial, viaje o retrato en movimiento, a pantalla completa]"
+        fallbackLabel="Pam Guerrero con los brazos abiertos frente a las torres de Bayon, Angkor, Camboya"
+        fallbackSrc="/photos/hero-bayon-brazos-abiertos.jpg"
         aspect="square"
         tone="dark"
         className="absolute inset-0 h-full w-full border-none"

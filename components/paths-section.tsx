@@ -1,7 +1,10 @@
 import Link from "next/link";
-import { PhotoPlaceholder } from "@/components/photo-placeholder";
+import { SanityImage } from "@/components/sanity-image";
 import { SectionHeader } from "@/components/section-header";
 import { OrganicAccent } from "@/components/organic-accent";
+import { imageDataAttribute } from "@/lib/sanity/data-attribute";
+import { getSiteSettings, SITE_SETTINGS_ID } from "@/lib/sanity/queries";
+import type { SanityImageRef } from "@/lib/sanity/queries";
 
 const PATHS = [
   {
@@ -11,7 +14,9 @@ const PATHS = [
     cta: "Ver mis viajes",
     dot: "bg-coral",
     offset: "sm:mt-0",
-    label: "[FOTO: PAM EN MOVIMIENTO]",
+    label: "Pam Guerrero caminando hacia las raíces de Ta Prohm, Angkor, Camboya",
+    fallbackSrc: "/photos/ta-prohm-raices.jpg",
+    settingsKey: "pathsViajaConmigoImage" as const,
   },
   {
     title: "Viajes",
@@ -21,6 +26,8 @@ const PATHS = [
     dot: "bg-burgundy",
     offset: "sm:mt-10",
     label: "[FOTO: MAPA O RUTA DE VIAJE]",
+    fallbackSrc: undefined,
+    settingsKey: undefined,
   },
   {
     title: "Experiencias",
@@ -30,10 +37,14 @@ const PATHS = [
     dot: "bg-tangerine",
     offset: "sm:mt-0",
     label: "[FOTO: MOMENTO CULTURAL O DE ENCUENTRO]",
+    fallbackSrc: undefined,
+    settingsKey: undefined,
   },
 ];
 
-export function PathsSection() {
+export async function PathsSection() {
+  const settings = await getSiteSettings();
+
   return (
     <section className="relative overflow-hidden bg-paper py-24 sm:py-32">
       <OrganicAccent className="pointer-events-none absolute -left-24 -bottom-16 h-96 w-96 text-turquoise/8" />
@@ -45,36 +56,50 @@ export function PathsSection() {
         />
 
         <div className="mt-16 grid gap-8 sm:grid-cols-3">
-          {PATHS.map((path) => (
-            <Link
-              key={path.href}
-              href={path.href}
-              data-reveal
-              className={`group relative block overflow-hidden rounded-lg shadow-[0_18px_40px_-18px_rgba(0,0,0,0.35)] ${path.offset}`}
-            >
-              <PhotoPlaceholder
-                label={path.label}
-                aspect="portrait"
-                tone="dark"
-                className="border-none transition-transform duration-300 group-hover:scale-[1.03]"
-              />
-              <div
-                className="pointer-events-none absolute inset-x-0 bottom-0 flex flex-col gap-2 p-6"
-                style={{
-                  background: "linear-gradient(to top, rgba(23,35,46,0.92) 0%, rgba(23,35,46,0) 65%)",
-                }}
+          {PATHS.map((path) => {
+            const image: SanityImageRef | undefined = path.settingsKey
+              ? settings[path.settingsKey]
+              : undefined;
+
+            return (
+              <Link
+                key={path.href}
+                href={path.href}
+                data-reveal
+                className={`group relative block overflow-hidden rounded-lg shadow-[0_18px_40px_-18px_rgba(0,0,0,0.35)] ${path.offset}`}
               >
-                <h3 className="font-display text-2xl italic font-medium text-white">
-                  {path.title}
-                </h3>
-                <p className="font-body text-sm leading-relaxed text-white/75">{path.body}</p>
-                <span className="mt-2 flex items-center gap-2 font-body text-xs font-semibold uppercase tracking-[0.1em] text-white">
-                  <span className={`h-1.5 w-1.5 rounded-full ${path.dot}`} />
-                  {path.cta} →
-                </span>
-              </div>
-            </Link>
-          ))}
+                <SanityImage
+                  image={image}
+                  fallbackLabel={path.label}
+                  fallbackSrc={path.fallbackSrc}
+                  aspect="portrait"
+                  tone="dark"
+                  className="border-none"
+                  imageClassName="transition-transform duration-300 group-hover:scale-[1.03]"
+                  dataAttribute={
+                    path.settingsKey
+                      ? imageDataAttribute(SITE_SETTINGS_ID, "siteSettings", path.settingsKey)
+                      : undefined
+                  }
+                />
+                <div
+                  className="pointer-events-none absolute inset-x-0 bottom-0 flex flex-col gap-2 p-6"
+                  style={{
+                    background: "linear-gradient(to top, rgba(23,35,46,0.92) 0%, rgba(23,35,46,0) 65%)",
+                  }}
+                >
+                  <h3 className="font-display text-2xl italic font-medium text-white">
+                    {path.title}
+                  </h3>
+                  <p className="font-body text-sm leading-relaxed text-white/75">{path.body}</p>
+                  <span className="mt-2 flex items-center gap-2 font-body text-xs font-semibold uppercase tracking-[0.1em] text-white">
+                    <span className={`h-1.5 w-1.5 rounded-full ${path.dot}`} />
+                    {path.cta} →
+                  </span>
+                </div>
+              </Link>
+            );
+          })}
         </div>
       </div>
     </section>

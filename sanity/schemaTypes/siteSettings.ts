@@ -61,6 +61,10 @@ export const siteSettings = defineType({
   fields: [
     // — Fotos —
     imageField("heroImage", "Foto de fondo del Hero (Home)", "La fotografía a pantalla completa del inicio del sitio."),
+    imageField("storyPhotoPrimary", "[Por qué viajo] Foto principal", "La foto grande del collage, en Home."),
+    imageField("storyPhotoSecondary", "[Por qué viajo] Foto secundaria", "La foto pequeña superior del collage, en Home."),
+    imageField("storyPhotoTertiary", "[Por qué viajo] Foto terciaria", "La foto pequeña inferior del collage, en Home."),
+    imageField("pathsViajaConmigoImage", "[¿Qué quieres hacer?] Foto de \"Viaja conmigo\"", "La primera de las tres tarjetas, en Home."),
     imageField("sobrePamIntroImage", "Sobre Pam — foto principal", "La foto grande de la sección \"Persona\", en /sobre-pam."),
     imageField("sobrePamIntroImageSecondary", "Sobre Pam — foto secundaria", "La foto pequeña superpuesta, en /sobre-pam."),
     imageField("sobrePamExperienceImage", "Sobre Pam — foto de la sección \"Lo que he vivido\"", undefined),

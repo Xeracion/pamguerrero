@@ -6,6 +6,12 @@ import type { SanityImageRef } from "@/lib/sanity/queries";
 interface SanityImageProps {
   image?: SanityImageRef;
   fallbackLabel: string;
+  /**
+   * Foto real a mostrar mientras el campo de Sanity está vacío (ruta local
+   * en /public), en vez del cuadro gris de PhotoPlaceholder. Sanity, si
+   * tiene una imagen cargada, siempre tiene prioridad sobre esto.
+   */
+  fallbackSrc?: string;
   aspect?: "square" | "portrait" | "landscape" | "wide";
   tone?: "light" | "dark";
   className?: string;
@@ -24,6 +30,7 @@ const ASPECT_RATIO: Record<NonNullable<SanityImageProps["aspect"]>, string> = {
 export function SanityImage({
   image,
   fallbackLabel,
+  fallbackSrc,
   aspect = "landscape",
   tone = "light",
   className = "",
@@ -31,7 +38,7 @@ export function SanityImage({
   sizes = "(min-width: 1024px) 33vw, 100vw",
   dataAttribute,
 }: SanityImageProps) {
-  const url = urlForImage(image)?.width(1600).url();
+  const url = urlForImage(image)?.width(1600).url() ?? fallbackSrc;
 
   if (!url) {
     return (

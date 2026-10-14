@@ -309,6 +309,10 @@ export interface PhotoCaption {
 
 export interface SiteSettings {
   heroImage?: SanityImageRef;
+  storyPhotoPrimary?: SanityImageRef;
+  storyPhotoSecondary?: SanityImageRef;
+  storyPhotoTertiary?: SanityImageRef;
+  pathsViajaConmigoImage?: SanityImageRef;
   sobrePamIntroImage?: SanityImageRef;
   sobrePamIntroImageSecondary?: SanityImageRef;
   sobrePamExperienceImage?: SanityImageRef;
@@ -371,6 +375,10 @@ export async function getSiteSettings(): Promise<SiteSettings> {
   const { data } = await sanityFetch({
     query: `*[_type == "siteSettings" && _id == $id][0] {
       heroImage ${IMAGE_PROJECTION},
+      storyPhotoPrimary ${IMAGE_PROJECTION},
+      storyPhotoSecondary ${IMAGE_PROJECTION},
+      storyPhotoTertiary ${IMAGE_PROJECTION},
+      pathsViajaConmigoImage ${IMAGE_PROJECTION},
       sobrePamIntroImage ${IMAGE_PROJECTION},
       sobrePamIntroImageSecondary ${IMAGE_PROJECTION},
       sobrePamExperienceImage ${IMAGE_PROJECTION},

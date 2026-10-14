@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { PhotoPlaceholder } from "@/components/photo-placeholder";
+import { SanityImage } from "@/components/sanity-image";
 import { RouteLine } from "@/components/route-line";
-import { getSiteSettings } from "@/lib/sanity/queries";
+import { imageDataAttribute } from "@/lib/sanity/data-attribute";
+import { getSiteSettings, SITE_SETTINGS_ID } from "@/lib/sanity/queries";
 
 export async function StorySection() {
   const settings = await getSiteSettings();
@@ -14,21 +15,30 @@ export async function StorySection() {
       />
       <div className="relative mx-auto grid max-w-6xl gap-16 px-6 lg:grid-cols-[1fr_1.05fr] lg:items-center">
         <div className="relative mx-auto aspect-square w-full max-w-md lg:mx-0">
-          <PhotoPlaceholder
-            label="[REEMPLAZAR CON FOTO REAL DE PAM — momento de docencia o primer viaje]"
+          <SanityImage
+            image={settings.storyPhotoPrimary}
+            fallbackLabel="Pam Guerrero contemplando las torres talladas del templo de Bayon, Angkor, Camboya"
+            fallbackSrc="/photos/bayon-patio.jpg"
             aspect="portrait"
             tone="dark"
             className="absolute inset-y-0 left-0 w-[72%] border-none"
+            dataAttribute={imageDataAttribute(SITE_SETTINGS_ID, "siteSettings", "storyPhotoPrimary")}
           />
-          <PhotoPlaceholder
-            label="[FOTO SECUNDARIA: PAM CON PERSONAS]"
+          <SanityImage
+            image={settings.storyPhotoSecondary}
+            fallbackLabel="Pam Guerrero sonriendo, selfie en un autobús nocturno durante un viaje"
+            fallbackSrc="/photos/selfie-bus.jpg"
             aspect="square"
             className="absolute right-0 top-0 w-[45%] rotate-3 border-4 border-burgundy shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)]"
+            dataAttribute={imageDataAttribute(SITE_SETTINGS_ID, "siteSettings", "storyPhotoSecondary")}
           />
-          <PhotoPlaceholder
-            label="[FOTO TERCIARIA: DETALLE DE VIAJE]"
+          <SanityImage
+            image={settings.storyPhotoTertiary}
+            fallbackLabel="Pam Guerrero mirando hacia arriba en el templo de Bayon, Angkor, Camboya"
+            fallbackSrc="/photos/bayon-mirando-arriba.jpg"
             aspect="square"
             className="absolute bottom-0 right-6 w-[38%] -rotate-2 border-4 border-burgundy shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)]"
+            dataAttribute={imageDataAttribute(SITE_SETTINGS_ID, "siteSettings", "storyPhotoTertiary")}
           />
         </div>
 
