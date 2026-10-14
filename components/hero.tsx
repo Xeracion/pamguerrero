@@ -13,8 +13,8 @@ export async function Hero() {
     <section className="relative min-h-[60vh] overflow-hidden bg-burgundy">
       <SanityImage
         image={settings.heroImage}
-        fallbackLabel="Pam Guerrero con los brazos abiertos frente a las torres de Bayon, Angkor, Camboya"
-        fallbackSrc="/photos/hero-bayon-brazos-abiertos.jpg"
+        fallbackLabel="Pam Guerrero sonriendo entre varillas de incienso rojas en un pueblo artesanal de Vietnam"
+        fallbackSrc="/photos/hero-incienso-vietnam.jpg"
         aspect="square"
         tone="dark"
         className="absolute inset-0 h-full w-full border-none"

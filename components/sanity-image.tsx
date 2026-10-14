@@ -38,13 +38,20 @@ export function SanityImage({
   sizes = "(min-width: 1024px) 33vw, 100vw",
   dataAttribute,
 }: SanityImageProps) {
-  const url = urlForImage(image)?.width(1600).url() ?? fallbackSrc;
+  const sanityUrl = urlForImage(image)?.width(1600).url();
+  const url = sanityUrl ?? fallbackSrc;
 
   if (!url) {
     return (
       <PhotoPlaceholder label={fallbackLabel} aspect={aspect} tone={tone} className={className} />
     );
   }
+
+  // El alt solo viene de Sanity cuando la foto también viene de Sanity — si
+  // el campo tiene texto alternativo cargado pero ningún archivo (p. ej.
+  // alguien completó el alt en el Studio antes de subir la imagen), la URL
+  // cae a fallbackSrc pero no debe heredar ese alt huérfano.
+  const alt = sanityUrl ? image?.alt || fallbackLabel : fallbackLabel;
 
   // Callers that need a full-bleed background pass their own "absolute"
   // positioning (e.g. "absolute inset-0 h-full w-full") in className. Forcing
@@ -62,7 +69,7 @@ export function SanityImage({
     >
       <Image
         src={url}
-        alt={image?.alt || fallbackLabel}
+        alt={alt}
         fill
         sizes={sizes}
         className={`object-cover ${imageClassName}`}
