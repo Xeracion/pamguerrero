@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { COOKIE_NAME, isConfigured, isValidToken } from "@/lib/cumpleanos/auth";
-import { MENSAJE_FINAL, PREGUNTA_SEGURO, PREGUNTAS, PREMIOS, TELEFONO_AMIGO } from "@/lib/cumpleanos/preguntas";
+import { GIRO_FINAL, MENSAJE_FINAL, PREGUNTA_SEGURO, PREGUNTAS, PREMIOS, TELEFONO_AMIGO } from "@/lib/cumpleanos/preguntas";
 import { LoginForm } from "./login-form";
 import { Juego } from "./juego";
 
@@ -28,6 +28,7 @@ export default async function CumpleanosPage() {
             preguntaSeguro={PREGUNTA_SEGURO}
             telefono={TELEFONO_AMIGO}
             mensajeFinal={MENSAJE_FINAL}
+            giroFinal={GIRO_FINAL}
           />
         ) : (
           <LoginForm configurado={isConfigured()} />

@@ -13,6 +13,7 @@ interface Props {
   preguntaSeguro: number;
   telefono: string;
   mensajeFinal: string;
+  giroFinal: string;
 }
 
 const LETRAS = ["A", "B", "C", "D"] as const;
@@ -83,7 +84,7 @@ function Confeti() {
   );
 }
 
-export function Juego({ preguntas, premios, preguntaSeguro, telefono, mensajeFinal }: Props) {
+export function Juego({ preguntas, premios, preguntaSeguro, telefono, mensajeFinal, giroFinal }: Props) {
   const total = preguntas.length;
   const [fase, setFase] = useState<Fase>("intro");
   const [nivel, setNivel] = useState(0);
@@ -93,6 +94,7 @@ export function Juego({ preguntas, premios, preguntaSeguro, telefono, mensajeFin
   const [llamadaUsada, setLlamadaUsada] = useState(false);
   const [llamando, setLlamando] = useState(false);
   const [silenciada, setSilenciada] = useState(false);
+  const [giro, setGiro] = useState(false);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const musica = useRef<Musica | null>(null);
 
@@ -128,6 +130,7 @@ export function Juego({ preguntas, premios, preguntaSeguro, telefono, mensajeFin
     setCincuentaUsado(false);
     setLlamadaUsada(false);
     setLlamando(false);
+    setGiro(false);
   }
 
   function alternarSonido() {
@@ -153,24 +156,27 @@ export function Juego({ preguntas, premios, preguntaSeguro, telefono, mensajeFin
         setFase("fallo");
         return;
       }
+      musica.current?.acierto();
       if (nivel + 1 >= total) {
-        musica.current?.victoria();
         setFase("ganado");
+        timer.current = setTimeout(() => {
+          setGiro(true);
+          musica.current?.victoria();
+        }, 5000);
         return;
       }
-      musica.current?.acierto();
       setFase("acierto");
-      const pausa = premios[nivel + 1] ? 3200 : 1800;
-      timer.current = setTimeout(() => {
-        setNivel(nivel + 1);
-        setElegida(null);
-        setOcultas([]);
-        setLlamando(false);
-        musica.current?.setNivel(nivel + 1);
-        musica.current?.setModo("juego");
-        setFase("jugando");
-      }, pausa);
     }, 3000);
+  }
+
+  function siguiente() {
+    setNivel(nivel + 1);
+    setElegida(null);
+    setOcultas([]);
+    setLlamando(false);
+    musica.current?.setNivel(nivel + 1);
+    musica.current?.setModo("juego");
+    setFase("jugando");
   }
 
   function usarCincuenta() {
@@ -251,28 +257,33 @@ export function Juego({ preguntas, premios, preguntaSeguro, telefono, mensajeFin
     const todos = Object.values(premios);
     return (
       <div className="mx-auto flex min-h-dvh max-w-2xl flex-col items-center justify-center px-4 py-12 text-center">
-        <Confeti />
-        <p className="font-body text-xs font-semibold tracking-[0.3em] text-tangerine uppercase">¡Lo lograste!</p>
-        <p className="mt-4 font-display text-5xl font-semibold sm:text-7xl">
-          {total} de {total}
+        <p className="font-body text-xs font-semibold tracking-[0.3em] text-tangerine uppercase">
+          ¡{total} de {total}!
         </p>
-        <ul className="mt-8 flex flex-wrap justify-center gap-3">
-          {todos.map((p) => (
-            <li
-              key={p}
-              className="flex items-center gap-2 rounded-full bg-tangerine px-5 py-2 font-body text-sm font-bold text-ink-deep"
+        <p className="mt-6 font-display text-3xl leading-snug italic sm:text-4xl">{actual.comentario}</p>
+        {giro && (
+          <div className="aparecer flex flex-col items-center">
+            <Confeti />
+            <p className="mt-12 font-display text-5xl font-semibold text-tangerine sm:text-6xl">{giroFinal}</p>
+            <ul className="mt-8 flex flex-wrap justify-center gap-3">
+              {todos.map((p) => (
+                <li
+                  key={p}
+                  className="flex items-center gap-2 rounded-full bg-tangerine px-5 py-2 font-body text-sm font-bold text-ink-deep"
+                >
+                  <IconoRegalo /> {p}
+                </li>
+              ))}
+            </ul>
+            <p className="mt-10 font-display text-2xl leading-snug italic sm:text-3xl">{mensajeFinal}</p>
+            <button
+              onClick={empezar}
+              className="mt-10 rounded-full border-2 border-tangerine px-8 py-3 font-body text-sm font-bold tracking-widest text-tangerine uppercase transition hover:bg-tangerine hover:text-ink-deep"
             >
-              <IconoRegalo /> {p}
-            </li>
-          ))}
-        </ul>
-        <p className="mt-10 font-display text-2xl leading-snug italic sm:text-3xl">{mensajeFinal}</p>
-        <button
-          onClick={empezar}
-          className="mt-10 rounded-full border-2 border-tangerine px-8 py-3 font-body text-sm font-bold tracking-widest text-tangerine uppercase transition hover:bg-tangerine hover:text-ink-deep"
-        >
-          Jugar otra vez
-        </button>
+              Jugar otra vez
+            </button>
+          </div>
+        )}
       </div>
     );
   }
@@ -388,14 +399,21 @@ export function Juego({ preguntas, premios, preguntaSeguro, telefono, mensajeFin
             )}
             {fase === "revelando" && <p className="font-display text-2xl italic text-white/80">Veamos…</p>}
             {fase === "acierto" && (
-              <div className="flex flex-col items-center gap-2">
-                <p className="font-display text-3xl text-turquoise">¡Correcto!</p>
+              <div className="aparecer flex flex-col items-center gap-4">
+                <p className="max-w-xl font-display text-2xl leading-snug italic sm:text-3xl">{actual.comentario}</p>
                 {premioDeEsta && (
                   <p className="flex items-center gap-2 rounded-full bg-tangerine px-5 py-2 font-body text-sm font-bold text-ink-deep">
                     <IconoRegalo /> ¡{premioDeEsta} conseguido
                     {nivel + 1 === preguntaSeguro ? " y asegurado" : ""}!
                   </p>
                 )}
+                <button
+                  onClick={siguiente}
+                  autoFocus
+                  className="mt-2 rounded-full bg-tangerine px-8 py-3 font-body text-sm font-bold tracking-widest text-ink-deep uppercase transition hover:bg-[#d6ad57]"
+                >
+                  Siguiente pregunta
+                </button>
               </div>
             )}
             {fase === "fallo" && (
