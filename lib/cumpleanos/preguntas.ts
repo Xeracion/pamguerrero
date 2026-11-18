@@ -129,7 +129,7 @@ export const PREMIOS: Record<number, string> = {
  * vista previa y un botón de descarga.
  */
 export const MENSAJES_PREMIO: Record<number, string> = {
-  5: "¡Enhorabuena, gamberra! Te has ganado 40 minutos de manos expertas, aceites aromáticos y velitas. Personal, intransferible y con final feliz garantizado (las condiciones las pone el masajista). Descárgalo, guárdalo bien y úsalo cuando más te convenga… o cuando más le convenga a él.",
+  5: "¡Enhorabuena, gamberra! Te has ganado 40 minutos de manos expertas, aceites aromáticos y velitas. Personal, intransferible y con final feliz garantizado (las condiciones las pone el masajista). Descárgalo, guárdalo bien y úsalo cuando más te convenga.",
 };
 
 /** Pregunta a partir de la cual el premio queda asegurado. */
