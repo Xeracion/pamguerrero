@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { COOKIE_NAME, isConfigured, isValidToken } from "@/lib/cumpleanos/auth";
-import { MENSAJE_FINAL, PREGUNTAS, PREMIOS, SEGUROS } from "@/lib/cumpleanos/preguntas";
+import { MENSAJE_FINAL, PREGUNTA_SEGURO, PREGUNTAS, PREMIOS, TELEFONO_AMIGO } from "@/lib/cumpleanos/preguntas";
 import { LoginForm } from "./login-form";
 import { Juego } from "./juego";
 
@@ -22,7 +22,13 @@ export default async function CumpleanosPage() {
       />
       <div className="relative">
         {autorizado ? (
-          <Juego preguntas={PREGUNTAS} premios={PREMIOS} seguros={SEGUROS} mensajeFinal={MENSAJE_FINAL} />
+          <Juego
+            preguntas={PREGUNTAS}
+            premios={PREMIOS}
+            preguntaSeguro={PREGUNTA_SEGURO}
+            telefono={TELEFONO_AMIGO}
+            mensajeFinal={MENSAJE_FINAL}
+          />
         ) : (
           <LoginForm configurado={isConfigured()} />
         )}
