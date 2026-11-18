@@ -120,7 +120,7 @@ export const GIRO_FINAL = "Que noo… que hay premio de verdad";
  */
 export const PREMIOS: Record<number, string> = {
   5: "Cupón de masaje",
-  10: "Gran premio",
+  10: "Entrada de circo",
 };
 
 /**
@@ -130,6 +130,7 @@ export const PREMIOS: Record<number, string> = {
  */
 export const MENSAJES_PREMIO: Record<number, string> = {
   5: "¡Enhorabuena, gamberra! Te has ganado 40 minutos de manos expertas, aceites aromáticos y velitas. Personal, intransferible y con final feliz garantizado (las condiciones las pone el masajista). Descárgalo, guárdalo bien y úsalo cuando más te convenga.",
+  10: "¡Enhorabuena, gamberra! Te has ganado una entrada para el circo: A Serie Clopen, el viernes 4 de diciembre a las 20:30 en el Teatro Jofre de Ferrol. Acróbatas, equilibrios imposibles y gente volando por los aires… vamos, que vas a estar en tu salsa. Descarga la entrada, enseña el QR en la puerta y ve pensando a quién vas a chinchear en la butaca de al lado.",
 };
 
 /** Pregunta a partir de la cual el premio queda asegurado. */

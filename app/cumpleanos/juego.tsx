@@ -461,22 +461,42 @@ export function Juego({
           <div className="aparecer flex flex-col items-center">
             <Confeti />
             <p className="mt-12 font-display text-5xl font-semibold text-tangerine sm:text-6xl">{giroFinal}</p>
-            <ul className="mt-8 flex flex-wrap justify-center gap-3">
-              {Object.entries(premios).map(([n, p]) =>
-                descargables.includes(Number(n)) ? (
-                  <li key={n}>
-                    <BotonDescarga numero={Number(n)} nombre={p} />
-                  </li>
-                ) : (
-                  <li
-                    key={n}
-                    className="flex items-center gap-2 rounded-full bg-tangerine px-5 py-2 font-body text-sm font-bold text-ink-deep"
-                  >
-                    <IconoRegalo /> {p}
-                  </li>
-                ),
-              )}
-            </ul>
+            <h2 className="mt-8 font-display text-4xl font-semibold sm:text-5xl">
+              ¡Premio! <span className="italic text-tangerine">{premios[total]}</span>
+            </h2>
+            {descargables.includes(total) && (
+              // eslint-disable-next-line @next/next/no-img-element -- imagen privada servida por la ruta del premio
+              <img
+                src={`/cumpleanos/premio/${total}?vista`}
+                alt={premios[total]}
+                width={640}
+                height={907}
+                className="mt-8 w-full max-w-xs rotate-[2deg] rounded-xl border-4 border-tangerine/70 shadow-[0_20px_60px_rgba(0,0,0,0.5)]"
+              />
+            )}
+            {mensajesPremio[total] && (
+              <p className="mt-8 max-w-xl font-display text-2xl leading-snug italic sm:text-3xl">{mensajesPremio[total]}</p>
+            )}
+            {descargables.includes(total) && (
+              <div className="mt-8">
+                <BotonDescarga numero={total} nombre={premios[total]} grande />
+              </div>
+            )}
+            {Object.keys(premios)
+              .map(Number)
+              .filter((n) => n < total)
+              .map((n) => (
+                <div key={n} className="mt-8 flex flex-col items-center gap-2">
+                  <p className="font-body text-xs text-white/60">Y no te olvides del primero:</p>
+                  {descargables.includes(n) ? (
+                    <BotonDescarga numero={n} nombre={premios[n]} />
+                  ) : (
+                    <span className="flex items-center gap-2 rounded-full bg-tangerine px-5 py-2 font-body text-sm font-bold text-ink-deep">
+                      <IconoRegalo /> {premios[n]}
+                    </span>
+                  )}
+                </div>
+              ))}
             <p className="mt-10 font-display text-2xl leading-snug italic sm:text-3xl">{mensajeFinal}</p>
           </div>
         )}

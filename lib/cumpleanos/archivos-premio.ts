@@ -18,4 +18,9 @@ export const ARCHIVOS_PREMIO: Record<number, ArchivoPremio> = {
     vista: "cupon-masaje.jpg",
     nombreDescarga: "Cupon de masaje.pdf",
   },
+  10: {
+    pdf: "entrada-circo.pdf",
+    vista: "entrada-circo.jpg",
+    nombreDescarga: "Entrada de circo.pdf",
+  },
 };
