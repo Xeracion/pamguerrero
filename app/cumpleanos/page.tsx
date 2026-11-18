@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { COOKIE_NAME, isConfigured, isValidToken } from "@/lib/cumpleanos/auth";
 import { PARTIDA_COOKIE, leerPartida } from "@/lib/cumpleanos/partida";
-import { GIRO_FINAL, MENSAJE_FALLO, MENSAJE_FINAL, PREGUNTA_SEGURO, PREGUNTAS, PREMIOS, TELEFONO_AMIGO } from "@/lib/cumpleanos/preguntas";
+import { ARCHIVOS_PREMIO } from "@/lib/cumpleanos/archivos-premio";
+import { GIRO_FINAL, MENSAJE_FALLO, MENSAJE_FINAL, MENSAJES_PREMIO, PREGUNTA_SEGURO, PREGUNTAS, PREMIOS, TELEFONO_AMIGO } from "@/lib/cumpleanos/preguntas";
 import { LoginForm } from "./login-form";
 import { Juego } from "./juego";
 
@@ -31,6 +32,8 @@ export default async function CumpleanosPage() {
             mensajeFinal={MENSAJE_FINAL}
             giroFinal={GIRO_FINAL}
             mensajeFallo={MENSAJE_FALLO}
+            mensajesPremio={MENSAJES_PREMIO}
+            descargables={Object.keys(ARCHIVOS_PREMIO).map(Number)}
             partidaInicial={leerPartida(cookieStore.get(PARTIDA_COOKIE)?.value)}
           />
         ) : (

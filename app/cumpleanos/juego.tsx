@@ -6,7 +6,7 @@ import type { Partida } from "@/lib/cumpleanos/partida";
 import { guardarPartida, salir } from "./actions";
 import { Musica } from "./musica";
 
-type Fase = "intro" | "reglas" | "reanudar" | "jugando" | "confirmando" | "revelando" | "acierto" | "fallo" | "ganado";
+type Fase = "intro" | "reglas" | "reanudar" | "premio" | "jugando" | "confirmando" | "revelando" | "acierto" | "fallo" | "ganado";
 
 interface Props {
   preguntas: Pregunta[];
@@ -17,6 +17,10 @@ interface Props {
   giroFinal: string;
   mensajeFallo: string;
   partidaInicial: Partida | null;
+  /** Mensaje de la pantalla de premio, por número de pregunta. */
+  mensajesPremio: Record<number, string>;
+  /** Números de pregunta cuyo premio tiene descargable. */
+  descargables: number[];
 }
 
 const LETRAS = ["A", "B", "C", "D"] as const;
@@ -66,6 +70,30 @@ function IconoSonido({ silenciada }: { silenciada: boolean }) {
   );
 }
 
+function BotonDescarga({ numero, nombre, grande = false }: { numero: number; nombre: string; grande?: boolean }) {
+  return (
+    <a
+      href={`/cumpleanos/premio/${numero}`}
+      download
+      className={
+        grande
+          ? "inline-flex items-center gap-2 rounded-full bg-tangerine px-8 py-4 font-body text-sm font-bold tracking-widest text-ink-deep uppercase transition hover:bg-[#d6ad57]"
+          : "inline-flex items-center gap-2 rounded-full bg-tangerine px-5 py-2 font-body text-sm font-bold text-ink-deep transition hover:bg-[#d6ad57]"
+      }
+    >
+      <IconoDescarga /> {grande ? `Descargar ${nombre.toLowerCase()}` : nombre}
+    </a>
+  );
+}
+
+function IconoDescarga() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4" aria-hidden>
+      <path d="M12 3v12M7 10l5 5 5-5M5 21h14" />
+    </svg>
+  );
+}
+
 function Confeti() {
   const piezas = Array.from({ length: 60 }, (_, i) => i);
   const colores = ["#c49a45", "#d96f5f", "#438c8a", "#ffffff", "#7595a5"];
@@ -103,6 +131,8 @@ export function Juego({
   giroFinal,
   mensajeFallo,
   partidaInicial,
+  mensajesPremio,
+  descargables,
 }: Props) {
   const total = preguntas.length;
   const [fase, setFase] = useState<Fase>(faseInicial(partidaInicial));
@@ -207,6 +237,11 @@ export function Juego({
       }
       setFase("acierto");
     }, 3000);
+  }
+
+  function verPremio() {
+    musica.current?.victoria();
+    setFase("premio");
   }
 
   function siguiente() {
@@ -352,6 +387,46 @@ export function Juego({
     );
   }
 
+  if (fase === "premio") {
+    const numero = nivel + 1;
+    const nombre = premios[numero] ?? "Premio";
+    const descargable = descargables.includes(numero);
+    return (
+      <div className="mx-auto flex min-h-dvh max-w-2xl flex-col items-center justify-center px-4 py-12 text-center">
+        <Confeti />
+        <p className="aparecer font-body text-xs font-semibold tracking-[0.3em] text-tangerine uppercase">
+          Pregunta {numero} superada
+        </p>
+        <h1 className="aparecer mt-3 font-display text-5xl font-semibold sm:text-6xl">
+          ¡Premio! <span className="italic text-tangerine">{nombre}</span>
+        </h1>
+        {descargable && (
+          // eslint-disable-next-line @next/next/no-img-element -- imagen privada servida por la ruta del premio
+          <img
+            src={`/cumpleanos/premio/${numero}?vista`}
+            alt={nombre}
+            width={640}
+            height={905}
+            className="aparecer mt-8 w-full max-w-xs rotate-[-2deg] rounded-xl border-4 border-tangerine/70 shadow-[0_20px_60px_rgba(0,0,0,0.5)]"
+          />
+        )}
+        <p className="mt-8 max-w-xl font-display text-2xl leading-snug italic sm:text-3xl">{mensajesPremio[numero]}</p>
+        <p className="mt-4 font-body text-sm text-white/70">
+          Este premio ya es tuyo: aunque falles más adelante, no te lo quita nadie.
+        </p>
+        <div className="mt-8 flex flex-col items-center gap-4">
+          {descargable && <BotonDescarga numero={numero} nombre={nombre} grande />}
+          <button
+            onClick={siguiente}
+            className="rounded-full border-2 border-tangerine px-8 py-3 font-body text-sm font-bold tracking-widest text-tangerine uppercase transition hover:bg-tangerine hover:text-ink-deep"
+          >
+            Seguir jugando
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   if (fase === "reanudar") {
     return (
       <div className="mx-auto flex min-h-dvh max-w-xl flex-col items-center justify-center px-4 py-12 text-center">
@@ -365,12 +440,17 @@ export function Juego({
         <button onClick={reanudar} className={`mt-10 ${botonPrincipal}`}>
           Continuar
         </button>
+        {descargables.filter((n) => n <= nivel).map((n) => (
+          <div key={n} className="mt-8 flex flex-col items-center gap-2">
+            <p className="font-body text-xs text-white/60">Tu premio, por si no lo descargaste:</p>
+            <BotonDescarga numero={n} nombre={premios[n]} />
+          </div>
+        ))}
       </div>
     );
   }
 
   if (fase === "ganado") {
-    const todos = Object.values(premios);
     return (
       <div className="mx-auto flex min-h-dvh max-w-2xl flex-col items-center justify-center px-4 py-12 text-center">
         <p className="font-body text-xs font-semibold tracking-[0.3em] text-tangerine uppercase">
@@ -382,14 +462,20 @@ export function Juego({
             <Confeti />
             <p className="mt-12 font-display text-5xl font-semibold text-tangerine sm:text-6xl">{giroFinal}</p>
             <ul className="mt-8 flex flex-wrap justify-center gap-3">
-              {todos.map((p) => (
-                <li
-                  key={p}
-                  className="flex items-center gap-2 rounded-full bg-tangerine px-5 py-2 font-body text-sm font-bold text-ink-deep"
-                >
-                  <IconoRegalo /> {p}
-                </li>
-              ))}
+              {Object.entries(premios).map(([n, p]) =>
+                descargables.includes(Number(n)) ? (
+                  <li key={n}>
+                    <BotonDescarga numero={Number(n)} nombre={p} />
+                  </li>
+                ) : (
+                  <li
+                    key={n}
+                    className="flex items-center gap-2 rounded-full bg-tangerine px-5 py-2 font-body text-sm font-bold text-ink-deep"
+                  >
+                    <IconoRegalo /> {p}
+                  </li>
+                ),
+              )}
             </ul>
             <p className="mt-10 font-display text-2xl leading-snug italic sm:text-3xl">{mensajeFinal}</p>
           </div>
@@ -518,11 +604,11 @@ export function Juego({
                   </p>
                 )}
                 <button
-                  onClick={siguiente}
+                  onClick={mensajesPremio[nivel + 1] ? verPremio : siguiente}
                   autoFocus
                   className="mt-2 rounded-full bg-tangerine px-8 py-3 font-body text-sm font-bold tracking-widest text-ink-deep uppercase transition hover:bg-[#d6ad57]"
                 >
-                  Siguiente pregunta
+                  {mensajesPremio[nivel + 1] ? "Ver tu premio" : "Siguiente pregunta"}
                 </button>
               </div>
             )}
@@ -539,6 +625,11 @@ export function Juego({
                   )}
                 </p>
                 <p className="max-w-xl font-display text-xl italic text-white/90">{mensajeFallo}</p>
+                {descargables
+                  .filter((n) => n <= nivel && n <= preguntaSeguro)
+                  .map((n) => (
+                    <BotonDescarga key={n} numero={n} nombre={premios[n]} grande />
+                  ))}
               </div>
             )}
           </div>
