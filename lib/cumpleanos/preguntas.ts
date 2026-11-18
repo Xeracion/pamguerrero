@@ -129,5 +129,10 @@ export const PREGUNTA_SEGURO = 5;
 /** Número al que llama el comodín "Llamada a un amigo". */
 export const TELEFONO_AMIGO = "+34684126167";
 
+/** Felicitación al ganar la partida completa. */
 export const MENSAJE_FINAL =
-  "¡Feliz cumpleaños, Pam! Que este nuevo año venga cargado de sellos en el pasaporte, caminos nuevos y gente bonita con quien recorrerlos.";
+  "¡Feliz cumpleaños, gamberra! Un año más vieja, igual de peligrosa y cada vez más difícil de aguantar… menos mal que chincheas de maravilla. Que este año venga con más carretera, más Dacia, más picardías y menos citronela. Y pórtate mal, que es lo que mejor se te da.";
+
+/** Felicitación si la partida termina con un fallo. */
+export const MENSAJE_FALLO =
+  "¡Feliz cumpleaños igualmente, gamberra! Has fallado, pero tranquila: a tu edad lo importante es participar. Lo que no te has ganado aquí tendrás que cobrártelo a base de chinchear… y ya sabes que el que chinchea, cobra.";

@@ -2,10 +2,11 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { Pregunta } from "@/lib/cumpleanos/preguntas";
-import { salir } from "./actions";
+import type { Partida } from "@/lib/cumpleanos/partida";
+import { guardarPartida, salir } from "./actions";
 import { Musica } from "./musica";
 
-type Fase = "intro" | "jugando" | "confirmando" | "revelando" | "acierto" | "fallo" | "ganado";
+type Fase = "intro" | "reglas" | "reanudar" | "jugando" | "confirmando" | "revelando" | "acierto" | "fallo" | "ganado";
 
 interface Props {
   preguntas: Pregunta[];
@@ -14,6 +15,8 @@ interface Props {
   telefono: string;
   mensajeFinal: string;
   giroFinal: string;
+  mensajeFallo: string;
+  partidaInicial: Partida | null;
 }
 
 const LETRAS = ["A", "B", "C", "D"] as const;
@@ -84,17 +87,33 @@ function Confeti() {
   );
 }
 
-export function Juego({ preguntas, premios, preguntaSeguro, telefono, mensajeFinal, giroFinal }: Props) {
+function faseInicial(p: Partida | null): Fase {
+  if (!p) return "intro";
+  if (p.estado === "fallo") return "fallo";
+  if (p.estado === "ganado") return "ganado";
+  return "reanudar";
+}
+
+export function Juego({
+  preguntas,
+  premios,
+  preguntaSeguro,
+  telefono,
+  mensajeFinal,
+  giroFinal,
+  mensajeFallo,
+  partidaInicial,
+}: Props) {
   const total = preguntas.length;
-  const [fase, setFase] = useState<Fase>("intro");
-  const [nivel, setNivel] = useState(0);
-  const [elegida, setElegida] = useState<number | null>(null);
-  const [ocultas, setOcultas] = useState<number[]>([]);
-  const [cincuentaUsado, setCincuentaUsado] = useState(false);
-  const [llamadaUsada, setLlamadaUsada] = useState(false);
+  const [fase, setFase] = useState<Fase>(faseInicial(partidaInicial));
+  const [nivel, setNivel] = useState(Math.min(partidaInicial?.nivel ?? 0, preguntas.length - 1));
+  const [elegida, setElegida] = useState<number | null>(partidaInicial?.elegida ?? null);
+  const [ocultas, setOcultas] = useState<number[]>(partidaInicial?.ocultas ?? []);
+  const [cincuentaUsado, setCincuentaUsado] = useState(partidaInicial?.cincuenta ?? false);
+  const [llamadaUsada, setLlamadaUsada] = useState(partidaInicial?.llamada ?? false);
   const [llamando, setLlamando] = useState(false);
   const [silenciada, setSilenciada] = useState(false);
-  const [giro, setGiro] = useState(false);
+  const [giro, setGiro] = useState(partidaInicial?.estado === "ganado");
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const musica = useRef<Musica | null>(null);
 
@@ -117,20 +136,37 @@ export function Juego({ preguntas, premios, preguntaSeguro, telefono, mensajeFin
       .filter((n) => n <= superadas && n <= preguntaSeguro)
       .map((n) => premios[n]);
 
-  function empezar() {
+  /** Guarda el progreso en el servidor (cookie firmada). */
+  function guardar(cambios: Partial<Partida>) {
+    const p: Partida = {
+      nivel,
+      estado: "jugando",
+      cincuenta: cincuentaUsado,
+      llamada: llamadaUsada,
+      ocultas,
+      elegida: null,
+      ...cambios,
+    };
+    void guardarPartida(p);
+  }
+
+  function arrancarMusica(n: number) {
     if (!musica.current) musica.current = new Musica();
     musica.current.iniciar();
     musica.current.setSilencio(silenciada);
-    musica.current.setNivel(0);
+    musica.current.setNivel(n);
     musica.current.setModo("juego");
+  }
+
+  function empezar() {
+    arrancarMusica(0);
+    guardar({ nivel: 0, cincuenta: false, llamada: false, ocultas: [] });
     setFase("jugando");
-    setNivel(0);
-    setElegida(null);
-    setOcultas([]);
-    setCincuentaUsado(false);
-    setLlamadaUsada(false);
-    setLlamando(false);
-    setGiro(false);
+  }
+
+  function reanudar() {
+    arrancarMusica(nivel);
+    setFase("jugando");
   }
 
   function alternarSonido() {
@@ -147,11 +183,15 @@ export function Juego({ preguntas, premios, preguntaSeguro, telefono, mensajeFin
 
   function confirmar() {
     if (elegida === null) return;
+    const acierta = elegida === actual.correcta;
+    if (!acierta) guardar({ estado: "fallo", elegida });
+    else if (nivel + 1 >= total) guardar({ estado: "ganado", elegida });
+    else guardar({ nivel: nivel + 1, ocultas: [] });
     setFase("revelando");
     setLlamando(false);
     musica.current?.setModo("suspense");
     timer.current = setTimeout(() => {
-      if (elegida !== actual.correcta) {
+      if (!acierta) {
         musica.current?.fallo();
         setFase("fallo");
         return;
@@ -185,6 +225,7 @@ export function Juego({ preguntas, premios, preguntaSeguro, telefono, mensajeFin
     musica.current?.comodin();
     const quitar = shuffle(visibles.filter((i) => i !== actual.correcta)).slice(0, 2);
     setOcultas([...ocultas, ...quitar]);
+    guardar({ cincuenta: true, ocultas: [...ocultas, ...quitar] });
     if (elegida !== null && quitar.includes(elegida)) {
       setElegida(null);
       setFase("jugando");
@@ -195,6 +236,7 @@ export function Juego({ preguntas, premios, preguntaSeguro, telefono, mensajeFin
     // El enlace tel: abre la llamada; aquí solo marcamos el comodín como usado.
     setLlamadaUsada(true);
     setLlamando(true);
+    guardar({ llamada: true });
     musica.current?.comodin();
   }
 
@@ -226,6 +268,9 @@ export function Juego({ preguntas, premios, preguntaSeguro, telefono, mensajeFin
     </button>
   );
 
+  const botonPrincipal =
+    "rounded-full bg-tangerine px-10 py-4 font-body text-sm font-bold tracking-widest text-ink-deep uppercase transition hover:bg-[#d6ad57]";
+
   if (fase === "intro") {
     return (
       <div className="mx-auto flex min-h-dvh max-w-2xl flex-col items-center justify-center px-4 py-12 text-center">
@@ -234,21 +279,92 @@ export function Juego({ preguntas, premios, preguntaSeguro, telefono, mensajeFin
           ¿Quién quiere ser <span className="italic text-tangerine">cumpleañera</span>?
         </h1>
         <p className="mt-6 max-w-lg font-body text-sm leading-relaxed text-white/80 sm:text-base">
-          {total} preguntas sobre Pam, de la más fácil a la más difícil. La pregunta {preguntaSeguro} y la pregunta{" "}
-          {total} tienen premio, y al llegar a la {preguntaSeguro} el primero queda asegurado. Tienes dos comodines: el
-          50:50 y la llamada a un amigo. Sube el volumen. ¿Lista?
+          {total} preguntas, dos premios y una sola oportunidad. Sube el volumen y ponte cómoda.
         </p>
-        <button
-          onClick={empezar}
-          className="mt-10 rounded-full bg-tangerine px-10 py-4 font-body text-sm font-bold tracking-widest text-ink-deep uppercase transition hover:bg-[#d6ad57]"
-        >
-          Empezar a jugar
+        <button onClick={() => setFase("reglas")} className={`mt-10 ${botonPrincipal}`}>
+          Ver las reglas
         </button>
         <form action={salir} className="mt-8">
           <button type="submit" className="font-body text-xs text-white/50 underline hover:text-white">
             Cerrar sesión
           </button>
         </form>
+      </div>
+    );
+  }
+
+  if (fase === "reglas") {
+    const reglas = [
+      `Son ${total} preguntas, de la más fácil a la más difícil. Cada una tiene cuatro respuestas y solo una es correcta.`,
+      "Antes de revelar la respuesta te preguntaremos si es tu respuesta definitiva. Puedes pensártelo todo lo que quieras.",
+      `La pregunta ${preguntaSeguro} y la pregunta ${total} tienen premio. Si aciertas la ${preguntaSeguro}, el ${premios[preguntaSeguro]?.toLowerCase() ?? "primer premio"} es tuyo pase lo que pase.`,
+      `Si fallas, la partida termina y te llevas solo el premio que hayas alcanzado: el ${premios[preguntaSeguro]?.toLowerCase() ?? "primer premio"} si ya pasaste la ${preguntaSeguro}, o nada si no.`,
+      "Solo hay una oportunidad. No se puede volver a jugar, y si recargas la página la partida sigue donde la dejaste.",
+    ];
+    return (
+      <div className="mx-auto flex min-h-dvh max-w-2xl flex-col justify-center px-4 py-12">
+        <p className="text-center font-body text-xs font-semibold tracking-[0.3em] text-tangerine uppercase">
+          Antes de empezar
+        </p>
+        <h1 className="mt-3 text-center font-display text-4xl font-semibold sm:text-5xl">Las reglas del juego</h1>
+
+        <ol className="mt-8 space-y-3">
+          {reglas.map((r, i) => (
+            <li key={i} className="flex gap-4 rounded-2xl border border-white/15 bg-ink-deep/60 p-4">
+              <span className="font-display text-2xl leading-none font-semibold text-tangerine">{i + 1}</span>
+              <span className="font-body text-sm leading-relaxed text-white/85">{r}</span>
+            </li>
+          ))}
+        </ol>
+
+        <h2 className="mt-10 text-center font-display text-3xl font-semibold">Los comodines</h2>
+        <p className="mt-2 text-center font-body text-sm text-white/70">Cada uno se puede usar una sola vez en toda la partida.</p>
+        <div className="mt-5 grid gap-3 sm:grid-cols-2">
+          <div className="rounded-2xl border border-tangerine/50 bg-ink-deep/60 p-5">
+            <div className="flex h-12 w-16 items-center justify-center rounded-full border-2 border-tangerine font-body text-sm font-bold text-tangerine">
+              50:50
+            </div>
+            <p className="mt-3 font-body text-sm font-semibold">El 50:50</p>
+            <p className="mt-1 font-body text-sm leading-relaxed text-white/75">
+              Elimina dos respuestas incorrectas y te deja con una correcta y una incorrecta.
+            </p>
+          </div>
+          <div className="rounded-2xl border border-tangerine/50 bg-ink-deep/60 p-5">
+            <div className="flex h-12 w-16 items-center justify-center rounded-full border-2 border-tangerine text-tangerine">
+              <IconoTelefono />
+            </div>
+            <p className="mt-3 font-body text-sm font-semibold">La llamada a un amigo</p>
+            <p className="mt-1 font-body text-sm leading-relaxed text-white/75">
+              Llama de verdad al {telefonoLegible(telefono)}. Quien conteste te ayudará… o no.
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-10 flex flex-col items-center gap-3">
+          <button onClick={empezar} className={botonPrincipal}>
+            ¡Que empiece el juego!
+          </button>
+          <button onClick={() => setFase("intro")} className="font-body text-xs text-white/50 underline hover:text-white">
+            Volver
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  if (fase === "reanudar") {
+    return (
+      <div className="mx-auto flex min-h-dvh max-w-xl flex-col items-center justify-center px-4 py-12 text-center">
+        <p className="font-body text-xs font-semibold tracking-[0.3em] text-tangerine uppercase">Partida en curso</p>
+        <h1 className="mt-4 font-display text-4xl font-semibold sm:text-5xl">
+          Te quedaste en la pregunta {nivel + 1}
+        </h1>
+        <p className="mt-5 font-body text-sm leading-relaxed text-white/75">
+          Solo hay una partida, así que seguimos donde lo dejaste, con los mismos comodines.
+        </p>
+        <button onClick={reanudar} className={`mt-10 ${botonPrincipal}`}>
+          Continuar
+        </button>
       </div>
     );
   }
@@ -276,12 +392,6 @@ export function Juego({ preguntas, premios, preguntaSeguro, telefono, mensajeFin
               ))}
             </ul>
             <p className="mt-10 font-display text-2xl leading-snug italic sm:text-3xl">{mensajeFinal}</p>
-            <button
-              onClick={empezar}
-              className="mt-10 rounded-full border-2 border-tangerine px-8 py-3 font-body text-sm font-bold tracking-widest text-tangerine uppercase transition hover:bg-tangerine hover:text-ink-deep"
-            >
-              Jugar otra vez
-            </button>
           </div>
         )}
       </div>
@@ -425,16 +535,10 @@ export function Juego({ preguntas, premios, preguntaSeguro, telefono, mensajeFin
                       Pero te llevas el <span className="font-bold text-tangerine">{asegurados.join(" y el ")}</span>.
                     </>
                   ) : (
-                    "Esta vez no hay premio… ¡pero puedes volver a intentarlo!"
+                    "Esta vez te vas sin premio."
                   )}
                 </p>
-                <p className="max-w-xl font-display text-xl italic text-white/90">{mensajeFinal}</p>
-                <button
-                  onClick={empezar}
-                  className="mt-2 rounded-full border-2 border-tangerine px-8 py-3 font-body text-sm font-bold tracking-widest text-tangerine uppercase transition hover:bg-tangerine hover:text-ink-deep"
-                >
-                  Intentarlo de nuevo
-                </button>
+                <p className="max-w-xl font-display text-xl italic text-white/90">{mensajeFallo}</p>
               </div>
             )}
           </div>
