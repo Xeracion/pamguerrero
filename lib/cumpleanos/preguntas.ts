@@ -130,7 +130,7 @@ export const PREMIOS: Record<number, string> = {
  */
 export const MENSAJES_PREMIO: Record<number, string> = {
   5: "¡Enhorabuena, gamberra! Te has ganado 40 minutos de manos expertas, aceites aromáticos y velitas. Personal, intransferible y con final feliz garantizado (las condiciones las pone el masajista). Descárgalo, guárdalo bien y úsalo cuando más te convenga.",
-  10: "¡Enhorabuena, gamberra! Te has ganado una entrada para el circo: A Serie Clopen, el viernes 4 de diciembre a las 20:30 en el Teatro Jofre de Ferrol. Acróbatas, equilibrios imposibles y gente volando por los aires… vamos, que vas a estar en tu salsa. Descarga la entrada, enseña el QR en la puerta y ve pensando a quién vas a chinchear en la butaca de al lado.",
+  10: "¡Enhorabuena, corazón! Te has ganado una entrada para el circo: A Serie Clopen, el viernes 4 de diciembre a las 20:30 en el Teatro Jofre de Ferrol. Acróbatas, equilibrios imposibles y gente volando por los aires… ¡Te va a gustar! Descarga la entrada, enseña el QR en la puerta y ve pensando a quién vas a chinchear en la butaca de al lado ;)",
 };
 
 /** Pregunta a partir de la cual el premio queda asegurado. */
@@ -138,10 +138,6 @@ export const PREGUNTA_SEGURO = 5;
 
 /** Número al que llama el comodín "Llamada a un amigo". */
 export const TELEFONO_AMIGO = "+34684126167";
-
-/** Felicitación al ganar la partida completa. */
-export const MENSAJE_FINAL =
-  "¡Feliz cumpleaños, gamberra! Un año más vieja, igual de peligrosa y cada vez más difícil de aguantar… menos mal que chincheas de maravilla. Que este año venga con más carretera, más Dacia, más picardías y menos citronela. Y pórtate mal, que es lo que mejor se te da.";
 
 /** Felicitación si la partida termina con un fallo. */
 export const MENSAJE_FALLO =

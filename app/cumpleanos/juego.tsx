@@ -13,7 +13,6 @@ interface Props {
   premios: Record<number, string>;
   preguntaSeguro: number;
   telefono: string;
-  mensajeFinal: string;
   giroFinal: string;
   mensajeFallo: string;
   partidaInicial: Partida | null;
@@ -36,12 +35,6 @@ function shuffle<T>(items: T[]): T[] {
     [copy[i], copy[j]] = [copy[j], copy[i]];
   }
   return copy;
-}
-
-/** +34684126167 → +34 684 12 61 67 */
-function telefonoLegible(tel: string) {
-  const m = tel.match(/^(\+\d{2})(\d{3})(\d{2})(\d{2})(\d{2})$/);
-  return m ? `${m[1]} ${m[2]} ${m[3]} ${m[4]} ${m[5]}` : tel;
 }
 
 function IconoTelefono({ className = "h-5 w-5" }: { className?: string }) {
@@ -127,7 +120,6 @@ export function Juego({
   premios,
   preguntaSeguro,
   telefono,
-  mensajeFinal,
   giroFinal,
   mensajeFallo,
   partidaInicial,
@@ -158,6 +150,9 @@ export function Juego({
   const actual = preguntas[nivel];
   const visibles = [0, 1, 2, 3].filter((i) => !ocultas.includes(i));
   const enJuego = fase === "jugando" || fase === "confirmando";
+
+  /** Nombre genérico, para no desvelar el premio antes de tiempo. */
+  const etiquetaPremio = (n: number) => (n === total ? "Gran premio" : "Primer premio");
 
   /** Premios conseguidos al fallar habiendo superado `superadas` preguntas. */
   const premiosAsegurados = (superadas: number) =>
@@ -332,8 +327,8 @@ export function Juego({
     const reglas = [
       `Son ${total} preguntas, de la más fácil a la más difícil. Cada una tiene cuatro respuestas y solo una es correcta.`,
       "Antes de revelar la respuesta te preguntaremos si es tu respuesta definitiva. Puedes pensártelo todo lo que quieras.",
-      `La pregunta ${preguntaSeguro} y la pregunta ${total} tienen premio. Si aciertas la ${preguntaSeguro}, el ${premios[preguntaSeguro]?.toLowerCase() ?? "primer premio"} es tuyo pase lo que pase.`,
-      `Si fallas, la partida termina y te llevas solo el premio que hayas alcanzado: el ${premios[preguntaSeguro]?.toLowerCase() ?? "primer premio"} si ya pasaste la ${preguntaSeguro}, o nada si no.`,
+      `La pregunta ${preguntaSeguro} y la pregunta ${total} tienen premio. Si aciertas la ${preguntaSeguro}, el primer premio es tuyo pase lo que pase. Qué premios son… lo descubrirás al ganarlos.`,
+      `Si fallas, la partida termina y te llevas solo el premio que hayas alcanzado: el primer premio si ya pasaste la ${preguntaSeguro}, o nada si no.`,
       "Solo hay una oportunidad. No se puede volver a jugar, y si recargas la página la partida sigue donde la dejaste.",
     ];
     return (
@@ -370,7 +365,7 @@ export function Juego({
             </div>
             <p className="mt-3 font-body text-sm font-semibold">La llamada a un amigo</p>
             <p className="mt-1 font-body text-sm leading-relaxed text-white/75">
-              Llama de verdad al {telefonoLegible(telefono)}. Quien conteste te ayudará… o no.
+              Hace una llamada de verdad a una persona que te puede ayudar. Quién es… lo sabrás cuando conteste.
             </p>
           </div>
         </div>
@@ -460,7 +455,10 @@ export function Juego({
         {giro && (
           <div className="aparecer flex flex-col items-center">
             <Confeti />
-            <p className="mt-12 font-display text-5xl font-semibold text-tangerine sm:text-6xl">{giroFinal}</p>
+            <div aria-hidden className="mt-10 flex h-[85vh] flex-col items-center justify-end pb-6 text-tangerine/60">
+              <span className="animate-bounce font-body text-2xl">↓</span>
+            </div>
+            <p className="font-display text-5xl font-semibold text-tangerine sm:text-6xl">{giroFinal}</p>
             <h2 className="mt-8 font-display text-4xl font-semibold sm:text-5xl">
               ¡Premio! <span className="italic text-tangerine">{premios[total]}</span>
             </h2>
@@ -497,7 +495,6 @@ export function Juego({
                   )}
                 </div>
               ))}
-            <p className="mt-10 font-display text-2xl leading-snug italic sm:text-3xl">{mensajeFinal}</p>
           </div>
         )}
       </div>
@@ -505,7 +502,7 @@ export function Juego({
   }
 
   const asegurados = premiosAsegurados(nivel);
-  const premioDeEsta = premios[nivel + 1];
+  const premioDeEsta = premios[nivel + 1] ? etiquetaPremio(nivel + 1) : undefined;
 
   return (
     <div className="mx-auto grid min-h-dvh max-w-6xl gap-8 px-4 py-8 lg:grid-cols-[1fr_280px] lg:py-12">
@@ -563,7 +560,7 @@ export function Juego({
           {llamando && (
             <div className="mx-auto mb-6 max-w-xl rounded-2xl border border-white/20 bg-ink-deep/60 px-5 py-4 text-center font-body text-sm text-white/90">
               <IconoTelefono className="mr-2 inline h-4 w-4 align-[-2px] text-tangerine" />
-              Llamando a {telefonoLegible(telefono)}… Si no se abre la llamada, marca ese número desde tu móvil.
+              Llamando a alguien que te puede ayudar… Si la llamada no se abre, prueba desde el móvil.
             </div>
           )}
 
@@ -661,7 +658,7 @@ export function Juego({
           const numero = i + 1;
           const esActual = i === nivel;
           const superada = i < nivel;
-          const premio = premios[numero];
+          const premio = premios[numero] ? (superada ? premios[numero] : etiquetaPremio(numero)) : undefined;
           return (
             <li
               key={i}
