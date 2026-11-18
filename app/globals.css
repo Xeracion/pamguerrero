@@ -158,3 +158,25 @@ h4 {
 .link-underline:hover::after {
   transform: scaleX(1);
 }
+
+/* Juego de cumpleaños (/cumpleanos): parpadeo de la respuesta mientras se
+   revela y confeti al ganar. */
+@keyframes respuesta-revelando {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.35); }
+}
+
+.respuesta-revelando {
+  animation: respuesta-revelando 0.5s ease-in-out infinite;
+}
+
+@keyframes confeti-caida {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(110vh) rotate(720deg); opacity: 0.6; }
+}
+
+.confeti {
+  animation-name: confeti-caida;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
