@@ -31,16 +31,16 @@ export async function entrar(_prev: LoginState, formData: FormData): Promise<Log
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
-    path: "/cumpleanos",
+    path: "/felices35",
     maxAge: COOKIE_MAX_AGE,
   });
-  redirect("/cumpleanos");
+  redirect("/felices35");
 }
 
 export async function salir() {
   const cookieStore = await cookies();
-  cookieStore.delete({ name: COOKIE_NAME, path: "/cumpleanos" });
-  redirect("/cumpleanos");
+  cookieStore.delete({ name: COOKIE_NAME, path: "/felices35" });
+  redirect("/felices35");
 }
 
 /** Guarda el progreso de la partida. Devuelve false si el cambio no es válido. */
@@ -57,7 +57,7 @@ export async function guardarPartida(nueva: Partida): Promise<boolean> {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
-    path: "/cumpleanos",
+    path: "/felices35",
     maxAge: PARTIDA_MAX_AGE,
   });
   return true;

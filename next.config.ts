@@ -3,7 +3,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   // Los premios del juego de cumpleaños se leen del disco en su ruta.
   outputFileTracingIncludes: {
-    "/cumpleanos/premio/[numero]": ["./private/cumpleanos/**/*"],
+    "/felices35/premio/[numero]": ["./private/cumpleanos/**/*"],
   },
   images: {
     remotePatterns: [

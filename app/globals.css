@@ -159,7 +159,7 @@ h4 {
   transform: scaleX(1);
 }
 
-/* Juego de cumpleaños (/cumpleanos): parpadeo de la respuesta mientras se
+/* Juego de cumpleaños (/felices35): parpadeo de la respuesta mientras se
    revela y confeti al ganar. */
 @keyframes respuesta-revelando {
   0%, 100% { filter: brightness(1); }

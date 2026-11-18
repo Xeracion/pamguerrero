@@ -1,7 +1,7 @@
 import { createHmac, timingSafeEqual } from "node:crypto";
 
 /**
- * Acceso a /cumpleanos. La contraseña vive solo en el servidor, en la
+ * Acceso a /felices35. La contraseña vive solo en el servidor, en la
  * variable de entorno CUMPLEANOS_PASSWORD (nunca con prefijo NEXT_PUBLIC_).
  * La cookie no guarda la contraseña sino un HMAC derivado de ella: no se
  * puede falsificar sin conocerla, y cambiar la contraseña invalida todas

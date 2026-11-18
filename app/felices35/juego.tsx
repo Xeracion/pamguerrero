@@ -66,7 +66,7 @@ function IconoSonido({ silenciada }: { silenciada: boolean }) {
 function BotonDescarga({ numero, nombre, grande = false }: { numero: number; nombre: string; grande?: boolean }) {
   return (
     <a
-      href={`/cumpleanos/premio/${numero}`}
+      href={`/felices35/premio/${numero}`}
       download
       className={
         grande
@@ -227,7 +227,7 @@ export function Juego({
         timer.current = setTimeout(() => {
           setGiro(true);
           musica.current?.victoria();
-        }, 5000);
+        }, 6000);
         return;
       }
       setFase("acierto");
@@ -398,7 +398,7 @@ export function Juego({
         {descargable && (
           // eslint-disable-next-line @next/next/no-img-element -- imagen privada servida por la ruta del premio
           <img
-            src={`/cumpleanos/premio/${numero}?vista`}
+            src={`/felices35/premio/${numero}?vista`}
             alt={nombre}
             width={640}
             height={905}
@@ -455,17 +455,14 @@ export function Juego({
         {giro && (
           <div className="aparecer flex flex-col items-center">
             <Confeti />
-            <div aria-hidden className="mt-10 flex h-[85vh] flex-col items-center justify-end pb-6 text-tangerine/60">
-              <span className="animate-bounce font-body text-2xl">↓</span>
-            </div>
-            <p className="font-display text-5xl font-semibold text-tangerine sm:text-6xl">{giroFinal}</p>
+            <p className="mt-12 font-display text-5xl font-semibold text-tangerine sm:text-6xl">{giroFinal}</p>
             <h2 className="mt-8 font-display text-4xl font-semibold sm:text-5xl">
               ¡Premio! <span className="italic text-tangerine">{premios[total]}</span>
             </h2>
             {descargables.includes(total) && (
               // eslint-disable-next-line @next/next/no-img-element -- imagen privada servida por la ruta del premio
               <img
-                src={`/cumpleanos/premio/${total}?vista`}
+                src={`/felices35/premio/${total}?vista`}
                 alt={premios[total]}
                 width={640}
                 height={907}

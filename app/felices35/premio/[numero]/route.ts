@@ -9,8 +9,8 @@ import { PREGUNTAS } from "@/lib/cumpleanos/preguntas";
 const CARPETA = path.join(process.cwd(), "private", "cumpleanos");
 
 /**
- * GET /cumpleanos/premio/5        → descarga el PDF del premio
- * GET /cumpleanos/premio/5?vista  → imagen de vista previa
+ * GET /felices35/premio/5        → descarga el PDF del premio
+ * GET /felices35/premio/5?vista  → imagen de vista previa
  * Solo con sesión válida y una partida que haya superado esa pregunta.
  */
 export async function GET(request: Request, { params }: { params: Promise<{ numero: string }> }) {

@@ -1,6 +1,6 @@
 /**
  * Archivos descargables de cada premio. Viven en private/cumpleanos (fuera
- * de public/) y solo los sirve app/cumpleanos/premio/[numero]/route.ts a
+ * de public/) y solo los sirve app/felices35/premio/[numero]/route.ts a
  * quien tenga sesión y haya llegado a esa pregunta.
  */
 export interface ArchivoPremio {
